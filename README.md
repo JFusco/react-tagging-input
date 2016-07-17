@@ -3,7 +3,7 @@
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
 
-> Simple tagging component for React projects.
+> Simple tagging component.
 
 ## Getting Started ##
 
