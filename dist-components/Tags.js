@@ -78,6 +78,10 @@ var Tags = function (_Component) {
 
 			var value = this.input.value.trim();
 
+			if (!this.props.allowDupes) {
+				if (this.state.tags.indexOf(value) >= 0) return;
+			}
+
 			this.setState({
 				tags: (0, _reactAddonsUpdate2.default)(this.state.tags, { $push: [value] })
 			}, function () {
