@@ -46,6 +46,10 @@ export default class Tags extends Component{
 	addTag(){
 		const value = this.input.value.trim();
 
+		if (!this.props.allowDupes){
+			if (this.state.tags.indexOf(value) >= 0) return;
+		}
+
 		this.setState({
 			tags: update(this.state.tags, {$push: [value] })
 		}, () => {
