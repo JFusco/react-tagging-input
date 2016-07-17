@@ -1,5 +1,5 @@
 {
-	"name": "react-tags",
+	"name": "react-tagging-input",
 	"version": "1.0.1",
 	"description": "Simple tagging component",
 	"main": "dist-components/Tags.js",

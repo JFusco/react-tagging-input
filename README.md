@@ -1,5 +1,4 @@
-# react-tags
-
+# react-tagging-input
 ![npm][npm-version-image]
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
@@ -11,7 +10,7 @@
 #### Installation
 From the root of your project.
 ```sh
-npm install react-tags --save
+npm install react-tagging-input --save
 ```
 
 ## Usage
@@ -19,7 +18,7 @@ Simple implementation of tags. See [options available](#options) below.
 ```js
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Tags from 'react-tags';
+import Tags from 'react-tagging-input';
 
 class Application extends Component{
 	constructor(props){
@@ -155,7 +154,7 @@ The `string` to be used for the ID of the component
 #### Installation
 Import the main SCSS file in to your application SCSS files
 ```scss
-@import "node_modules/react-tags/src/scss/react-tags";
+@import "node_modules/react-tagging-input/src/scss/react-tags";
 ```
 
 There are a few variables set to `!default` that can be overriden. If you need to change it more just override the actual styles.
@@ -185,7 +184,7 @@ $tag-input-placeholder-color
 
 If you don't care to override variables and just want to override actual styles you may choose to import the minified compiled version of the css instead
 ```scss
-@import "node_modules/react-tags/dist/react-tags.min.css";
+@import "node_modules/react-tagging-input/dist/react-tags.min.css";
 ```
 
 ## License ##
