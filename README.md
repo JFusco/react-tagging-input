@@ -1,2 +1,2 @@
 # react-tags
-Simple tagging component for React projects
+> Simple tagging component for React projects.

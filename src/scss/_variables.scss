@@ -1,0 +1,24 @@
+//**
+// React tags variables
+//-- Variables may be overridden
+//**
+
+//-- Global UI
+$tag-base-height:               26px !default;
+$tag-base-font-size:            12px !default;
+$tag-base-border-radius:        12px !default;
+$tag-base-font-color:           $dark-gray !default;
+$tag-base-margin:               5px !default;
+$tag-base-font-family:          "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+//-- Tags
+$tag-background-color:          $light-gray !default;
+$tag-background-hover-color:    darken($light-gray, 6%) !default;
+$tag-remove-color:              $black !default;
+$tag-remove-font-size:          $tag-base-font-size !default;
+$tag-remove-hover-color:        lighten($tag-remove-color, 40%) !default;
+
+//-- Input
+$tag-input-bg-color:            $white !default;
+$tag-input-border:              1px solid $light-gray !default;
+$tag-input-placeholder-color:   rgba($dark-gray, 0.5) !default;

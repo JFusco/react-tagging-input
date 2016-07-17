@@ -1,0 +1,86 @@
+//**
+// React tags component
+//**
+
+@import
+"colorpalette",
+"variables";
+
+%tags-ui-base {
+	font-size: $tag-base-font-size;
+	height: $tag-base-height;
+	line-height: $tag-base-height;
+	color: $tag-base-font-color;
+	border-radius: $tag-base-border-radius;
+	font-family: $tag-base-font-family;
+	display: inline-block;
+	padding: 0 9px;
+}
+
+.react-tags {
+	input {
+		@extend %tags-ui-base;
+
+		$height: $tag-base-height - 2;
+
+		background: $tag-input-bg-color;
+		border: $tag-input-border;
+		height: $height;
+		line-height: $height;
+		margin-top: $tag-base-margin;
+
+		&::-webkit-input-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&::-moz-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&:-ms-input-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.tags-container {
+		display: inline;
+
+		> span {
+			@extend %tags-ui-base;
+
+			background: $tag-background-color;
+			margin: $tag-base-margin $tag-base-margin 0 0;
+			transition: background 0.3s ease;
+			cursor: default;
+
+			&:hover {
+				background: $tag-background-hover-color;
+			}
+		}
+
+		a {
+			font-size: $tag-remove-font-size;
+			color: $tag-remove-color;
+			transition: color 0.3s ease;
+			display: inline-block;
+			margin-left: 7px;
+			text-decoration: none;
+
+			&:hover {
+				color: $tag-remove-hover-color;
+			}
+		}
+
+		i {
+			font-style: normal;
+		}
+
+		&.readonly {
+			pointer-events: none;
+		}
+	}
+}
