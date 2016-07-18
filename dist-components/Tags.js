@@ -14,9 +14,9 @@ var _reactAddonsUpdate = require('react-addons-update');
 
 var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 
-var _tag = require('./tag');
+var _Tag = require('./Tag');
 
-var _tag2 = _interopRequireDefault(_tag);
+var _Tag2 = _interopRequireDefault(_Tag);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -123,7 +123,7 @@ var Tags = function (_Component) {
 			var _this4 = this;
 
 			var tagItems = this.state.tags.map(function (tag, v) {
-				return _react2.default.createElement(_tag2.default, {
+				return _react2.default.createElement(_Tag2.default, {
 					key: v,
 					readOnly: _this4.props.readOnly,
 					name: tag,

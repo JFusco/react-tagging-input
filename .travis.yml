@@ -9,4 +9,4 @@ before_install:
   - npm install -g babel-cli
   - npm install -g jest-cli
 script:
-    - "gulp eslint"
+    - "gulp eslint && npm test"

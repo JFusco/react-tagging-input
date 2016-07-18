@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import update from 'react-addons-update';
-import tag from './tag';
+import Tag from './Tag';
 
 const map = new WeakMap();
 
@@ -95,7 +95,7 @@ export default class Tags extends Component{
 
 	render(){
 		const tagItems = this.state.tags.map((tag, v) => {
-			return <tag
+			return <Tag
 				key={v}
 				readOnly={this.props.readOnly}
 				name={tag}

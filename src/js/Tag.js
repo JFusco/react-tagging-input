@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const tag = props => {
+const Tag = props => {
 	const onRemoveClick = e => {
 		e.preventDefault();
 
@@ -29,9 +29,9 @@ const tag = props => {
 	);
 };
 
-export default tag;
+export default Tag;
 
-tag.propTypes = {
+Tag.propTypes = {
 	name: React.PropTypes.string.isRequired,
 	removeTag: React.PropTypes.func,
 	readOnly: React.PropTypes.bool,
