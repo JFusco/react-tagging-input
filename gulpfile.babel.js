@@ -13,11 +13,12 @@ require('./gulp/bridge.js')(gulp, [
 	'scss-lint',
 	'sass',
 	'clean-css',
+	'test',
 	'watch'
 ], $);
 
 gulp.task('default', cb => {
-	$.runSequence('sass', 'cleanCSS', 'eslint', 'webpack', 'babel', () => {
+	$.runSequence('sass', 'cleanCSS', 'eslint', 'test', 'webpack', 'babel', () => {
 		$.util.log($.util.colors.green.bold('FINISHED BUILD'));
 
 		if(argv.w){
