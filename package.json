@@ -62,7 +62,6 @@
 		"testDirectoryName": "__tests__",
 		"rootDir": "src",
 		"testPathIgnorePatterns": [
-			"/node_modules/",
 			"<rootDir>/node_modules/"
 		],
 		"unmockedModulePathPatterns": [
