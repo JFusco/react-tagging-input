@@ -8,6 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import Tags from '../src/js/Tags';
+import Tag from '../src/js/Tag';
 
 describe('Tags', () => {
 	it('should render', () => {
