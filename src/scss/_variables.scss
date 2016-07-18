@@ -17,8 +17,10 @@ $tag-background-hover-color:    darken($light-gray, 6%) !default;
 $tag-remove-color:              $black !default;
 $tag-remove-font-size:          $tag-base-font-size !default;
 $tag-remove-hover-color:        lighten($tag-remove-color, 40%) !default;
+$tag-intro-animation:           slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1) !default;
 
 //-- Input
 $tag-input-bg-color:            $white !default;
 $tag-input-border:              1px solid $light-gray !default;
 $tag-input-placeholder-color:   rgba($dark-gray, 0.5) !default;
+$tag-input-border-focus-color:  darken($light-gray, 15%) !default;

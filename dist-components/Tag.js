@@ -40,7 +40,7 @@ exports.default = Tag;
 
 Tag.propTypes = {
 	name: _react2.default.PropTypes.string.isRequired,
-	removeTag: _react2.default.PropTypes.func.isRequired,
+	removeTag: _react2.default.PropTypes.func,
 	readOnly: _react2.default.PropTypes.bool,
 	removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
 };

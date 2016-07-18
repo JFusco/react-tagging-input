@@ -1,6 +1,6 @@
 'use strict';
 
-import React  from 'react';
+import React from 'react';
 
 const Tag = props => {
 	const onRemoveClick = e => {
@@ -23,7 +23,6 @@ const Tag = props => {
 		<span>
 			{/* Tag name */}
 			{props.name}
-
 			{/* Tag remove icon */}
 			{removeIcon()}
 		</span>
@@ -34,7 +33,7 @@ export default Tag;
 
 Tag.propTypes = {
 	name: React.PropTypes.string.isRequired,
-	removeTag: React.PropTypes.func.isRequired,
+	removeTag: React.PropTypes.func,
 	readOnly: React.PropTypes.bool,
 	removeTagIcon: React.PropTypes.oneOfType([
 		React.PropTypes.string,

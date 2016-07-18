@@ -9,6 +9,7 @@
   padding: 0 9px; }
 
 .react-tags input {
+  transition: border-color 0.3s ease;
   background: #FFF;
   border: 1px solid #D9D8DD;
   height: 24px;
@@ -21,11 +22,16 @@
   .react-tags input:-ms-input-placeholder {
     color: rgba(98, 97, 102, 0.5); }
   .react-tags input:focus {
-    outline: none; }
+    outline: none;
+    border-color: #b1afb9; }
 
 .react-tags .tags-container {
   display: inline; }
   .react-tags .tags-container > span {
+    -webkit-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    -o-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     background: #D9D8DD;
     margin: 5px 5px 0 0;
     transition: background 0.3s ease;
@@ -45,3 +51,28 @@
     font-style: normal; }
   .react-tags .tags-container.readonly {
     pointer-events: none; }
+
+@-webkit-keyframes slide-left {
+  0% {
+    -webkit-transform: translate3d(8, 0, 0); }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0); } }
+
+@-moz-keyframes slide-left {
+  0% {
+    -moz-transform: translate3d(8px, 0, 0); }
+  100% {
+    -moz-transform: translate3d(0, 0, 0); } }
+
+@-o-keyframes slide-left {
+  0% {
+    -o-transform: translate3d(8px, 0, 0); }
+  100% {
+    opacity: 1;
+    -o-transform: translate3d(0, 0, 0); } }
+
+@keyframes slide-left {
+  0% {
+    transform: translate3d(8px, 0, 0); }
+  100% {
+    transform: translate3d(0, 0, 0); } }

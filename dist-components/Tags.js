@@ -140,18 +140,14 @@ var Tags = function (_Component) {
 					return _this4.input = el;
 				} }) : null;
 
-			var classNames = function classNames() {
-				var classes = 'tags-container';
-
-				return _this4.props.readOnly ? classes + ' readonly' : classes;
-			};
+			var classNames = this.props.readOnly ? 'tags-container readonly' : 'tags-container';
 
 			return _react2.default.createElement(
 				'div',
 				{ className: 'react-tags', id: this.props.id },
 				_react2.default.createElement(
 					'div',
-					{ className: classNames() },
+					{ className: classNames },
 					tagItems
 				),
 				tagInput

@@ -110,15 +110,11 @@ export default class Tags extends Component{
 			onKeyUp={this.onInputKey.bind(this)}
 			ref={el => this.input = el} /> : null;
 
-		const classNames = () => {
-			const classes = 'tags-container';
-
-			return this.props.readOnly ? `${classes} readonly` : classes;
-		};
+		const classNames = this.props.readOnly ? 'tags-container readonly' : 'tags-container';
 
 		return (
 			<div className="react-tags" id={this.props.id}>
-				<div className={classNames()}>
+				<div className={classNames}>
 					{tagItems}
 				</div>
 

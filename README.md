@@ -1,5 +1,6 @@
 # react-tagging-input
-![npm][npm-version-image]
+[![MIT][mit-image]][mit-url]
+[![npm][npm-version-image]][npm-url]
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
 
@@ -187,12 +188,16 @@ If you don't care to override variables and just want to override actual styles 
 @import "node_modules/react-tagging-input/dist/react-tags.min.css";
 ```
 
-## License ##
+## Tests ##
+```
+npm test
+```
 
- * [MIT License](http://www.opensource.org/licenses/mit-license.php)
-
+[mit-image]: https://img.shields.io/npm/l/react-tagging-input.svg?style=flat-square
+[mit-url]: https://github.com/JFusco/react-tagging-input/blob/master/LICENSE
 [npm-version-image]: https://img.shields.io/npm/v/npm.svg?maxAge=2592000
-[dev-dep-image]: https://david-dm.org/JFusco/react-tags/dev-status.svg
-[dev-dep-url]: https://david-dm.org/JFusco/react-tags#info=devDependencies
-[peer-dep-image]: https://david-dm.org/JFusco/react-tags/peer-status.svg
-[peer-dep-url]: https://david-dm.org/JFusco/react-tags#info=peerDependencies
+[npm-url]: https://www.npmjs.com/package/react-tagging-input
+[dev-dep-image]: https://david-dm.org/JFusco/react-tagging-input/dev-status.svg
+[dev-dep-url]: https://david-dm.org/JFusco/react-tagging-input#info=devDependencies
+[peer-dep-image]: https://david-dm.org/JFusco/react-tagging-input/peer-status.svg
+[peer-dep-url]: https://david-dm.org/JFusco/react-tagging-input#info=peerDependencies
