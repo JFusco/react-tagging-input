@@ -8,6 +8,5 @@ before_install:
   - npm install -g eslint
   - npm install -g babel-cli
   - npm install -g jest-cli
-  - gem install sass
 script:
-    - "gulp eslint && gulp scss-lint && npm test"
+    - "gulp eslint && npm test"
