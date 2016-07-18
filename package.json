@@ -56,11 +56,10 @@
 		"minimist": "~1.2.0"
 	},
 	"scripts": {
-		"test": "jest --coverage --json"
+		"test": "jest --coverage"
 	},
 	"jest": {
 		"testDirectoryName": "__tests__",
-		"rootDir": "src",
 		"testPathIgnorePatterns": [
 			"<rootDir>/node_modules/"
 		],
