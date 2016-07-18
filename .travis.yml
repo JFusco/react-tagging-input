@@ -1,10 +1,8 @@
- language: node_js
- node_js:
-   - "6"
-branches:
-  only:
-  - master
+language: node_js
+node_js:
+  - "6"
 before_install:
   - npm install -g gulp
   - npm install -g eslint
-script: gulp eslint && gulp test
+script:
+    - "gulp eslint && gulp test"
