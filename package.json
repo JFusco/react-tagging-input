@@ -55,9 +55,6 @@
 		"run-sequence": "^1.2.1",
 		"minimist": "~1.2.0"
 	},
-	"scripts": {
-		"test": "jest --coverage"
-	},
 	"jest": {
 		"testDirectoryName": "__tests__",
 		"testPathIgnorePatterns": [

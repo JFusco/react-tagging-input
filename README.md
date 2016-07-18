@@ -1,8 +1,12 @@
 # react-tagging-input
-[![MIT][mit-image]][mit-url]
-[![npm][npm-version-image]][npm-url]
+
+[![Build Status][build-image]][build-url]
+
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
+
+[![MIT][mit-image]][mit-url]
+[![npm][npm-version-image]][npm-url]
 
 > Simple tagging component.
 
@@ -193,6 +197,8 @@ If you don't care to override variables and just want to override actual styles 
 npm test
 ```
 
+[build-image]: https://travis-ci.org/JFusco/react-tagging-input.svg?branch=master
+[build-url]: https://travis-ci.org/JFusco/react-tagging-input
 [mit-image]: https://img.shields.io/npm/l/react-tagging-input.svg?style=flat-square
 [mit-url]: https://github.com/JFusco/react-tagging-input/blob/master/LICENSE
 [npm-version-image]: https://img.shields.io/npm/v/npm.svg?maxAge=2592000
