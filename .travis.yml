@@ -7,4 +7,4 @@ branches:
 before_install:
   - npm install -g gulp
   - npm install -g eslint
-script: "gulp eslint && gulp test"
+script: gulp eslint && gulp test
