@@ -1,6 +1,8 @@
 'use strict';
 
 jest.disableAutomock();
+jest.unmock('../src/js/Tags');
+jest.unmock('../src/js/Tag');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
