@@ -56,10 +56,15 @@
 		"minimist": "~1.2.0"
 	},
 	"scripts": {
-		"test": "jest"
+		"test": "jest --coverage --json"
 	},
 	"jest": {
 		"testDirectoryName": "__tests__",
+		"rootDir": "src",
+		"testPathIgnorePatterns": [
+			"/node_modules/",
+			"<rootDir>/node_modules/"
+		],
 		"unmockedModulePathPatterns": [
 			"<rootDir>/node_modules/react/",
 			"<rootDir>/node_modules/react-dom/",
