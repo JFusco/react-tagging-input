@@ -57,8 +57,10 @@ render(<Application />, document.getElementById('application'));
 #### Options
 * **[`initialTags`](#initialTags)**
 * **[`placeholder`](#placeholder)**
+* **[`delimiters`](#delimiters)**
 * **[`change`](#change)**
 * **[`added`](#added)**
+* **[`removed`](#removed)**
 * **[`readOnly`](#readOnly)**
 * **[`removeTagWithDeleteKey`](#removeTagWithDeleteKey)**
 * **[`removeTagIcon`](#removeTagIcon)**
@@ -79,6 +81,15 @@ const tags = ['hello', 'world'];
 A `string` used as placeholder text in the tags input field
 ```js
 <Tags placeholder="Add a tag" />
+```
+
+<a name="delimiters"></a>
+##### delimiters ~ optional ~ default `[13, 9, 32]`
+An `array` of keyCodes used to tell the tags component which delimiter to use to add a tag
+
+[Here](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) is more info and a list of keyCodes
+```js
+<Tags delimiters={[13, 9, 32, 188]} />
 ```
 
 <a name="change"></a>

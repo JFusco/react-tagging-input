@@ -17,21 +17,17 @@ var Tag = function Tag(props) {
 		props.removeTag();
 	};
 
-	var removeIcon = function removeIcon() {
-		if (props.readOnly) return null;
-
-		return _react2.default.createElement(
-			'a',
-			{ onClick: onRemoveClick, href: '#' },
-			props.removeTagIcon
-		);
-	};
+	var removeIcon = !props.readOnly ? _react2.default.createElement(
+		'a',
+		{ onClick: onRemoveClick, href: '#' },
+		props.removeTagIcon || String.fromCharCode(215)
+	) : null;
 
 	return _react2.default.createElement(
-		'span',
+		'li',
 		null,
 		props.name,
-		removeIcon()
+		removeIcon
 	);
 };
 
@@ -41,6 +37,7 @@ exports.default = Tag;
 Tag.propTypes = {
 	name: _react2.default.PropTypes.string.isRequired,
 	removeTag: _react2.default.PropTypes.func,
+	selectedTag: _react2.default.PropTypes.bool,
 	readOnly: _react2.default.PropTypes.bool,
 	removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
 };

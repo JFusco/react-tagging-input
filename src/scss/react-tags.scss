@@ -50,8 +50,11 @@
 
 	.tags-container {
 		display: inline;
+		margin: 0;
+		padding: 0;
+		list-style: none;
 
-		> span {
+		> li {
 			@extend %tags-ui-base;
 
 			-webkit-animation: $tag-intro-animation;

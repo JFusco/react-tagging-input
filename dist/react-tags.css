@@ -1,4 +1,4 @@
-.react-tags input, .react-tags .tags-container > span {
+.react-tags input, .react-tags .tags-container > li {
   font-size: 12px;
   height: 26px;
   line-height: 26px;
@@ -26,8 +26,11 @@
     border-color: #b1afb9; }
 
 .react-tags .tags-container {
-  display: inline; }
-  .react-tags .tags-container > span {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .react-tags .tags-container > li {
     -webkit-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     -moz-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     -o-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
@@ -36,7 +39,7 @@
     margin: 5px 5px 0 0;
     transition: background 0.3s ease;
     cursor: default; }
-    .react-tags .tags-container > span:hover {
+    .react-tags .tags-container > li:hover {
       background: #c9c8cf; }
   .react-tags .tags-container a {
     font-size: 12px;

@@ -4,41 +4,70 @@ import React, {Component} from 'react';
 import update from 'react-addons-update';
 import Tag from './Tag';
 
-const map = new WeakMap();
+class Tags extends Component{
+	static KEYS = {
+		enter: 13,
+		tab: 9,
+		spacebar: 32,
+		backspace: 8,
+		left: 37,
+		right: 39
+	};
 
-export default class Tags extends Component{
+	static propTypes = {
+		initialTags: React.PropTypes.arrayOf(React.PropTypes.string),
+		change: React.PropTypes.func,
+		added: React.PropTypes.func,
+		removed: React.PropTypes.func,
+		placeholder: React.PropTypes.string,
+		delimiters: React.PropTypes.arrayOf(React.PropTypes.number),
+		id: React.PropTypes.string,
+		readOnly: React.PropTypes.bool,
+		allowDupes: React.PropTypes.bool,
+		removeTagIcon: React.PropTypes.oneOfType([
+			React.PropTypes.string,
+			React.PropTypes.element
+		])
+	};
+
+	static defaultProps = {
+		initialTags: [],
+		placeholder: 'Add a tag',
+		delimiters: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+		allowDupes: true,
+		readOnly: false
+	};
+
+	state = {
+		tags: this.props.initialTags
+	};
+
 	constructor(props){
 		super(props);
-
-		this.state = {
-			tags: this.props.initialTags
-		};
-
-		map.set(this, {
-			empty: true
-		});
 	}
 
 	onInputKey(e){
-		if (this.input.value.length !== 0 && this.empty){
-			this.empty = false;
-		}
-
 		switch (e.keyCode){
-			case 8:
+			case Tags.KEYS.backspace:
 				if (this.state.tags.length === 0) return;
 
-				if (this.empty){
+				if (this.input.value === ''){
 					this.removeTag(this.state.tags.length - 1);
 				}
 
-				if (this.input.value.length === 0){
-					this.empty = true;
-				}
 				break;
 
-			case 13:
-				this.addTag();
+			default:
+				if (this.input.value === '') return;
+
+				if (this.props.delimiters.indexOf(e.keyCode) !== -1){
+					if (Tags.KEYS.enter !== e.keyCode){
+						e.preventDefault();
+					}
+
+					this.addTag();
+				}
+
 				break;
 		}
 	}
@@ -61,8 +90,6 @@ export default class Tags extends Component{
 				this.props.added(value);
 			}
 
-			this.empty = true;
-
 			this.input.value = '';
 		});
 	}
@@ -83,40 +110,32 @@ export default class Tags extends Component{
 		});
 	}
 
-	set empty(empty){
-		map.set(this, {
-			empty
-		});
-	}
-
-	get empty(){
-		return map.get(this).empty;
-	}
-
 	render(){
 		const tagItems = this.state.tags.map((tag, v) => {
 			return <Tag
 				key={v}
-				readOnly={this.props.readOnly}
 				name={tag}
+				readOnly={this.props.readOnly}
 				removeTagIcon={this.props.removeTagIcon}
 				removeTag={this.removeTag.bind(this, v)} />;
 		});
 
-		const tagInput = !this.props.readOnly ? <input
-			type="text"
-			role="textbox"
-			placeholder={this.props.placeholder}
-			onKeyUp={this.onInputKey.bind(this)}
-			ref={el => this.input = el} /> : null;
+		const tagInput = !this.props.readOnly ? (
+			<input
+				type="text"
+				role="textbox"
+				placeholder={this.props.placeholder}
+				onKeyDown={this.onInputKey.bind(this)}
+				ref={el => this.input = el} />
+		) : null;
 
 		const classNames = this.props.readOnly ? 'tags-container readonly' : 'tags-container';
 
 		return (
 			<div className="react-tags" id={this.props.id}>
-				<div className={classNames}>
+				<ul className={classNames}>
 					{tagItems}
-				</div>
+				</ul>
 
 				{tagInput}
 			</div>
@@ -124,28 +143,4 @@ export default class Tags extends Component{
 	}
 }
 
-Tags.propTypes = {
-	initialTags: React.PropTypes.arrayOf(React.PropTypes.string),
-	change: React.PropTypes.func,
-	added: React.PropTypes.func,
-	removed: React.PropTypes.func,
-	placeholder: React.PropTypes.string,
-	id: React.PropTypes.string,
-	readOnly: React.PropTypes.bool,
-	allowDupes: React.PropTypes.bool,
-	removeTagWithDeleteKey: React.PropTypes.bool,
-	removeTagIcon: React.PropTypes.oneOfType([
-		React.PropTypes.string,
-		React.PropTypes.element
-	])
-};
-
-Tags.defaultProps = {
-	initialTags: [],
-	placeholder: null,
-	id: null,
-	allowDupes: true,
-	readOnly: false,
-	removeTagWithDeleteKey: true,
-	removeTagIcon: String.fromCharCode(215)
-};
+export default Tags;

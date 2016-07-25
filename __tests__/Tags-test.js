@@ -3,173 +3,333 @@
 jest.disableAutomock();
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import { findDOMNode } from 'react-dom';
+import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
 import Tags from '../src/js/Tags';
 
+const TEST_TAGS = [
+	'foo',
+	'bar'
+];
+
 describe('Tags', () => {
-	it('should render', () => {
-		const tags = TestUtils.renderIntoDocument(
-			<Tags />
+	let renderer,
+		tags;
+
+	beforeEach(() => {
+		renderer = createRenderer();
+
+		renderer.render(
+			<Tags
+				id="test-tags"
+				placeholder="Custom placeholder text"
+				initialTags={TEST_TAGS} />
 		);
 
-		expect(TestUtils.isCompositeComponent(tags)).toBeTruthy();
+		tags = renderer.getRenderOutput();
 	});
 
-	it('should build tags from an array passed as prop', () => {
-		const tags = TestUtils.renderIntoDocument(
-			<Tags initialTags={['hello', 'world']} />
+	it('should render', () => {
+		expect(tags).not.toBeUndefined();
+		expect(tags.type).toBe('div');
+	});
+
+	it('should check ID of tags component', () => {
+		expect(tags.type).toEqual('div');
+		expect(tags.props.id).toEqual('test-tags');
+	});
+
+	it('should render custom placeholder if provided', () => {
+		expect(tags.props.children[1].type).toBe('input');
+		expect(tags.props.children[1].props.placeholder).toBe('Custom placeholder text');
+	});
+});
+
+
+describe('Tags - "initialTags"', () => {
+	it('should render tags (shallow render)', () => {
+		const renderer = createRenderer();
+
+		const renderList = () => {
+			renderer.render(
+				<Tags
+					initialTags={TEST_TAGS} />
+			);
+
+			const list = renderer.getRenderOutput();
+			return list.props.children.filter(component => component.type == 'ul');
+		};
+
+		const items = renderList();
+
+		expect(items[0].props.children.length).toBe(TEST_TAGS.length);
+	});
+
+	it('should render tags (DOM render)', () => {
+		const tags = renderIntoDocument(
+			<Tags
+				initialTags={TEST_TAGS} />
 		);
 
-		const renderedDOM = ReactDOM.findDOMNode(tags);
+		const renderedDOM = findDOMNode(tags);
 		const tagContainer = renderedDOM.querySelector('.tags-container');
 
-		expect(tagContainer.children.length).toBe(2);
+		expect(tagContainer.children.length).toBe(TEST_TAGS.length);
 	});
+});
 
-	it('should be read only', () => {
-		const tags = TestUtils.renderIntoDocument(
+describe('Tags - "readOnly"', () => {
+	let renderer;
+
+	beforeEach(() => {
+		renderer = createRenderer();
+
+		renderer.render(
 			<Tags
-				initialTags={['hello', 'world']}
+				initialTags={TEST_TAGS}
 				readOnly={true} />
 		);
-
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
-
-		expect(renderedDOM.getElementsByTagName('input').length).toBe(0);
-		expect(renderedDOM.getElementsByTagName('div')[0].classList.contains('readonly')).toBeTruthy();
-		expect(tagContainer.children[0].getElementsByTagName('a').length).toBe(0);
-		expect(tagContainer.children[0].textContent).toContain('hello');
 	});
 
-	it('should render custom remove tag icon element', () => {
-		const removeContent = <i className="icon-remove"></i>;
+	it('should only render the tags container, not the input', () => {
+		const list = renderer.getRenderOutput();
+		const items = list.props.children;
 
-		const tags = TestUtils.renderIntoDocument(
+		expect(items.length).toBe(2);
+		expect(items[0].type).toBe('ul');
+		expect(items[1]).toBeNull();
+	});
+
+	it('should add the className "readonly" to tags container', () => {
+		const list = renderer.getRenderOutput();
+		const items = list.props.children;
+
+		expect(items[0].props.className).toContain('readonly');
+	});
+});
+
+
+describe('Tags - "delimiters"', () => {
+	let tags,
+		input,
+		tagContainer;
+
+	beforeEach(() => {
+		tags = renderIntoDocument(
 			<Tags
-				initialTags={['hello', 'world']}
-				removeTagIcon={removeContent} />
+				initialTags={TEST_TAGS}
+				delimiters={[13, 9, 32, 188]} />
 		);
 
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
+		const renderedDOM = findDOMNode(tags);
+		tagContainer = renderedDOM.querySelector('.tags-container');
+		input = renderedDOM.getElementsByTagName('input')[0];
 
-		expect(tagContainer.children[0].getElementsByTagName('i').length).toBe(1);
-		expect(tagContainer.children[0].querySelector('.icon-remove')).not.toBeNull();
+		input.value = TEST_TAGS[0];
+
+		Simulate.change(input);
 	});
 
-	it('should render custom remove tag icon string', () => {
-		const removeContent = 'close';
+	afterEach(() => {
+		tags = null;
+		input = null;
+		tagContainer = null;
+	});
 
-		const tags = TestUtils.renderIntoDocument(
+	describe('when pressing "enter"', () => {
+		it('should add a tag', () => {
+			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+
+			expect(tagContainer.children.length).toBe(3);
+		});
+	});
+
+	describe('when pressing "tab"', () => {
+		it('should add a tag', () => {
+			Simulate.keyDown(input, {key: 'Tab', keyCode: 9, which: 9});
+
+			expect(tagContainer.children.length).toBe(3);
+		});
+	});
+
+	describe('when pressing "spacebar"', () => {
+		it('should add a tag', () => {
+			Simulate.keyDown(input, {key: 'Spacebar', keyCode: 32, which: 32});
+
+			expect(tagContainer.children.length).toBe(3);
+		});
+	});
+
+	describe('when pressing ","', () => {
+		it('should add a tag', () => {
+			Simulate.keyDown(input, {key: 'Comma', keyCode: 188, which: 188});
+
+			expect(tagContainer.children.length).toBe(3);
+		});
+	});
+});
+
+describe('Tags - events', () => {
+	let tags,
+		input,
+		tagContainer;
+
+	const onTagAdded = jest.genMockFunction();
+	const onTagRemoved = jest.genMockFunction();
+	const onTagsChanged = jest.genMockFunction();
+
+	beforeEach(() => {
+		tags = renderIntoDocument(
 			<Tags
-				initialTags={['hello', 'world']}
-				removeTagIcon={removeContent} />
+				initialTags={TEST_TAGS}
+				added={onTagAdded}
+				removed={onTagRemoved}
+				change={onTagsChanged} />
 		);
 
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
-
-		expect(tagContainer.children[0].getElementsByTagName('a')[0].textContent).toContain('close');
+		const renderedDOM = findDOMNode(tags);
+		tagContainer = renderedDOM.querySelector('.tags-container');
+		input = renderedDOM.getElementsByTagName('input')[0];
 	});
 
-
-	it('should remove a single tag', () => {
-		const tags = TestUtils.renderIntoDocument(
-			<Tags initialTags={['hello', 'world']} />
-		);
-
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
-
-		TestUtils.Simulate.click(
-			tagContainer.children[0].getElementsByTagName('a')[0]
-		);
-
-		expect(tagContainer.children.length).toBe(1);
+	afterEach(() => {
+		tags = null;
+		input = null;
+		tagContainer = null;
 	});
 
-	it('should add a single tag', () => {
-		const tags = TestUtils.renderIntoDocument(
-			<Tags initialTags={['hello', 'world']} />
+	describe('when adding a tag', () => {
+		beforeEach(() => {
+			input.value = TEST_TAGS[0];
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+		});
+
+		it('should call the "added" event and return the new tag', () => {
+			expect(onTagAdded).toBeCalledWith(TEST_TAGS[0]);
+		});
+
+		it('should call the "changed" event and return the new tags list as an array', () => {
+			const newArray = TEST_TAGS.concat('foo');
+
+			expect(onTagsChanged).toBeCalledWith(newArray);
+		});
+	});
+
+	describe('when removing a tag', () => {
+		beforeEach(() => {
+			input.value = '';
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+		});
+
+		it('should call the "removed" event and return the tag that was removed', () => {
+			expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1]);
+		});
+
+		it('should call the "changed" event and return the new tags list as an array', () => {
+			expect(onTagsChanged).toBeCalledWith([TEST_TAGS[0]]);
+		});
+	});
+});
+
+describe('Tags - removing', () => {
+	let tags,
+		input,
+		tagContainer;
+
+	beforeEach(() => {
+		tags = renderIntoDocument(
+			<Tags
+				initialTags={TEST_TAGS} />
 		);
 
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
+		const renderedDOM = findDOMNode(tags);
+		tagContainer = renderedDOM.querySelector('.tags-container');
+		input = renderedDOM.getElementsByTagName('input')[0];
+	});
+
+	afterEach(() => {
+		tags = null;
+		input = null;
+		tagContainer = null;
+	});
+
+	describe('when the remove icon is clicked on a tag', () => {
+		it('should remove a single tag', () => {
+			const removeIcon = tagContainer.children[0].getElementsByTagName('a')[0];
+
+			Simulate.click(removeIcon);
+
+			expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[1]);
+			expect(tagContainer.children.length).toBe(1);
+		});
+	});
+
+	describe('when the input field is empty and backspace is pressed', () => {
+		it('should remove a single tag', () => {
+			input.value = '';
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+
+			expect(tagContainer.children.length).toBe(1);
+			expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[0]);
+		});
+	});
+
+	describe('when the input field is not empty and backspace is pressed', () => {
+		it('should not remove a tag', () => {
+			input.value = 'a';
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+
+			expect(tagContainer.children.length).toBe(2);
+			expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
+		});
+	});
+});
+
+describe('Tags - "allowDupes"', () => {
+	it('should allow duplicate tags to be created', () => {
+		const tags = renderIntoDocument(
+			<Tags
+				initialTags={TEST_TAGS} />
+		);
+
+		const renderedDOM = findDOMNode(tags);
 		const input = renderedDOM.getElementsByTagName('input')[0];
+		const tagContainer = renderedDOM.querySelector('.tags-container');
 
-		input.value = 'foo';
-		TestUtils.Simulate.change(input);
-		TestUtils.Simulate.keyUp(input, {key: 'Enter', keyCode: 13, which: 13});
+		input.value = TEST_TAGS[0];
+
+		Simulate.change(input);
+		Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
 		expect(tagContainer.children.length).toBe(3);
+		expect(tagContainer.children[2].textContent).toContain(TEST_TAGS[0]);
+		expect(tagContainer.children[2].textContent).toBe(tagContainer.children[0].textContent);
 	});
 
-	it('should call event added and return the tag that was just added', () => {
-		const onTagAdded = jest.genMockFunction();
-
-		const tags = TestUtils.renderIntoDocument(
+	it('should not allow duplicate tags to be created', () => {
+		const tags = renderIntoDocument(
 			<Tags
-				initialTags={['hello', 'world']}
-				added={onTagAdded} />
+				initialTags={TEST_TAGS}
+				allowDupes={false} />
 		);
 
-		const renderedDOM = ReactDOM.findDOMNode(tags);
+		const renderedDOM = findDOMNode(tags);
 		const input = renderedDOM.getElementsByTagName('input')[0];
-
-		input.value = 'foo';
-		TestUtils.Simulate.change(input);
-		TestUtils.Simulate.keyUp(input, {key: 'Enter', keyCode: 13, which: 13});
-
-		expect(onTagAdded).toBeCalledWith('foo');
-	});
-
-	it('should call event removed and return the tag that was just removed', () => {
-		const onTagRemoved = jest.genMockFunction();
-
-		const tags = TestUtils.renderIntoDocument(
-			<Tags
-				initialTags={['hello', 'world']}
-				removed={onTagRemoved} />
-		);
-
-		const renderedDOM = ReactDOM.findDOMNode(tags);
 		const tagContainer = renderedDOM.querySelector('.tags-container');
 
-		TestUtils.Simulate.click(
-			tagContainer.children[0].getElementsByTagName('a')[0]
-		);
+		input.value = TEST_TAGS[0];
 
-		expect(onTagRemoved).toBeCalledWith('hello');
-	});
+		Simulate.change(input);
+		Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-	it('should call event change and return the new tags list as an array', () => {
-		const onTagsChange = jest.genMockFunction();
-
-		const tags = TestUtils.renderIntoDocument(
-			<Tags
-				initialTags={['hello', 'world']}
-				change={onTagsChange} />
-		);
-
-		const renderedDOM = ReactDOM.findDOMNode(tags);
-		const input = renderedDOM.getElementsByTagName('input')[0];
-
-		input.value = 'foo';
-		TestUtils.Simulate.change(input);
-		TestUtils.Simulate.keyUp(input, {key: 'Enter', keyCode: 13, which: 13});
-
-		expect(onTagsChange).toBeCalledWith(['hello', 'world', 'foo']);
-	});
-
-	it('should add a placeholder to the input element', () => {
-		const tags = TestUtils.renderIntoDocument(
-			<Tags placeholder="add a tag" />
-		);
-
-		var input = TestUtils.findRenderedDOMComponentWithTag(tags, 'input');
-
-		expect(input.getAttribute('placeholder')).toEqual('add a tag');
+		expect(tagContainer.children.length).toBe(2);
 	});
 });

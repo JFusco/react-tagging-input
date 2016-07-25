@@ -26,8 +26,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var map = new WeakMap();
-
 var Tags = function (_Component) {
 	_inherits(Tags, _Component);
 
@@ -39,35 +37,33 @@ var Tags = function (_Component) {
 		_this.state = {
 			tags: _this.props.initialTags
 		};
-
-		map.set(_this, {
-			empty: true
-		});
 		return _this;
 	}
 
 	_createClass(Tags, [{
 		key: 'onInputKey',
 		value: function onInputKey(e) {
-			if (this.input.value.length !== 0 && this.empty) {
-				this.empty = false;
-			}
-
 			switch (e.keyCode) {
-				case 8:
+				case Tags.KEYS.backspace:
 					if (this.state.tags.length === 0) return;
 
-					if (this.empty) {
+					if (this.input.value === '') {
 						this.removeTag(this.state.tags.length - 1);
 					}
 
-					if (this.input.value.length === 0) {
-						this.empty = true;
-					}
 					break;
 
-				case 13:
-					this.addTag();
+				default:
+					if (this.input.value === '') return;
+
+					if (this.props.delimiters.indexOf(e.keyCode) !== -1) {
+						if (Tags.KEYS.enter !== e.keyCode) {
+							e.preventDefault();
+						}
+
+						this.addTag();
+					}
+
 					break;
 			}
 		}
@@ -92,8 +88,6 @@ var Tags = function (_Component) {
 				if (typeof _this2.props.added !== 'undefined') {
 					_this2.props.added(value);
 				}
-
-				_this2.empty = true;
 
 				_this2.input.value = '';
 			});
@@ -125,8 +119,8 @@ var Tags = function (_Component) {
 			var tagItems = this.state.tags.map(function (tag, v) {
 				return _react2.default.createElement(_Tag2.default, {
 					key: v,
-					readOnly: _this4.props.readOnly,
 					name: tag,
+					readOnly: _this4.props.readOnly,
 					removeTagIcon: _this4.props.removeTagIcon,
 					removeTag: _this4.removeTag.bind(_this4, v) });
 			});
@@ -135,7 +129,7 @@ var Tags = function (_Component) {
 				type: 'text',
 				role: 'textbox',
 				placeholder: this.props.placeholder,
-				onKeyUp: this.onInputKey.bind(this),
+				onKeyDown: this.onInputKey.bind(this),
 				ref: function ref(el) {
 					return _this4.input = el;
 				} }) : null;
@@ -146,50 +140,43 @@ var Tags = function (_Component) {
 				'div',
 				{ className: 'react-tags', id: this.props.id },
 				_react2.default.createElement(
-					'div',
+					'ul',
 					{ className: classNames },
 					tagItems
 				),
 				tagInput
 			);
 		}
-	}, {
-		key: 'empty',
-		set: function set(empty) {
-			map.set(this, {
-				empty: empty
-			});
-		},
-		get: function get() {
-			return map.get(this).empty;
-		}
 	}]);
 
 	return Tags;
 }(_react.Component);
 
-exports.default = Tags;
-
-
+Tags.KEYS = {
+	enter: 13,
+	tab: 9,
+	spacebar: 32,
+	backspace: 8,
+	left: 37,
+	right: 39
+};
 Tags.propTypes = {
 	initialTags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
 	change: _react2.default.PropTypes.func,
 	added: _react2.default.PropTypes.func,
 	removed: _react2.default.PropTypes.func,
 	placeholder: _react2.default.PropTypes.string,
+	delimiters: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.number),
 	id: _react2.default.PropTypes.string,
 	readOnly: _react2.default.PropTypes.bool,
 	allowDupes: _react2.default.PropTypes.bool,
-	removeTagWithDeleteKey: _react2.default.PropTypes.bool,
 	removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
 };
-
 Tags.defaultProps = {
 	initialTags: [],
-	placeholder: null,
-	id: null,
+	placeholder: 'Add a tag',
+	delimiters: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
 	allowDupes: true,
-	readOnly: false,
-	removeTagWithDeleteKey: true,
-	removeTagIcon: String.fromCharCode(215)
+	readOnly: false
 };
+exports.default = Tags;
