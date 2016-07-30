@@ -10,7 +10,7 @@ const Tag = props => {
 	};
 
 	const removeIcon = !props.readOnly ? (
-		<a onClick={onRemoveClick} href="#">
+		<a onClick={onRemoveClick}>
 			{props.removeTagIcon|| String.fromCharCode(215)}
 		</a>
 	) : null;

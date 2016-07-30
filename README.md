@@ -10,6 +10,9 @@
 
 > Simple tagging component.
 
+### Demo
+![img](tags-demo.gif)
+
 ## Getting Started ##
 
 #### Installation

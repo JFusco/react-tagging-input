@@ -16,7 +16,8 @@
 			transition: background 0.3s ease;
 			cursor: default;
 
-			&:hover, &.active {
+			&:hover,
+			&.active {
 				background: $tag-background-hover-color;
 			}
 		}
@@ -24,6 +25,7 @@
 		a {
 			font-size: $tag-remove-font-size;
 			color: $tag-remove-color;
+			cursor: pointer;
 			transition: color 0.3s ease;
 			display: inline-block;
 			margin-left: 7px;

@@ -19,7 +19,7 @@ var Tag = function Tag(props) {
 
 	var removeIcon = !props.readOnly ? _react2.default.createElement(
 		'a',
-		{ onClick: onRemoveClick, href: '#' },
+		{ onClick: onRemoveClick },
 		props.removeTagIcon || String.fromCharCode(215)
 	) : null;
 
