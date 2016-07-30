@@ -3,7 +3,7 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
-const $ = gulpLoadPlugins({pattern: ['gulp-*', 'run-sequence', 'minimist'], scope: ['devDependencies']});
+const $ = gulpLoadPlugins({pattern: ['gulp-*', 'run-sequence', 'del', 'minimist'], scope: ['devDependencies']});
 const argv = $.minimist(process.argv.slice(2));
 
 require('./gulp/bridge.js')(gulp, [
@@ -14,11 +14,12 @@ require('./gulp/bridge.js')(gulp, [
 	'sass',
 	'clean-css',
 	'test',
-	'watch'
+	'watch',
+	'clean'
 ], $);
 
 gulp.task('default', cb => {
-	$.runSequence('sass', 'cleanCSS', 'eslint', 'test', 'webpack', 'babel', () => {
+	$.runSequence('clean', 'sass', 'cleanCSS', 'eslint', 'test', 'webpack', 'babel', () => {
 		$.util.log($.util.colors.green.bold('FINISHED BUILD'));
 
 		if(argv.w){

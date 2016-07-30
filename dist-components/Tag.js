@@ -14,7 +14,7 @@ var Tag = function Tag(props) {
 	var onRemoveClick = function onRemoveClick(e) {
 		e.preventDefault();
 
-		props.removeTag();
+		props.onRemoveTag(e);
 	};
 
 	var removeIcon = !props.readOnly ? _react2.default.createElement(
@@ -36,7 +36,7 @@ exports.default = Tag;
 
 Tag.propTypes = {
 	name: _react2.default.PropTypes.string.isRequired,
-	removeTag: _react2.default.PropTypes.func,
+	onRemoveTag: _react2.default.PropTypes.func,
 	selectedTag: _react2.default.PropTypes.bool,
 	readOnly: _react2.default.PropTypes.bool,
 	removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])

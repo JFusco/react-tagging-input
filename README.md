@@ -44,7 +44,7 @@ class Application extends Component{
 				<Tags
 				 initialTags={this.state.tags}
 				 placeholder="Add a tag"
-				 change={this.onTagsChange} />
+				 onChange={this.onTagsChange} />
 			</div>
 		);
 	}
@@ -57,14 +57,14 @@ render(<Application />, document.getElementById('application'));
 #### Options
 * **[`initialTags`](#initialTags)**
 * **[`placeholder`](#placeholder)**
-* **[`delimiters`](#delimiters)**
-* **[`change`](#change)**
-* **[`added`](#added)**
-* **[`removed`](#removed)**
+* **[`addKeys`](#addKeys)**
+* **[`onChange`](#onChange)**
+* **[`onAdded`](#onAdded)**
+* **[`onRemoved`](#onRemoved)**
+* **[`maxTags`](#maxTags)**
 * **[`readOnly`](#readOnly)**
-* **[`removeTagWithDeleteKey`](#removeTagWithDeleteKey)**
 * **[`removeTagIcon`](#removeTagIcon)**
-* **[`allowDupes`](#allowDupes)**
+* **[`uniqueTags`](#allowDupes)**
 * **[`id`](#id)**
 
 <a name="initialTags"></a>
@@ -83,46 +83,53 @@ A `string` used as placeholder text in the tags input field
 <Tags placeholder="Add a tag" />
 ```
 
-<a name="delimiters"></a>
-##### delimiters ~ optional ~ default `[13, 9, 32]`
+<a name="addKeys"></a>
+##### addKeys ~ optional ~ default `[13, 9, 32]`
 An `array` of keyCodes used to tell the tags component which delimiter to use to add a tag
 
 [Here](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) is more info and a list of keyCodes
 ```js
-<Tags delimiters={[13, 9, 32, 188]} />
+<Tags addKeys={[13, 9, 32, 188]} />
 ```
 
-<a name="change"></a>
-##### change ~ optional
+<a name="onChange"></a>
+##### onChange ~ optional
 A `function` fired anytime there is a change - returns the new `array` of tags
 ```js
 onTagsChange(tags){
 	console.log(`new tags: ${tags}`);
 }
 
-<Tags change={this.onTagsChange} />
+<Tags onChange={this.onTagsChange} />
 ```
 
-<a name="added"></a>
-##### added ~ optional
+<a name="onAdded"></a>
+##### onAdded ~ optional
 A `function` fired when a new tag is added - returns a `string` of the new tag
 ```js
 onTagAdded(tag){
 	console.log(`new tag: ${tags}`);
 }
 
-<Tags added={this.onTagAdded} />
+<Tags onAdded={this.onTagAdded} />
 ```
 
-<a name="removed"></a>
-##### removed ~ optional
+<a name="onRemoved"></a>
+##### onRemoved ~ optional
 A `function` fired when a new tag is deleted - returns a `string` of the tag that was deleted
 ```js
 onTagRemoved(tag){
 	console.log(`deleted tag: ${tag}`);
 }
 
-<Tags removed={this.onTagRemoved} />
+<Tags onRemoved={this.onTagRemoved} />
+```
+
+<a name="maxTags"></a>
+##### maxTags ~ optional ~ default `-1` (infinite)
+An `integer` representing the maximum number of tags that are allowed to be added
+```js
+<Tags maxTags={10} />
 ```
 
 <a name="readOnly"></a>
@@ -130,13 +137,6 @@ onTagRemoved(tag){
 A `boolean` that sets the tag component to read only mode. No adding or removing tags and pointer events
 ```js
 <Tags readOnly={true} />
-```
-
-<a name="removeTagWithDeleteKey"></a>
-##### removeTagWithDeleteKey ~ optional ~ default `true`
-A `boolean` that allows tags to be removed with the delete key when the input field is empty
-```js
-<Tags removeTagWithDeleteKey={true} />
 ```
 
 <a name="removeTagIcon"></a>
@@ -152,11 +152,12 @@ const removeIcon = () => {
 <Tags removeTagsIcon={removeIcon()} />
 ```
 
-<a name="allowDupes"></a>
-##### allowDupes ~ optional ~ default `false`
-A `boolean` that allows tags to be added more than once
+<a name="uniqueTags"></a>
+##### uniqueTags ~ optional ~ default `false`
+A `boolean` that allows the same tag to be added more than once
 ```js
-<Tags allowDupes={false} />
+//-- Only allow unique tags to be added
+<Tags uniqueTags={true} />
 ```
 
 <a name="id"></a>

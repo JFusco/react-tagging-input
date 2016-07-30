@@ -1,0 +1,35 @@
+//**
+// Tags input
+//**
+
+.react-tags {
+	input {
+		@extend %tags-ui-base;
+
+		$height: $tag-base-height - 2;
+
+		transition: border-color 0.3s ease;
+		background: $tag-input-bg-color;
+		border: $tag-input-border;
+		height: $height;
+		line-height: $height;
+		margin-top: $tag-base-margin;
+
+		&::-webkit-input-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&::-moz-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&:-ms-input-placeholder {
+			color: $tag-input-placeholder-color;
+		}
+
+		&:focus {
+			outline: none;
+			border-color: $tag-input-border-focus-color;
+		}
+	}
+}

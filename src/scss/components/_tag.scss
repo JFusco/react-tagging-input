@@ -1,0 +1,45 @@
+//**
+// Tags tags
+//**
+
+.react-tags {
+	.tags-container {
+		> li {
+			@extend %tags-ui-base;
+
+			-webkit-animation: $tag-intro-animation;
+			-moz-animation: $tag-intro-animation;
+			-o-animation: $tag-intro-animation;
+			animation: $tag-intro-animation;
+			background: $tag-background-color;
+			margin: $tag-base-margin $tag-base-margin 0 0;
+			transition: background 0.3s ease;
+			cursor: default;
+
+			&:hover, &.active {
+				background: $tag-background-hover-color;
+			}
+		}
+
+		a {
+			font-size: $tag-remove-font-size;
+			color: $tag-remove-color;
+			transition: color 0.3s ease;
+			display: inline-block;
+			margin-left: 7px;
+			text-decoration: none;
+
+			&:hover {
+				color: $tag-remove-hover-color;
+			}
+		}
+
+		i {
+			font-style: normal;
+		}
+
+		&.readonly {
+			pointer-events: none;
+		}
+	}
+}

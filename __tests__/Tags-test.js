@@ -40,11 +40,18 @@ describe('Tags', () => {
 	});
 
 	it('should render custom placeholder if provided', () => {
-		expect(tags.props.children[1].type).toBe('input');
-		expect(tags.props.children[1].props.placeholder).toBe('Custom placeholder text');
+		const input = tags.props.children[1];
+
+		expect(input.type).toBe('input');
+		expect(input.props.placeholder).toBe('Custom placeholder text');
+	});
+
+	it('should set aria-label', () => {
+		const input = tags.props.children[1];
+
+		expect(input.props['aria-label']).toBe('Custom placeholder text');
 	});
 });
-
 
 describe('Tags - "initialTags"', () => {
 	it('should render tags (shallow render)', () => {
@@ -109,7 +116,7 @@ describe('Tags - "readOnly"', () => {
 });
 
 
-describe('Tags - "delimiters"', () => {
+describe('Tags - "addKeys"', () => {
 	let tags,
 		input,
 		tagContainer;
@@ -118,7 +125,7 @@ describe('Tags - "delimiters"', () => {
 		tags = renderIntoDocument(
 			<Tags
 				initialTags={TEST_TAGS}
-				delimiters={[13, 9, 32, 188]} />
+				addKeys={[13, 9, 32, 188]} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -177,14 +184,16 @@ describe('Tags - events', () => {
 	const onTagAdded = jest.genMockFunction();
 	const onTagRemoved = jest.genMockFunction();
 	const onTagsChanged = jest.genMockFunction();
+	const onTagsInputChange = jest.genMockFunction();
 
 	beforeEach(() => {
 		tags = renderIntoDocument(
 			<Tags
 				initialTags={TEST_TAGS}
-				added={onTagAdded}
-				removed={onTagRemoved}
-				change={onTagsChanged} />
+				onAdded={onTagAdded}
+				onRemoved={onTagRemoved}
+				onChange={onTagsChanged}
+				onInputChange={onTagsInputChange} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -206,11 +215,11 @@ describe('Tags - events', () => {
 			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 		});
 
-		it('should call the "added" event and return the new tag', () => {
+		it('should call the "onAdded" event and return the new tag', () => {
 			expect(onTagAdded).toBeCalledWith(TEST_TAGS[0]);
 		});
 
-		it('should call the "changed" event and return the new tags list as an array', () => {
+		it('should call the "onChange" event and return the new tags list as an array', () => {
 			const newArray = TEST_TAGS.concat('foo');
 
 			expect(onTagsChanged).toBeCalledWith(newArray);
@@ -225,12 +234,24 @@ describe('Tags - events', () => {
 			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 		});
 
-		it('should call the "removed" event and return the tag that was removed', () => {
+		it('should call the "onRemoved" event and return the tag that was removed', () => {
 			expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1]);
 		});
 
-		it('should call the "changed" event and return the new tags list as an array', () => {
+		it('should call the "onChange" event and return the new tags list as an array', () => {
 			expect(onTagsChanged).toBeCalledWith([TEST_TAGS[0]]);
+		});
+	});
+
+	describe('when typing in the input field', () => {
+		it('should call the "inputChange" and return the word as you\'re typing', () => {
+			Simulate.change(input, {
+				target: {
+					value: 'a'
+				}
+			});
+
+			expect(onTagsInputChange).toBeCalledWith('a');
 		});
 	});
 });
@@ -293,11 +314,12 @@ describe('Tags - removing', () => {
 	});
 });
 
-describe('Tags - "allowDupes"', () => {
+describe('Tags - "uniqueTags"', () => {
 	it('should allow duplicate tags to be created', () => {
 		const tags = renderIntoDocument(
 			<Tags
-				initialTags={TEST_TAGS} />
+				initialTags={TEST_TAGS}
+				uniqueTags={false} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -318,7 +340,7 @@ describe('Tags - "allowDupes"', () => {
 		const tags = renderIntoDocument(
 			<Tags
 				initialTags={TEST_TAGS}
-				allowDupes={false} />
+				uniqueTags={true} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -331,5 +353,32 @@ describe('Tags - "allowDupes"', () => {
 		Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
 		expect(tagContainer.children.length).toBe(2);
+	});
+});
+
+describe('Tags - "maxTags"', () => {
+	describe('when maxTags is set to 3', () => {
+		it('should allow no more than 3 tags to be added', () => {
+			const tags = renderIntoDocument(
+				<Tags
+					initialTags={TEST_TAGS}
+					maxTags={3} />
+			);
+
+			const renderedDOM = findDOMNode(tags);
+			const input = renderedDOM.getElementsByTagName('input')[0];
+			const tagContainer = renderedDOM.querySelector('.tags-container');
+
+			input.value = TEST_TAGS[0];
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+
+			input.value = TEST_TAGS[0];
+
+			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+
+			expect(tagContainer.children.length).toBe(3);
+		});
 	});
 });

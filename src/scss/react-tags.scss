@@ -1,133 +1,15 @@
 //**
-// React tags component
+// Tags component
+//-- All imports
 //**
 
 @import
+//-- Core
 "colorpalette",
-"variables";
+"variables",
+"base",
 
-%tags-ui-base {
-	font-size: $tag-base-font-size;
-	height: $tag-base-height;
-	line-height: $tag-base-height;
-	color: $tag-base-font-color;
-	border-radius: $tag-base-border-radius;
-	font-family: $tag-base-font-family;
-	display: inline-block;
-	padding: 0 9px;
-}
-
-.react-tags {
-	input {
-		@extend %tags-ui-base;
-
-		$height: $tag-base-height - 2;
-
-		transition: border-color 0.3s ease;
-		background: $tag-input-bg-color;
-		border: $tag-input-border;
-		height: $height;
-		line-height: $height;
-		margin-top: $tag-base-margin;
-
-		&::-webkit-input-placeholder {
-			color: $tag-input-placeholder-color;
-		}
-
-		&::-moz-placeholder {
-			color: $tag-input-placeholder-color;
-		}
-
-		&:-ms-input-placeholder {
-			color: $tag-input-placeholder-color;
-		}
-
-		&:focus {
-			outline: none;
-			border-color: $tag-input-border-focus-color;
-		}
-	}
-
-	.tags-container {
-		display: inline;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-
-		> li {
-			@extend %tags-ui-base;
-
-			-webkit-animation: $tag-intro-animation;
-			-moz-animation: $tag-intro-animation;
-			-o-animation: $tag-intro-animation;
-			animation: $tag-intro-animation;
-			background: $tag-background-color;
-			margin: $tag-base-margin $tag-base-margin 0 0;
-			transition: background 0.3s ease;
-			cursor: default;
-
-			&:hover {
-				background: $tag-background-hover-color;
-			}
-		}
-
-		a {
-			font-size: $tag-remove-font-size;
-			color: $tag-remove-color;
-			transition: color 0.3s ease;
-			display: inline-block;
-			margin-left: 7px;
-			text-decoration: none;
-
-			&:hover {
-				color: $tag-remove-hover-color;
-			}
-		}
-
-		i {
-			font-style: normal;
-		}
-
-		&.readonly {
-			pointer-events: none;
-		}
-	}
-}
-
-@-webkit-keyframes slide-left {
-	0% {
-		-webkit-transform: translate3d(8, 0, 0);
-	}
-
-	100% {
-		-webkit-transform: translate3d(0, 0, 0);
-	}
-}
-@-moz-keyframes slide-left {
-	0% {
-		-moz-transform: translate3d(8px, 0, 0);
-	}
-
-	100% {
-		-moz-transform: translate3d(0, 0, 0);
-	}
-}
-@-o-keyframes slide-left {
-	0% {
-		-o-transform: translate3d(8px, 0, 0);
-	}
-
-	100% {
-		opacity: 1;
-		-o-transform: translate3d(0, 0, 0);
-	}
-}
-@keyframes slide-left {
-	0% {
-		transform: translate3d(8px, 0, 0);
-	}
-
-	100% {
-		transform: translate3d(0, 0, 0);
-	}
-}
+//-- Components
+"components/input",
+"components/tags",
+"components/tag";

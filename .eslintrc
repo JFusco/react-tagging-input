@@ -50,7 +50,7 @@
 		"brace-style": [2, "1tbs", {
 			"allowSingleLine": true
 		}],
-		"object-curly-spacing": [2, "never", {
+		"object-curly-spacing": [2, "always", {
 			"objectsInObjects": true,
 			"arraysInObjects": true
 		}],
@@ -78,10 +78,6 @@
 		}]
 	},
 	"globals": {
-		"console": true,
-		"alert": true,
-		"document": true,
-		"window": true,
-		"WeakMap": true
+		"console": true
 	}
 }

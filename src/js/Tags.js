@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import update from 'react-addons-update';
 import Tag from './Tag';
 
@@ -16,14 +16,16 @@ class Tags extends Component{
 
 	static propTypes = {
 		initialTags: React.PropTypes.arrayOf(React.PropTypes.string),
-		change: React.PropTypes.func,
-		added: React.PropTypes.func,
-		removed: React.PropTypes.func,
+		onChange: React.PropTypes.func,
+		onAdded: React.PropTypes.func,
+		onRemoved: React.PropTypes.func,
+		onInputChange: React.PropTypes.func,
+		maxTags: React.PropTypes.number,
 		placeholder: React.PropTypes.string,
-		delimiters: React.PropTypes.arrayOf(React.PropTypes.number),
+		addKeys: React.PropTypes.arrayOf(React.PropTypes.number),
 		id: React.PropTypes.string,
 		readOnly: React.PropTypes.bool,
-		allowDupes: React.PropTypes.bool,
+		uniqueTags: React.PropTypes.bool,
 		removeTagIcon: React.PropTypes.oneOfType([
 			React.PropTypes.string,
 			React.PropTypes.element
@@ -32,18 +34,65 @@ class Tags extends Component{
 
 	static defaultProps = {
 		initialTags: [],
+		maxTags: -1,
 		placeholder: 'Add a tag',
-		delimiters: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-		allowDupes: true,
+		addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+		uniqueTags: false,
 		readOnly: false
 	};
 
 	state = {
-		tags: this.props.initialTags
+		tags: this.props.initialTags,
+		value: ''
 	};
 
 	constructor(props){
 		super(props);
+	}
+
+	addTag(){
+		if (this.props.maxTags >= 0){
+			if (this.state.tags.length >= this.props.maxTags) return;
+		}
+
+		const { uniqueTags, onChange, onAdded } = this.props;
+
+		const value = this.input.value.trim();
+
+		if (uniqueTags){
+			if (this.state.tags.indexOf(value) >= 0) return;
+		}
+
+		this.setState({
+			tags: update(this.state.tags, { $push: [value] })
+		}, () => {
+			if (typeof onChange !== 'undefined'){
+				onChange(this.state.tags);
+			}
+
+			if (typeof onAdded !== 'undefined'){
+				onAdded(value);
+			}
+
+			this.input.value = '';
+		});
+	}
+
+	removeTag(index){
+		const { onChange, onRemoved } = this.props;
+		const value = this.state.tags[index];
+
+		this.setState({
+			tags: update(this.state.tags, { $splice: [[index, 1]] })
+		}, () => {
+			if (typeof onChange !== 'undefined'){
+				onChange(this.state.tags);
+			}
+
+			if (typeof onRemoved !== 'undefined'){
+				onRemoved(value);
+			}
+		});
 	}
 
 	onInputKey(e){
@@ -60,7 +109,7 @@ class Tags extends Component{
 			default:
 				if (this.input.value === '') return;
 
-				if (this.props.delimiters.indexOf(e.keyCode) !== -1){
+				if (this.props.addKeys.indexOf(e.keyCode) !== -1){
 					if (Tags.KEYS.enter !== e.keyCode){
 						e.preventDefault();
 					}
@@ -72,67 +121,45 @@ class Tags extends Component{
 		}
 	}
 
-	addTag(){
-		const value = this.input.value.trim();
+	onInputChange(e){
+		const value = e.target.value.trim();
 
-		if (!this.props.allowDupes){
-			if (this.state.tags.indexOf(value) >= 0) return;
+		if (typeof this.props.onInputChange !== 'undefined'){
+			this.props.onInputChange(value);
 		}
 
 		this.setState({
-			tags: update(this.state.tags, {$push: [value] })
-		}, () => {
-			if (typeof this.props.change !== 'undefined'){
-				this.props.change(this.state.tags);
-			}
-
-			if (typeof this.props.added !== 'undefined'){
-				this.props.added(value);
-			}
-
-			this.input.value = '';
-		});
-	}
-
-	removeTag(index){
-		const value = this.state.tags[index];
-
-		this.setState({
-			tags: update(this.state.tags, {$splice: [[index, 1]] })
-		}, () => {
-			if (typeof this.props.change !== 'undefined'){
-				this.props.change(this.state.tags);
-			}
-
-			if (typeof this.props.removed !== 'undefined'){
-				this.props.removed(value);
-			}
+			value
 		});
 	}
 
 	render(){
+		const { readOnly, removeTagIcon, placeholder, id } = this.props;
+
 		const tagItems = this.state.tags.map((tag, v) => {
 			return <Tag
 				key={v}
 				name={tag}
-				readOnly={this.props.readOnly}
-				removeTagIcon={this.props.removeTagIcon}
-				removeTag={this.removeTag.bind(this, v)} />;
+				readOnly={readOnly}
+				removeTagIcon={removeTagIcon}
+				onRemoveTag={this.removeTag.bind(this, v)} />;
 		});
 
 		const tagInput = !this.props.readOnly ? (
 			<input
 				type="text"
 				role="textbox"
-				placeholder={this.props.placeholder}
+				aria-label={placeholder}
+				placeholder={placeholder}
+				onChange={this.onInputChange.bind(this)}
 				onKeyDown={this.onInputKey.bind(this)}
 				ref={el => this.input = el} />
 		) : null;
 
-		const classNames = this.props.readOnly ? 'tags-container readonly' : 'tags-container';
+		const classNames = readOnly ? 'tags-container readonly' : 'tags-container';
 
 		return (
-			<div className="react-tags" id={this.props.id}>
+			<div className="react-tags" id={id}>
 				<ul className={classNames}>
 					{tagItems}
 				</ul>

@@ -6,7 +6,7 @@ const Tag = props => {
 	const onRemoveClick = e => {
 		e.preventDefault();
 
-		props.removeTag();
+		props.onRemoveTag(e);
 	};
 
 	const removeIcon = !props.readOnly ? (
@@ -27,7 +27,7 @@ export default Tag;
 
 Tag.propTypes = {
 	name: React.PropTypes.string.isRequired,
-	removeTag: React.PropTypes.func,
+	onRemoveTag: React.PropTypes.func,
 	selectedTag: React.PropTypes.bool,
 	readOnly: React.PropTypes.bool,
 	removeTagIcon: React.PropTypes.oneOfType([

@@ -137,7 +137,7 @@ describe('Tag - "removeTagIcon"', () => {
 	});
 });
 
-describe('Tag - "removeTag"', () => {
+describe('Tag - "onRemoveTag"', () => {
 	it('should be called when clicking the remove icon', () => {
 		const onRemoveClick = jest.genMockFunction();
 
@@ -145,7 +145,7 @@ describe('Tag - "removeTag"', () => {
 			<div>
 				<Tag
 					name={TAG_NAME}
-					removeTag={onRemoveClick} />
+					onRemoveTag={onRemoveClick} />
 			</div>
 		);
 
