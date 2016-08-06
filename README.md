@@ -1,6 +1,7 @@
 # react-tagging-input
 
 [![Build Status][build-image]][build-url]
+[![Coverage Status](https://coveralls.io/repos/github/JFusco/react-tagging-input/badge.svg?branch=master)](https://coveralls.io/github/JFusco/react-tagging-input?branch=master)
 
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
