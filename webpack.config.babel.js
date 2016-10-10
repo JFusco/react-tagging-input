@@ -2,19 +2,21 @@
 
 import webpack from 'webpack';
 import path from 'path';
+import config from './config.json';
 
-const paths = {
-	output: path.join(__dirname, '/dist'),
-	src: './src/js'
-};
+const { library, entry, fileName } = config.scripts;
 
-export default {
-	entry: `${paths.src}/Tags.js`,
+module.exports =  {
+	entry: {
+		[fileName]: `./src/js/${entry}.js`,
+		[`${fileName}.min`]: `./src/js/${entry}.js`
+	},
 	output: {
-		path: paths.output,
-		filename: 'react-tags.min.js',
+		filename: '[name].js',
+		path: path.join(__dirname, '/dist'),
+		publicPath: '/',
 		libraryTarget: 'umd',
-		library: 'Tags'
+		library
 	},
 	module: {
 		loaders: [
@@ -30,17 +32,26 @@ export default {
 		'react-addons-update': 'update'
 	},
 	plugins: [
+		new webpack.NoErrorsPlugin(),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+		}),
 		new webpack.optimize.UglifyJsPlugin({
-			mangle: true,
+			include: /\.min\.js$/,
+			comments: false,
+			beautify: false,
+			mangle: {
+				screw_ie8 : true
+			},
 			compress: {
-				warnings: false
+				warnings: false,
+				drop_console: true
 			},
 			output: {
 				comments: false
 			}
-		}),
-		new webpack.NoErrorsPlugin(),
-		new webpack.optimize.DedupePlugin()
+		})
 	],
 	resolve: {
 		extensions: ['', '.js']

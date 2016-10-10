@@ -1,7 +1,6 @@
 # react-tagging-input
 
 [![Build Status][build-image]][build-url]
-[![Coverage Status](https://coveralls.io/repos/github/JFusco/react-tagging-input/badge.svg?branch=master)](https://coveralls.io/github/JFusco/react-tagging-input?branch=master)
 
 [![peerDependency Status][peer-dep-image]][peer-dep-url]
 [![devDependency Status][dev-dep-image]][dev-dep-url]
@@ -220,6 +219,6 @@ npm test
 [npm-version-image]: https://img.shields.io/npm/v/npm.svg?maxAge=2592000
 [npm-url]: https://www.npmjs.com/package/react-tagging-input
 [dev-dep-image]: https://david-dm.org/JFusco/react-tagging-input/dev-status.svg
-[dev-dep-url]: https://david-dm.org/JFusco/react-tagging-input#info=devDependencies
+[dev-dep-url]: https://david-dm.org/JFusco/react-tagging-input?type=dev
 [peer-dep-image]: https://david-dm.org/JFusco/react-tagging-input/peer-status.svg
-[peer-dep-url]: https://david-dm.org/JFusco/react-tagging-input#info=peerDependencies
+[peer-dep-url]: https://david-dm.org/JFusco/react-tagging-input?type=peer
