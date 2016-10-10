@@ -1,0 +1,16 @@
+/.idea/
+/__tests__/
+/gulp/
+/src/
+/coverage/
+.editorconfig
+tags-demo.gif
+.babelrc
+.eslintignore
+.eslintrc
+.gitignore
+.scsslint.yml
+.travis.yml
+config.json
+gulpfile.babel.js
+webpack.config.babel.js
