@@ -28,8 +28,7 @@ module.exports =  {
 		]
 	},
 	externals: {
-		'react': 'React',
-		'react-addons-update': 'update'
+		'react': 'React'
 	},
 	plugins: [
 		new webpack.NoErrorsPlugin(),

@@ -79,7 +79,7 @@ describe('Tags - "initialTags"', () => {
 		);
 
 		const renderedDOM = findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.tags-container');
+		const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
 		expect(tagContainer.children.length).toBe(TEST_TAGS.length);
 	});
@@ -129,7 +129,7 @@ describe('Tags - "addKeys"', () => {
 		);
 
 		const renderedDOM = findDOMNode(tags);
-		tagContainer = renderedDOM.querySelector('.tags-container');
+		tagContainer = renderedDOM.querySelector('.react-tags__container');
 		input = renderedDOM.getElementsByTagName('input')[0];
 
 		input.value = TEST_TAGS[0];
@@ -197,7 +197,7 @@ describe('Tags - events', () => {
 		);
 
 		const renderedDOM = findDOMNode(tags);
-		tagContainer = renderedDOM.querySelector('.tags-container');
+		tagContainer = renderedDOM.querySelector('.react-tags__container');
 		input = renderedDOM.getElementsByTagName('input')[0];
 	});
 
@@ -268,7 +268,7 @@ describe('Tags - removing', () => {
 		);
 
 		const renderedDOM = findDOMNode(tags);
-		tagContainer = renderedDOM.querySelector('.tags-container');
+		tagContainer = renderedDOM.querySelector('.react-tags__container');
 		input = renderedDOM.getElementsByTagName('input')[0];
 	});
 
@@ -324,7 +324,7 @@ describe('Tags - "uniqueTags"', () => {
 
 		const renderedDOM = findDOMNode(tags);
 		const input = renderedDOM.getElementsByTagName('input')[0];
-		const tagContainer = renderedDOM.querySelector('.tags-container');
+		const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
 		input.value = TEST_TAGS[0];
 
@@ -345,7 +345,7 @@ describe('Tags - "uniqueTags"', () => {
 
 		const renderedDOM = findDOMNode(tags);
 		const input = renderedDOM.getElementsByTagName('input')[0];
-		const tagContainer = renderedDOM.querySelector('.tags-container');
+		const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
 		input.value = TEST_TAGS[0];
 
@@ -367,7 +367,7 @@ describe('Tags - "maxTags"', () => {
 
 			const renderedDOM = findDOMNode(tags);
 			const input = renderedDOM.getElementsByTagName('input')[0];
-			const tagContainer = renderedDOM.querySelector('.tags-container');
+			const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
 			input.value = TEST_TAGS[0];
 

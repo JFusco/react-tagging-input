@@ -3,7 +3,7 @@
 //**
 
 .react-tags {
-	.tags-container {
+	&__container {
 		> li {
 			@extend %tags-ui-base;
 
@@ -40,7 +40,7 @@
 			font-style: normal;
 		}
 
-		&.readonly {
+		&_readonly {
 			pointer-events: none;
 		}
 	}

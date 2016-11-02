@@ -1,10 +1,14 @@
 'use strict';
 
-import React, { Component } from 'react';
-import update from 'react-addons-update';
+import React, { Component, PropTypes } from 'react';
 import Tag from './Tag';
 
-class Tags extends Component{
+class Tags extends Component {
+	state = {
+		tags: this.props.initialTags,
+		value: ''
+	};
+
 	static KEYS = {
 		enter: 13,
 		tab: 9,
@@ -15,20 +19,20 @@ class Tags extends Component{
 	};
 
 	static propTypes = {
-		initialTags: React.PropTypes.arrayOf(React.PropTypes.string),
-		onChange: React.PropTypes.func,
-		onAdded: React.PropTypes.func,
-		onRemoved: React.PropTypes.func,
-		onInputChange: React.PropTypes.func,
-		maxTags: React.PropTypes.number,
-		placeholder: React.PropTypes.string,
-		addKeys: React.PropTypes.arrayOf(React.PropTypes.number),
-		id: React.PropTypes.string,
-		readOnly: React.PropTypes.bool,
-		uniqueTags: React.PropTypes.bool,
-		removeTagIcon: React.PropTypes.oneOfType([
-			React.PropTypes.string,
-			React.PropTypes.element
+		initialTags: PropTypes.arrayOf(PropTypes.string),
+		onChange: PropTypes.func,
+		onAdded: PropTypes.func,
+		onRemoved: PropTypes.func,
+		onInputChange: PropTypes.func,
+		maxTags: PropTypes.number,
+		placeholder: PropTypes.string,
+		addKeys: PropTypes.arrayOf(PropTypes.number),
+		id: PropTypes.string,
+		readOnly: PropTypes.bool,
+		uniqueTags: PropTypes.bool,
+		removeTagIcon: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.element
 		])
 	};
 
@@ -39,11 +43,6 @@ class Tags extends Component{
 		addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
 		uniqueTags: false,
 		readOnly: false
-	};
-
-	state = {
-		tags: this.props.initialTags,
-		value: ''
 	};
 
 	constructor(props){
@@ -64,7 +63,7 @@ class Tags extends Component{
 		}
 
 		this.setState({
-			tags: update(this.state.tags, { $push: [value] })
+			tags: [...this.state.tags, value]
 		}, () => {
 			if (typeof onChange !== 'undefined'){
 				onChange(this.state.tags);
@@ -83,7 +82,7 @@ class Tags extends Component{
 		const value = this.state.tags[index];
 
 		this.setState({
-			tags: update(this.state.tags, { $splice: [[index, 1]] })
+			tags: this.state.tags.filter((_, i) => i !== index)
 		}, () => {
 			if (typeof onChange !== 'undefined'){
 				onChange(this.state.tags);
@@ -149,14 +148,15 @@ class Tags extends Component{
 			<input
 				type="text"
 				role="textbox"
+				autoComplete="off"
 				aria-label={placeholder}
 				placeholder={placeholder}
-				onChange={this.onInputChange.bind(this)}
-				onKeyDown={this.onInputKey.bind(this)}
+				onChange={::this.onInputChange}
+				onKeyDown={::this.onInputKey}
 				ref={el => this.input = el} />
 		) : null;
 
-		const classNames = readOnly ? 'tags-container readonly' : 'tags-container';
+		const classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 
 		return (
 			<div className="react-tags" id={id}>

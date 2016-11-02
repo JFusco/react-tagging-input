@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"), require("update"));
+		module.exports = factory(require("React"));
 	else if(typeof define === 'function' && define.amd)
-		define(["React", "update"], factory);
+		define(["React"], factory);
 	else if(typeof exports === 'object')
-		exports["Tags"] = factory(require("React"), require("update"));
+		exports["Tags"] = factory(require("React"));
 	else
-		root["Tags"] = factory(root["React"], root["update"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__) {
+		root["Tags"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -66,15 +66,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsUpdate = __webpack_require__(2);
-
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-
-	var _Tag = __webpack_require__(3);
+	var _Tag = __webpack_require__(2);
 
 	var _Tag2 = _interopRequireDefault(_Tag);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -106,10 +104,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					if (this.state.tags.length >= this.props.maxTags) return;
 				}
 
-				var _props = this.props;
-				var uniqueTags = _props.uniqueTags;
-				var onChange = _props.onChange;
-				var onAdded = _props.onAdded;
+				var _props = this.props,
+				    uniqueTags = _props.uniqueTags,
+				    onChange = _props.onChange,
+				    onAdded = _props.onAdded;
 
 
 				var value = this.input.value.trim();
@@ -119,7 +117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				}
 
 				this.setState({
-					tags: (0, _reactAddonsUpdate2.default)(this.state.tags, { $push: [value] })
+					tags: [].concat(_toConsumableArray(this.state.tags), [value])
 				}, function () {
 					if (typeof onChange !== 'undefined') {
 						onChange(_this2.state.tags);
@@ -137,14 +135,16 @@ return /******/ (function(modules) { // webpackBootstrap
 			value: function removeTag(index) {
 				var _this3 = this;
 
-				var _props2 = this.props;
-				var onChange = _props2.onChange;
-				var onRemoved = _props2.onRemoved;
+				var _props2 = this.props,
+				    onChange = _props2.onChange,
+				    onRemoved = _props2.onRemoved;
 
 				var value = this.state.tags[index];
 
 				this.setState({
-					tags: (0, _reactAddonsUpdate2.default)(this.state.tags, { $splice: [[index, 1]] })
+					tags: this.state.tags.filter(function (_, i) {
+						return i !== index;
+					})
 				}, function () {
 					if (typeof onChange !== 'undefined') {
 						onChange(_this3.state.tags);
@@ -200,11 +200,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			value: function render() {
 				var _this4 = this;
 
-				var _props3 = this.props;
-				var readOnly = _props3.readOnly;
-				var removeTagIcon = _props3.removeTagIcon;
-				var placeholder = _props3.placeholder;
-				var id = _props3.id;
+				var _props3 = this.props,
+				    readOnly = _props3.readOnly,
+				    removeTagIcon = _props3.removeTagIcon,
+				    placeholder = _props3.placeholder,
+				    id = _props3.id;
 
 
 				var tagItems = this.state.tags.map(function (tag, v) {
@@ -219,6 +219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				var tagInput = !this.props.readOnly ? _react2.default.createElement('input', {
 					type: 'text',
 					role: 'textbox',
+					autoComplete: 'off',
 					'aria-label': placeholder,
 					placeholder: placeholder,
 					onChange: this.onInputChange.bind(this),
@@ -227,7 +228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						return _this4.input = el;
 					} }) : null;
 
-				var classNames = readOnly ? 'tags-container readonly' : 'tags-container';
+				var classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 
 				return _react2.default.createElement(
 					'div',
@@ -254,18 +255,18 @@ return /******/ (function(modules) { // webpackBootstrap
 		right: 39
 	};
 	Tags.propTypes = {
-		initialTags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
-		onChange: _react2.default.PropTypes.func,
-		onAdded: _react2.default.PropTypes.func,
-		onRemoved: _react2.default.PropTypes.func,
-		onInputChange: _react2.default.PropTypes.func,
-		maxTags: _react2.default.PropTypes.number,
-		placeholder: _react2.default.PropTypes.string,
-		addKeys: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.number),
-		id: _react2.default.PropTypes.string,
-		readOnly: _react2.default.PropTypes.bool,
-		uniqueTags: _react2.default.PropTypes.bool,
-		removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
+		initialTags: _react.PropTypes.arrayOf(_react.PropTypes.string),
+		onChange: _react.PropTypes.func,
+		onAdded: _react.PropTypes.func,
+		onRemoved: _react.PropTypes.func,
+		onInputChange: _react.PropTypes.func,
+		maxTags: _react.PropTypes.number,
+		placeholder: _react.PropTypes.string,
+		addKeys: _react.PropTypes.arrayOf(_react.PropTypes.number),
+		id: _react.PropTypes.string,
+		readOnly: _react.PropTypes.bool,
+		uniqueTags: _react.PropTypes.bool,
+		removeTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])
 	};
 	Tags.defaultProps = {
 		initialTags: [],
@@ -285,12 +286,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
-
-/***/ },
-/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

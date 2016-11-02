@@ -1,4 +1,4 @@
-.react-tags input, .react-tags .tags-container > li {
+.react-tags input, .react-tags__container > li {
   font-size: 12px;
   height: 26px;
   line-height: 26px;
@@ -49,13 +49,13 @@
     outline: none;
     border-color: #b1afb9; }
 
-.react-tags .tags-container {
+.react-tags__container {
   display: inline;
   margin: 0;
   padding: 0;
   list-style: none; }
 
-.react-tags .tags-container > li {
+.react-tags__container > li {
   -webkit-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   -o-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
@@ -64,10 +64,10 @@
   margin: 5px 5px 0 0;
   transition: background 0.3s ease;
   cursor: default; }
-  .react-tags .tags-container > li:hover, .react-tags .tags-container > li.active {
+  .react-tags__container > li:hover, .react-tags__container > li.active {
     background: #c9c8cf; }
 
-.react-tags .tags-container a {
+.react-tags__container a {
   font-size: 12px;
   color: #000;
   cursor: pointer;
@@ -75,11 +75,11 @@
   display: inline-block;
   margin-left: 7px;
   text-decoration: none; }
-  .react-tags .tags-container a:hover {
+  .react-tags__container a:hover {
     color: #666666; }
 
-.react-tags .tags-container i {
+.react-tags__container i {
   font-style: normal; }
 
-.react-tags .tags-container.readonly {
+.react-tags__container_readonly {
   pointer-events: none; }
