@@ -56,6 +56,7 @@
 		"test": "jest --coverage",
 		"lint": "eslint --fix --color --debug --ignore-path .eslintignore ./src/component/js/*",
 		"start": "cross-env NODE_ENV=dev webpack-dev-server --config ./webpack.config.build.babel.js --hot --inline",
+		"docs": "webpack --config ./webpack.config.example.babel.js --colors",
 		"build": "gulp && npm run lint && npm test && cross-env NODE_ENV=prod webpack --config ./webpack.config.build.babel.js --display-chunks --display-modules --progress --colors"
 	},
 	"jest": {

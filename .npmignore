@@ -3,6 +3,7 @@
 /gulp/
 /src/
 /coverage/
+/docs/
 .editorconfig
 demo.gif
 .babelrc
