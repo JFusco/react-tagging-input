@@ -4,8 +4,10 @@ import webpack from 'webpack';
 import path from 'path';
 import config from './config.json';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const { library, entry, fileName } = config.scripts;
+const { library } = config.scripts;
+const { fileName } = config.css;
 
 module.exports =  {
 	entry: './src/example/index.js',
@@ -28,7 +30,6 @@ module.exports =  {
 					'style',
 					'css?sourceMap!sass?sourceMap'
 				),
-				//loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
 				test: /\.scss$/
 			}
 		]
@@ -36,26 +37,18 @@ module.exports =  {
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new ExtractTextPlugin('tags.css'),
+		new ExtractTextPlugin(`${fileName}.css`),
+		new CopyWebpackPlugin([{
+			from: './src/example/index.html', to: './'
+		}]),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 		})
-		//new webpack.optimize.UglifyJsPlugin({
-		//	include: /\.min\.js$/,
-		//	comments: false,
-		//	beautify: false,
-		//	mangle: {
-		//		screw_ie8 : true
-		//	},
-		//	compress: {
-		//		warnings: false,
-		//		drop_console: true
-		//	},
-		//	output: {
-		//		comments: false
-		//	}
-		//})
 	],
+	devServer: {
+		contentBase: path.join(__dirname, 'src/example'),
+		port: 8080
+	},
 	resolve: {
 		extensions: ['', '.js', '.scss']
 	}

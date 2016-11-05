@@ -11,6 +11,8 @@
 > Simple tagging component.
 
 ### Demo
+https://jfusco.github.io/react-tagging-input
+
 ![img](demo.gif)
 
 ## Getting Started ##

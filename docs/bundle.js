@@ -80,26 +80,210 @@ return /******/ (function(modules) { // webpackBootstrap
 		_inherits(App, _Component);
 
 		function App() {
+			var _ref;
+
+			var _temp, _this, _ret;
+
 			_classCallCheck(this, App);
 
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+				tags: []
+			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
 
 		_createClass(App, [{
 			key: 'onTagsChange',
 			value: function onTagsChange(tags) {
-				console.log('new tags: ' + tags);
+				this.setState({
+					tags: tags
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+				var removeIcon = _react2.default.createElement(
+					'span',
+					null,
+					'--'
+				);
+
 				return _react2.default.createElement(
 					'div',
-					null,
-					_react2.default.createElement(_Tags2.default, {
-						initialTags: this.props.tags,
-						placeholder: 'Add a tag',
-						onChange: this.onTagsChange.bind(this) })
+					{ className: 'container' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						'react-tagging-input'
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						'Below are a few implementations of the component, for more options and events please see the ',
+						_react2.default.createElement(
+							'a',
+							{ href: 'https://github.com/JFusco/react-tagging-input/blob/master/README.md#options' },
+							'README'
+						),
+						' file documentation'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Default tags'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'No properties are required to make this component work.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, null)
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'<Tags />'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Initial tags'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Pass in some default tags to the component.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { initialTags: this.props.tags })
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'static defaultProps = {\n\ttags: [\'hello\', \'world\']\n};\n\n<Tags initialTags={this.props.tags} />'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Read only tags'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Tags cannot be deleted or added.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { readOnly: true, initialTags: this.props.tags })
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'<Tags readOnly={true} initialTags={this.props.tags} />'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Custom delete button'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Tags are able to have a custom delete element or a string.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { removeTagIcon: 'delete', initialTags: this.props.tags })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { removeTagIcon: removeIcon, initialTags: this.props.tags })
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'<Tags removeTagIcon="delete" initialTags={this.props.tags} />'
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'//-- Custom element\nconst removeIcon = <span>--</span>;\n\n<Tags removeTagIcon={removeIcon} initialTags={this.props.tags} />'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Unique tags'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'The same tag can never be added twice.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { uniqueTags: true })
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'<Tags uniqueTags={true} />'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'example' },
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Change event'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Can listen for change event and pass back the new state of tags.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'example__component-wrapper' },
+							_react2.default.createElement(_Tags2.default, { onChange: this.onTagsChange.bind(this) })
+						),
+						_react2.default.createElement(
+							'pre',
+							null,
+							'<Tags onChange={::this.onTagsChange} />\n\ntags: ' + this.state.tags
+						)
+					)
 				);
 			}
 		}]);
