@@ -1,51 +1,51 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"));
+		module.exports = factory(require("react"));
 	else if(typeof define === 'function' && define.amd)
-		define(["React"], factory);
+		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["Tags"] = factory(require("React"));
+		exports["Tags"] = factory(require("react"));
 	else
 		root["Tags"] = factory(root["React"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -55,78 +55,80 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _react = __webpack_require__(1);
-
+	
 	var _react2 = _interopRequireDefault(_react);
-
+	
 	var _Tag = __webpack_require__(2);
-
+	
 	var _Tag2 = _interopRequireDefault(_Tag);
-
+	
+	__webpack_require__(3);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var Tags = function (_Component) {
 		_inherits(Tags, _Component);
-
+	
 		function Tags(props) {
 			_classCallCheck(this, Tags);
-
+	
 			var _this = _possibleConstructorReturn(this, (Tags.__proto__ || Object.getPrototypeOf(Tags)).call(this, props));
-
+	
 			_this.state = {
 				tags: _this.props.initialTags,
 				value: ''
 			};
 			return _this;
 		}
-
+	
 		_createClass(Tags, [{
 			key: 'addTag',
 			value: function addTag() {
 				var _this2 = this;
-
+	
 				if (this.props.maxTags >= 0) {
 					if (this.state.tags.length >= this.props.maxTags) return;
 				}
-
+	
 				var _props = this.props,
 				    uniqueTags = _props.uniqueTags,
 				    onChange = _props.onChange,
 				    onAdded = _props.onAdded;
-
-
+	
+	
 				var value = this.input.value.trim();
-
+	
 				if (uniqueTags) {
 					if (this.state.tags.indexOf(value) >= 0) return;
 				}
-
+	
 				this.setState({
 					tags: [].concat(_toConsumableArray(this.state.tags), [value])
 				}, function () {
 					if (typeof onChange !== 'undefined') {
 						onChange(_this2.state.tags);
 					}
-
+	
 					if (typeof onAdded !== 'undefined') {
 						onAdded(value);
 					}
-
+	
 					_this2.input.value = '';
 				});
 			}
@@ -134,13 +136,13 @@ return /******/ (function(modules) { // webpackBootstrap
 			key: 'removeTag',
 			value: function removeTag(index) {
 				var _this3 = this;
-
+	
 				var _props2 = this.props,
 				    onChange = _props2.onChange,
 				    onRemoved = _props2.onRemoved;
-
+	
 				var value = this.state.tags[index];
-
+	
 				this.setState({
 					tags: this.state.tags.filter(function (_, i) {
 						return i !== index;
@@ -149,7 +151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					if (typeof onChange !== 'undefined') {
 						onChange(_this3.state.tags);
 					}
-
+	
 					if (typeof onRemoved !== 'undefined') {
 						onRemoved(value);
 					}
@@ -161,24 +163,24 @@ return /******/ (function(modules) { // webpackBootstrap
 				switch (e.keyCode) {
 					case Tags.KEYS.backspace:
 						if (this.state.tags.length === 0) return;
-
+	
 						if (this.input.value === '') {
 							this.removeTag(this.state.tags.length - 1);
 						}
-
+	
 						break;
-
+	
 					default:
 						if (this.input.value === '') return;
-
+	
 						if (this.props.addKeys.indexOf(e.keyCode) !== -1) {
 							if (Tags.KEYS.enter !== e.keyCode) {
 								e.preventDefault();
 							}
-
+	
 							this.addTag();
 						}
-
+	
 						break;
 				}
 			}
@@ -186,11 +188,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			key: 'onInputChange',
 			value: function onInputChange(e) {
 				var value = e.target.value.trim();
-
+	
 				if (typeof this.props.onInputChange !== 'undefined') {
 					this.props.onInputChange(value);
 				}
-
+	
 				this.setState({
 					value: value
 				});
@@ -199,14 +201,14 @@ return /******/ (function(modules) { // webpackBootstrap
 			key: 'render',
 			value: function render() {
 				var _this4 = this;
-
+	
 				var _props3 = this.props,
 				    readOnly = _props3.readOnly,
 				    removeTagIcon = _props3.removeTagIcon,
 				    placeholder = _props3.placeholder,
 				    id = _props3.id;
-
-
+	
+	
 				var tagItems = this.state.tags.map(function (tag, v) {
 					return _react2.default.createElement(_Tag2.default, {
 						key: v,
@@ -215,7 +217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						removeTagIcon: removeTagIcon,
 						onRemoveTag: _this4.removeTag.bind(_this4, v) });
 				});
-
+	
 				var tagInput = !this.props.readOnly ? _react2.default.createElement('input', {
 					type: 'text',
 					role: 'textbox',
@@ -227,9 +229,9 @@ return /******/ (function(modules) { // webpackBootstrap
 					ref: function ref(el) {
 						return _this4.input = el;
 					} }) : null;
-
+	
 				var classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
-
+	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'react-tags', id: id },
@@ -242,10 +244,10 @@ return /******/ (function(modules) { // webpackBootstrap
 				);
 			}
 		}]);
-
+	
 		return Tags;
 	}(_react.Component);
-
+	
 	Tags.KEYS = {
 		enter: 13,
 		tab: 9,
@@ -289,30 +291,30 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
+	
 	var _react = __webpack_require__(1);
-
+	
 	var _react2 = _interopRequireDefault(_react);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var Tag = function Tag(props) {
 		var onRemoveClick = function onRemoveClick(e) {
 			e.preventDefault();
-
+	
 			props.onRemoveTag(e);
 		};
-
+	
 		var removeIcon = !props.readOnly ? _react2.default.createElement(
 			'a',
 			{ onClick: onRemoveClick },
 			props.removeTagIcon || String.fromCharCode(215)
 		) : null;
-
+	
 		return _react2.default.createElement(
 			'li',
 			null,
@@ -320,19 +322,26 @@ return /******/ (function(modules) { // webpackBootstrap
 			removeIcon
 		);
 	};
-
+	
 	exports.default = Tag;
-
-
+	
+	
 	Tag.propTypes = {
-		name: _react2.default.PropTypes.string.isRequired,
-		onRemoveTag: _react2.default.PropTypes.func,
-		selectedTag: _react2.default.PropTypes.bool,
-		readOnly: _react2.default.PropTypes.bool,
-		removeTagIcon: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
+		name: _react.PropTypes.string.isRequired,
+		onRemoveTag: _react.PropTypes.func,
+		selectedTag: _react.PropTypes.bool,
+		readOnly: _react.PropTypes.bool,
+		removeTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])
 	};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ])
 });
 ;
+//# sourceMappingURL=react-tags.js.map

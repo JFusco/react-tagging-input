@@ -4,7 +4,7 @@
 /src/
 /coverage/
 .editorconfig
-tags-demo.gif
+demo.gif
 .babelrc
 .eslintignore
 .eslintrc
@@ -13,4 +13,5 @@ tags-demo.gif
 .travis.yml
 config.json
 gulpfile.babel.js
-webpack.config.babel.js
+webpack.config.build.babel.js
+webpack.config.example.babel.js

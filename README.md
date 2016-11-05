@@ -11,7 +11,7 @@
 > Simple tagging component.
 
 ### Demo
-![img](tags-demo.gif)
+![img](demo.gif)
 
 ## Getting Started ##
 

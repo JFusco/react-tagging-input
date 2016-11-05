@@ -5,7 +5,7 @@ jest.disableAutomock();
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
-import Tag from '../src/js/Tag';
+import Tag from '../src/component/js/Tag';
 
 const TAG_NAME = 'foo';
 

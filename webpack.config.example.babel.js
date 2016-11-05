@@ -3,13 +3,15 @@
 import webpack from 'webpack';
 import path from 'path';
 import config from './config.json';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const { library, entry, fileName } = config.scripts;
 
 module.exports =  {
 	entry: {
-		[fileName]: `./src/js/${entry}.js`,
-		[`${fileName}.min`]: `./src/js/${entry}.js`
+		//[fileName]: `./src/component/js/${entry}.js`,
+		//[`${fileName}.min`]: `./src/component/js/${entry}.js`
+		app: './src/component/app.js'
 	},
 	output: {
 		filename: '[name].js',
@@ -24,20 +26,21 @@ module.exports =  {
 				loader: 'babel',
 				exclude: '/node_modules/',
 				test: /\.js?$/
+			},
+			{
+				//loader: ExtractTextPlugin.extract(
+				//	'style',
+				//	'css?sourceMap!sass?sourceMap'
+				//),
+				loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+				test: /\.scss$/
 			}
 		]
-	},
-	externals: {
-		'react': {
-			root: 'React',
-			commonjs2: 'react',
-			commonjs: 'react',
-			amd: 'react'
-		}
 	},
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
+		//new ExtractTextPlugin('tags.css'),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 		}),
@@ -57,7 +60,11 @@ module.exports =  {
 			}
 		})
 	],
+	devServer: {
+		contentBase: path.join(__dirname, 'src/component'),
+		port: 8080
+	},
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['', '.js', '.scss']
 	}
 };

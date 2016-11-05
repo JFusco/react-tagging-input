@@ -3,6 +3,8 @@
 import React, { Component, PropTypes } from 'react';
 import Tag from './Tag';
 
+import '../scss/styles.scss';
+
 class Tags extends Component {
 	state = {
 		tags: this.props.initialTags,
