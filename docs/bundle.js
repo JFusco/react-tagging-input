@@ -131,6 +131,21 @@ return /******/ (function(modules) { // webpackBootstrap
 						' file documentation'
 					),
 					_react2.default.createElement(
+						'h2',
+						null,
+						'Tests'
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						'View coverage report ',
+						_react2.default.createElement(
+							'a',
+							{ href: 'https://jfusco.github.io/react-tagging-input/coverage/lcov-report/index.html' },
+							'here'
+						)
+					),
+					_react2.default.createElement(
 						'div',
 						{ className: 'example' },
 						_react2.default.createElement(
