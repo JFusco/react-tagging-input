@@ -1,7 +1,4 @@
 {
-	"css": {
-		"fileName": "react-tags"
-	},
 	"scripts": {
 		"fileName": "react-tags",
 		"entry": "Tags",

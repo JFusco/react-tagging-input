@@ -4,7 +4,6 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import config from '../config.json';
 
-const { fileName } = config.css;
 const { NODE_ENV } = process.env;
 
 const plugins = [
@@ -17,7 +16,7 @@ const plugins = [
 
 if(NODE_ENV === 'prod'){
 	plugins.push(
-		new ExtractTextPlugin(`${fileName}.css`)
+		new ExtractTextPlugin('styles.css')
 	);
 }
 

@@ -18,5 +18,5 @@ demo.gif
 .travis.yml
 config.json
 gulpfile.babel.js
-webpack.config.build.babel.js
+webpack.config.babel.js
 webpack.config.example.babel.js

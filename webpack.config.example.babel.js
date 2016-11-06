@@ -7,7 +7,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const { library } = config.scripts;
-const { fileName } = config.css;
 
 module.exports =  {
 	entry: './src/example/index.js',
@@ -37,7 +36,7 @@ module.exports =  {
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new ExtractTextPlugin(`${fileName}.css`),
+		new ExtractTextPlugin('styles.css'),
 		new CopyWebpackPlugin([
 			{ from: './src/example/index.html', to: './' },
 			{ from: './src/example/index.css', to: './' },
