@@ -31,6 +31,9 @@ class App extends Component {
 				<h1>react-tagging-input</h1>
 				<p>Below are a few implementations of the component, for more options and events please see the <a href="https://github.com/JFusco/react-tagging-input/blob/master/README.md#options">README</a> file documentation</p>
 
+				<h2>Tests</h2>
+				<p>View coverage report <a href="https://jfusco.github.io/react-tagging-input/coverage/lcov-report/index.html">here</a></p>
+
 				<div className="example">
 					<h2>Default tags</h2>
 					<p>No properties are required to make this component work.</p>

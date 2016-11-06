@@ -38,9 +38,11 @@ module.exports =  {
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
 		new ExtractTextPlugin(`${fileName}.css`),
-		new CopyWebpackPlugin([{
-			from: './src/example/index.html', to: './'
-		}]),
+		new CopyWebpackPlugin([
+			{ from: './src/example/index.html', to: './' },
+			{ from: './src/example/index.css', to: './' },
+			{ from: './coverage', to: './coverage' }
+		]),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 		})

@@ -69,7 +69,7 @@ render(<Application />, document.getElementById('application'));
 * **[`maxTags`](#maxTags)**
 * **[`readOnly`](#readOnly)**
 * **[`removeTagIcon`](#removeTagIcon)**
-* **[`uniqueTags`](#allowDupes)**
+* **[`uniqueTags`](#uniqueTags)**
 * **[`id`](#id)**
 
 <a name="initialTags"></a>
@@ -176,7 +176,7 @@ The `string` to be used for the ID of the component
 #### Installation
 Import the main SCSS file in to your application SCSS files
 ```scss
-@import "node_modules/react-tagging-input/src/scss/react-tags";
+@import "node_modules/react-tagging-input/src/component/scss/styles.scss";
 ```
 
 There are a few variables set to `!default` that can be overriden. If you need to change it more just override the actual styles.
@@ -206,7 +206,7 @@ $tag-input-placeholder-color
 
 If you don't care to override variables and just want to override actual styles you may choose to import the minified compiled version of the css instead
 ```scss
-@import "node_modules/react-tagging-input/dist/react-tags.min.css";
+@import "node_modules/react-tagging-input/dist/react-tags.css";
 ```
 
 ## Tests ##

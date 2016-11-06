@@ -1,11 +1,15 @@
 /.idea/
 /__tests__/
 /gulp/
-/src/
+/src/example/
+/src/component/js/
 /coverage/
 /docs/
-.editorconfig
+/webpack/
+/src/component/index.html
+/src/component/index.js
 demo.gif
+.editorconfig
 .babelrc
 .eslintignore
 .eslintrc
