@@ -130,7 +130,7 @@ const removeIcon = <span>--</span>;
 					</div>
 
 					<pre>
-						{`<Tags onChange={::this.onTagsChange} />
+						{`<Tags onChange={this.onTagsChange.bind(this)} />
 
 tags: ${this.state.tags}`}
 					</pre>

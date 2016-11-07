@@ -296,7 +296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						_react2.default.createElement(
 							'pre',
 							null,
-							'<Tags onChange={::this.onTagsChange} />\n\ntags: ' + this.state.tags
+							'<Tags onChange={this.onTagsChange.bind(this)} />\n\ntags: ' + this.state.tags
 						)
 					)
 				);

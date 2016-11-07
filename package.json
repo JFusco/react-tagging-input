@@ -1,6 +1,6 @@
 {
 	"name": "react-tagging-input",
-	"version": "1.6.4",
+	"version": "1.6.5",
 	"description": "Simple tagging component",
 	"main": "dist/react-tags.js",
 	"license": "MIT",

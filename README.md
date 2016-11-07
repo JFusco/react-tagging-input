@@ -10,7 +10,7 @@
 
 > Simple tagging component.
 
-### Demo
+## Demo ##
 https://jfusco.github.io/react-tagging-input
 
 ![img](demo.gif)
@@ -49,7 +49,7 @@ class Application extends Component{
 				<Tags
 				 initialTags={this.state.tags}
 				 placeholder="Add a tag"
-				 onChange={this.onTagsChange} />
+				 onChange={this.onTagsChange.bind(this)} />
 			</div>
 		);
 	}
