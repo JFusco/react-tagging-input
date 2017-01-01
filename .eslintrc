@@ -78,6 +78,8 @@
 		}]
 	},
 	"globals": {
-		"console": true
+		"console": true,
+		"process": true,
+		"__DEV__": true
 	}
 }

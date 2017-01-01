@@ -7,6 +7,9 @@
 		> li {
 			@extend %tags-ui-base;
 
+			line-height: $tag-base-height;
+			-webkit-transform: translate3d(0, 0, 0);
+			-webkit-font-smoothing: antialiased;
 			-webkit-animation: $tag-intro-animation;
 			-moz-animation: $tag-intro-animation;
 			-o-animation: $tag-intro-animation;

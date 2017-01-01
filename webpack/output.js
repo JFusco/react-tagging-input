@@ -13,7 +13,7 @@ let output = {
 	publicPath: '/'
 };
 
-if(NODE_ENV === 'prod'){
+if(NODE_ENV === 'production'){
 	Object.assign(output, {
 		libraryTarget: 'umd',
 		library

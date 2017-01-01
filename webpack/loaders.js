@@ -13,7 +13,7 @@ const loaders = [
 	}
 ];
 
-if(NODE_ENV === 'prod'){
+if(NODE_ENV === 'production'){
 	loaders.push({
 			loader: ExtractTextPlugin.extract(
 				'style',

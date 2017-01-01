@@ -9,7 +9,7 @@ import output from './webpack/output';
 const { NODE_ENV } = process.env;
 
 const config = {
-	devtool: NODE_ENV === 'prod' ? 'source-map' : 'eval',
+	devtool: NODE_ENV === 'production' ? 'source-map' : 'eval',
 	entry,
 	output,
 	module: {
@@ -21,7 +21,7 @@ const config = {
 	}
 };
 
-if(NODE_ENV === 'prod'){
+if(NODE_ENV === 'production'){
 	config.externals = {
 		'react': {
 			root: 'React',

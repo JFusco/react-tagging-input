@@ -10,11 +10,14 @@ const plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.DefinePlugin({
-		'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+		'__DEV__': process.env.NODE_ENV === 'development',
+		'process.env': {
+			'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+		}
 	})
 ];
 
-if(NODE_ENV === 'prod'){
+if(NODE_ENV === 'production'){
 	plugins.push(
 		new ExtractTextPlugin('styles.css')
 	);
