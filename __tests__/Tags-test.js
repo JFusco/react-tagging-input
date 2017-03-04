@@ -1,7 +1,5 @@
 'use strict';
 
-jest.disableAutomock();
-
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
@@ -379,6 +377,31 @@ describe('Tags - "maxTags"', () => {
 			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
 			expect(tagContainer.children.length).toBe(3);
+		});
+	});
+});
+
+describe('Tags - "deleteOnKeyPress"', () => {
+	describe('when deleteOnKeyPress is false', () => {
+		it('should not remove tags on backspace', () => {
+			const tags = renderIntoDocument(
+				<Tags
+					initialTags={TEST_TAGS}
+					deleteOnKeyPress={false} />
+			);
+
+			const renderedDOM = findDOMNode(tags);
+			const input = renderedDOM.getElementsByTagName('input')[0];
+			const tagContainer = renderedDOM.querySelector('.react-tags__container');
+
+			input.value = '';
+
+			Simulate.change(input);
+			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+
+			expect(tagContainer.children.length).toBe(2);
+			expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
+			expect(tagContainer.children.length).toBe(2);
 		});
 	});
 });

@@ -28,7 +28,6 @@ export default Tag;
 Tag.propTypes = {
 	name: PropTypes.string.isRequired,
 	onRemoveTag: PropTypes.func,
-	selectedTag: PropTypes.bool,
 	readOnly: PropTypes.bool,
 	removeTagIcon: PropTypes.oneOfType([
 		PropTypes.string,

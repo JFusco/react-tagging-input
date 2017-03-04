@@ -1,158 +1,100 @@
 'use strict';
 
-jest.disableAutomock();
-
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
+import renderer from 'react-test-renderer';
+import { shallow, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import Tag from '../src/component/js/Tag';
 
 const TAG_NAME = 'foo';
 
 describe('Tag', () => {
-	let renderer,
-		tag;
-
-	beforeEach(() => {
-		renderer = createRenderer();
-
-		renderer.render(
+	it('should render', () => {
+		const component = renderer.create(
 			<Tag
 				name={TAG_NAME} />
-		);
+		).toJSON();
 
-		tag = renderer.getRenderOutput();
-	});
-
-	afterEach(() => {
-		renderer = null;
-		tag = null;
-	});
-
-	it('should render', () => {
-		expect(tag).not.toBeUndefined();
-		expect(tag.type).toBe('li');
-	});
-
-	it('should render with a name', () => {
-		const props = tag.props.children;
-
-		expect(props[0]).toBe(TAG_NAME);
+		expect(component).toMatchSnapshot();
 	});
 });
 
-
 describe('Tag - "readOnly"', () => {
-	let renderer;
-
-	beforeEach(() => {
-		renderer = createRenderer();
-	});
-
-	afterEach(() => {
-		renderer = null;
-	});
-
-	describe('when readOnly is false', () => {
+	describe('when false', () => {
 		it('should render the removeTagIcon', () => {
-			renderer.render(
+			const component = shallow(
 				<Tag
 					name={TAG_NAME}
 					readOnly={false} />
 			);
 
-			const tag = renderer.getRenderOutput();
-			const removeIcon = tag.props.children[1];
+			expect(component.find('a')).toHaveLength(1);
+			expect(component.find('a').text()).toEqual(String.fromCharCode(215));
 
-			expect(removeIcon).not.toBeNull();
-			expect(removeIcon.type).toBe('a');
+			expect(toJson(component)).toMatchSnapshot();
 		});
 	});
 
-	describe('when readOnly is true', () => {
+	describe('when true', () => {
 		it('should not render the removeTagIcon', () => {
-			renderer.render(
+			const component = shallow(
 				<Tag
 					name={TAG_NAME}
 					readOnly={true} />
 			);
 
-			const tag = renderer.getRenderOutput();
+			expect(component.find('a')).toHaveLength(0);
 
-			expect(tag.props.children[1]).toBeNull();
+			expect(toJson(component)).toMatchSnapshot();
 		});
 	});
 });
 
 describe('Tag - "removeTagIcon"', () => {
-	let renderer;
-
-	beforeEach(() => {
-		renderer = createRenderer();
-	});
-
-	afterEach(() => {
-		renderer = null;
-	});
-
 	describe('when a custom element is passed in', () => {
 		it('should render the element', () => {
 			const customRemoveIcon = (
 				<i className="icon-remove"></i>
 			);
 
-			renderer.render(
+			const component = renderer.create(
 				<Tag
 					name={TAG_NAME}
 					removeTagIcon={customRemoveIcon} />
-			);
+			).toJSON();
 
-			const tag = renderer.getRenderOutput();
-			const removeIcon = tag.props.children[1].props.children;
-
-			expect(tag.props.children[1].type).toBe('a');
-			expect(removeIcon.type).toBe('i');
-			expect(removeIcon.props.className).toBe('icon-remove');
+			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('when a custom string is passed in', () => {
 		it('should render the string', () => {
-			const renderer = createRenderer();
-
 			const customRemoveString = 'remove';
 
-			renderer.render(
+			const component = renderer.create(
 				<Tag
 					name={TAG_NAME}
 					removeTagIcon={customRemoveString} />
-			);
+			).toJSON();
 
-			const tag = renderer.getRenderOutput();
-			const removeIcon = tag.props.children[1].props.children;
-
-			expect(tag.props.children[1].type).toBe('a');
-			expect(removeIcon).toBe('remove');
+			expect(component).toMatchSnapshot();
 		});
 	});
 });
 
 describe('Tag - "onRemoveTag"', () => {
 	it('should be called when clicking the remove icon', () => {
-		const onRemoveClick = jest.genMockFunction();
+		const onRemoveClick = jest.fn();
 
-		const tag = renderIntoDocument(
-			<div>
-				<Tag
-					name={TAG_NAME}
-					onRemoveTag={onRemoveClick} />
-			</div>
+		const component = shallow(
+			<Tag
+				name={TAG_NAME}
+				onRemoveTag={onRemoveClick} />
 		);
 
-		const statelessTag = findDOMNode(tag).children[0];
-		const removeIcon = statelessTag.getElementsByTagName('a')[0];
-
-		Simulate.click(removeIcon);
+		component.find('a').simulate('click', {
+			preventDefault() {}
+		});
 
 		expect(onRemoveClick).toBeCalled();
 	});

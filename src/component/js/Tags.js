@@ -28,6 +28,7 @@ class Tags extends Component {
 		onInputChange: PropTypes.func,
 		maxTags: PropTypes.number,
 		placeholder: PropTypes.string,
+		deleteOnKeyPress: PropTypes.bool,
 		addKeys: PropTypes.arrayOf(PropTypes.number),
 		id: PropTypes.string,
 		readOnly: PropTypes.bool,
@@ -42,6 +43,7 @@ class Tags extends Component {
 		initialTags: [],
 		maxTags: -1,
 		placeholder: 'Add a tag',
+		deleteOnKeyPress: true,
 		addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
 		uniqueTags: false,
 		readOnly: false
@@ -97,12 +99,14 @@ class Tags extends Component {
 	}
 
 	onInputKey(e){
+		const { tags } = this.state;
+
 		switch (e.keyCode){
 			case Tags.KEYS.backspace:
-				if (this.state.tags.length === 0) return;
+				if (tags.length === 0 || !this.props.deleteOnKeyPress) return;
 
 				if (this.input.value === ''){
-					this.removeTag(this.state.tags.length - 1);
+					this.removeTag(tags.length - 1);
 				}
 
 				break;

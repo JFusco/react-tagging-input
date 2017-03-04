@@ -2,7 +2,7 @@
 
 import path from 'path';
 import plugins from './webpack/plugins';
-import loaders from './webpack/loaders';
+import rules from './webpack/rules';
 import entry from './webpack/entry';
 import output from './webpack/output';
 
@@ -13,11 +13,11 @@ const config = {
 	entry,
 	output,
 	module: {
-		loaders
+		rules
 	},
 	plugins,
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['.js']
 	}
 };
 

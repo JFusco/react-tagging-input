@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1483296386201" clover="3.2.0">
-  <project timestamp="1483296386201" name="All files">
-    <metrics statements="50" coveredstatements="50" conditionals="38" coveredconditionals="34" methods="13" coveredmethods="13" elements="101" coveredelements="97" complexity="0" loc="50" ncloc="50" packages="1" files="2" classes="2">
+<coverage generated="1488549075508" clover="3.2.0">
+  <project timestamp="1488549075508" name="All files">
+    <metrics statements="51" coveredstatements="51" conditionals="40" coveredconditionals="37" methods="13" coveredmethods="13" elements="104" coveredelements="101" complexity="0" loc="51" ncloc="51" packages="1" files="2" classes="2">
       <file name="Tag.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tag.js">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="95" type="stmt"/>
+        <line num="6" count="98" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="12" count="95" type="stmt"/>
-        <line num="18" count="95" type="stmt"/>
+        <line num="12" count="98" type="stmt"/>
+        <line num="18" count="98" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
       </file>
       <file name="Tags.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tags.js">
-        <metrics statements="43" coveredstatements="43" conditionals="34" coveredconditionals="30" methods="11" coveredmethods="11"/>
-        <line num="51" count="23" type="stmt"/>
-        <line num="55" count="10" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
-        <line num="59" count="9" type="stmt"/>
+        <metrics statements="44" coveredstatements="44" conditionals="36" coveredconditionals="33" methods="11" coveredmethods="11"/>
+        <line num="53" count="24" type="stmt"/>
+        <line num="57" count="10" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
         <line num="61" count="9" type="stmt"/>
         <line num="63" count="9" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="67" count="8" type="stmt"/>
-        <line num="70" count="8" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="74" count="8" type="stmt"/>
-        <line num="75" count="2" type="stmt"/>
-        <line num="78" count="8" type="stmt"/>
-        <line num="83" count="4" type="stmt"/>
-        <line num="84" count="4" type="stmt"/>
+        <line num="65" count="9" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="8" type="stmt"/>
+        <line num="72" count="8" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="76" count="8" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="80" count="8" type="stmt"/>
+        <line num="85" count="4" type="stmt"/>
         <line num="86" count="4" type="stmt"/>
-        <line num="87" count="8" type="stmt"/>
-        <line num="89" count="4" type="stmt"/>
-        <line num="90" count="2" type="stmt"/>
-        <line num="93" count="4" type="stmt"/>
-        <line num="94" count="2" type="stmt"/>
-        <line num="100" count="14" type="stmt"/>
-        <line num="102" count="4" type="stmt"/>
-        <line num="104" count="4" type="stmt"/>
-        <line num="105" count="3" type="stmt"/>
+        <line num="88" count="4" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+        <line num="91" count="4" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="95" count="4" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="102" count="15" type="stmt"/>
+        <line num="104" count="15" type="stmt"/>
+        <line num="106" count="5" type="stmt"/>
         <line num="108" count="4" type="stmt"/>
-        <line num="111" count="10" type="stmt"/>
-        <line num="113" count="10" type="stmt"/>
-        <line num="114" count="10" type="stmt"/>
-        <line num="115" count="3" type="stmt"/>
+        <line num="109" count="3" type="stmt"/>
+        <line num="112" count="4" type="stmt"/>
+        <line num="115" count="10" type="stmt"/>
+        <line num="117" count="10" type="stmt"/>
         <line num="118" count="10" type="stmt"/>
-        <line num="121" count="10" type="stmt"/>
-        <line num="126" count="14" type="stmt"/>
-        <line num="128" count="14" type="stmt"/>
-        <line num="129" count="5" type="stmt"/>
-        <line num="132" count="14" type="stmt"/>
-        <line num="138" count="49" type="stmt"/>
-        <line num="140" count="49" type="stmt"/>
-        <line num="141" count="102" type="stmt"/>
-        <line num="149" count="49" type="stmt"/>
-        <line num="158" count="68" type="stmt"/>
-        <line num="161" count="49" type="stmt"/>
-        <line num="163" count="49" type="stmt"/>
+        <line num="119" count="3" type="stmt"/>
+        <line num="122" count="10" type="stmt"/>
+        <line num="125" count="10" type="stmt"/>
+        <line num="130" count="15" type="stmt"/>
+        <line num="132" count="15" type="stmt"/>
+        <line num="133" count="5" type="stmt"/>
+        <line num="136" count="15" type="stmt"/>
+        <line num="142" count="51" type="stmt"/>
+        <line num="144" count="51" type="stmt"/>
+        <line num="145" count="106" type="stmt"/>
+        <line num="153" count="51" type="stmt"/>
+        <line num="162" count="71" type="stmt"/>
+        <line num="165" count="51" type="stmt"/>
+        <line num="167" count="51" type="stmt"/>
       </file>
     </metrics>
   </project>

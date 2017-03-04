@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag - "readOnly" when false should render the removeTagIcon 1`] = `
+<li>
+  foo
+  <a
+    onClick={[Function]}
+  >
+    ×
+  </a>
+</li>
+`;
+
+exports[`Tag - "readOnly" when true should not render the removeTagIcon 1`] = `
+<li>
+  foo
+</li>
+`;
+
+exports[`Tag - "removeTagIcon" when a custom element is passed in should render the element 1`] = `
+<li>
+  foo
+  <a
+    onClick={[Function]}
+  >
+    <i
+      className="icon-remove"
+    />
+  </a>
+</li>
+`;
+
+exports[`Tag - "removeTagIcon" when a custom string is passed in should render the string 1`] = `
+<li>
+  foo
+  <a
+    onClick={[Function]}
+  >
+    remove
+  </a>
+</li>
+`;
+
+exports[`Tag should render 1`] = `
+<li>
+  foo
+  <a
+    onClick={[Function]}
+  >
+    ×
+  </a>
+</li>
+`;

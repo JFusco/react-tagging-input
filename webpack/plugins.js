@@ -7,8 +7,7 @@ import config from '../config.json';
 const { NODE_ENV } = process.env;
 
 const plugins = [
-	new webpack.NoErrorsPlugin(),
-	new webpack.optimize.DedupePlugin(),
+	new webpack.NoEmitOnErrorsPlugin(),
 	new webpack.DefinePlugin({
 		'__DEV__': process.env.NODE_ENV === 'development',
 		'process.env': {
