@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489410095173" clover="3.2.0">
-  <project timestamp="1489410095174" name="All files">
+<coverage generated="1489755272930" clover="3.2.0">
+  <project timestamp="1489755272931" name="All files">
     <metrics statements="51" coveredstatements="51" conditionals="40" coveredconditionals="37" methods="13" coveredmethods="13" elements="104" coveredelements="101" complexity="0" loc="51" ncloc="51" packages="1" files="2" classes="2">
       <file name="Tag.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tag.js">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
