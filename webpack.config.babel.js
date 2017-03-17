@@ -9,7 +9,7 @@ import output from './webpack/output';
 const { NODE_ENV } = process.env;
 
 const config = {
-	devtool: NODE_ENV === 'production' ? 'source-map' : 'eval',
+	devtool: NODE_ENV === 'production' ? '#eval' : '#eval-source-map',
 	entry,
 	output,
 	module: {

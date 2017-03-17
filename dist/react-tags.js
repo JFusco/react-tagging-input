@@ -1,378 +1,46 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
-	else if(typeof define === 'function' && define.amd)
-		define(["react"], factory);
-	else if(typeof exports === 'object')
-		exports["Tags"] = factory(require("react"));
-	else
-		root["Tags"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
+!function(root, factory) {
+    "object" == typeof exports && "object" == typeof module ? module.exports = factory(require("react")) : "function" == typeof define && define.amd ? define([ "react" ], factory) : "object" == typeof exports ? exports.Tags = factory(require("react")) : root.Tags = factory(root.React);
+}(this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
+    return function(modules) {
+        function __webpack_require__(moduleId) {
+            if (installedModules[moduleId]) return installedModules[moduleId].exports;
+            var module = installedModules[moduleId] = {
+                i: moduleId,
+                l: !1,
+                exports: {}
+            };
+            return modules[moduleId].call(module.exports, module, module.exports, __webpack_require__), 
+            module.l = !0, module.exports;
+        }
+        var installedModules = {};
+        return __webpack_require__.m = modules, __webpack_require__.c = installedModules, 
+        __webpack_require__.i = function(value) {
+            return value;
+        }, __webpack_require__.d = function(exports, name, getter) {
+            __webpack_require__.o(exports, name) || Object.defineProperty(exports, name, {
+                configurable: !1,
+                enumerable: !0,
+                get: getter
+            });
+        }, __webpack_require__.n = function(module) {
+            var getter = module && module.__esModule ? function() {
+                return module.default;
+            } : function() {
+                return module;
+            };
+            return __webpack_require__.d(getter, "a", getter), getter;
+        }, __webpack_require__.o = function(object, property) {
+            return Object.prototype.hasOwnProperty.call(object, property);
+        }, __webpack_require__.p = "/", __webpack_require__(__webpack_require__.s = 3);
+    }([ function(module, exports) {
+        eval('module.exports = __WEBPACK_EXTERNAL_MODULE_0__;\n\n//////////////////\n// WEBPACK FOOTER\n// external {"root":"React","commonjs2":"react","commonjs":"react","amd":"react"}\n// module id = 0\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%7B%22root%22:%22React%22,%22commonjs2%22:%22react%22,%22commonjs%22:%22react%22,%22amd%22:%22react%22%7D?');
+    }, function(module, exports, __webpack_require__) {
+        "use strict";
+        eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Tag = function Tag(props) {\n\tvar onRemoveClick = function onRemoveClick(e) {\n\t\te.preventDefault();\n\n\t\tprops.onRemoveTag(e);\n\t};\n\n\tvar removeIcon = !props.readOnly ? _react2.default.createElement(\n\t\t'a',\n\t\t{ onClick: onRemoveClick },\n\t\tprops.removeTagIcon || String.fromCharCode(215)\n\t) : null;\n\n\treturn _react2.default.createElement(\n\t\t'li',\n\t\tnull,\n\t\tprops.name,\n\t\tremoveIcon\n\t);\n};\n\nexports.default = Tag;\n\n\nTag.propTypes = {\n\tname: _react.PropTypes.string.isRequired,\n\tonRemoveTag: _react.PropTypes.func,\n\treadOnly: _react.PropTypes.bool,\n\tremoveTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/component/js/Tag.js\n// module id = 1\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/component/js/Tag.js?");
+    }, function(module, exports) {
+        eval("// removed by extract-text-webpack-plugin\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/component/scss/styles.scss\n// module id = 2\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/component/scss/styles.scss?");
+    }, function(module, exports, __webpack_require__) {
+        "use strict";
+        eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Tag = __webpack_require__(1);\n\nvar _Tag2 = _interopRequireDefault(_Tag);\n\n__webpack_require__(2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Tags = function (_Component) {\n\t_inherits(Tags, _Component);\n\n\tfunction Tags(props) {\n\t\t_classCallCheck(this, Tags);\n\n\t\tvar _this = _possibleConstructorReturn(this, (Tags.__proto__ || Object.getPrototypeOf(Tags)).call(this, props));\n\n\t\t_this.state = {\n\t\t\ttags: _this.props.initialTags,\n\t\t\tvalue: ''\n\t\t};\n\t\treturn _this;\n\t}\n\n\t_createClass(Tags, [{\n\t\tkey: 'addTag',\n\t\tvalue: function addTag() {\n\t\t\tvar _this2 = this;\n\n\t\t\tif (this.props.maxTags >= 0) {\n\t\t\t\tif (this.state.tags.length >= this.props.maxTags) return;\n\t\t\t}\n\n\t\t\tvar _props = this.props,\n\t\t\t    uniqueTags = _props.uniqueTags,\n\t\t\t    onChange = _props.onChange,\n\t\t\t    onAdded = _props.onAdded;\n\n\n\t\t\tvar value = this.input.value.trim();\n\n\t\t\tif (uniqueTags) {\n\t\t\t\tif (this.state.tags.indexOf(value) >= 0) return;\n\t\t\t}\n\n\t\t\tthis.setState({\n\t\t\t\ttags: [].concat(_toConsumableArray(this.state.tags), [value])\n\t\t\t}, function () {\n\t\t\t\tif (typeof onChange !== 'undefined') {\n\t\t\t\t\tonChange(_this2.state.tags);\n\t\t\t\t}\n\n\t\t\t\tif (typeof onAdded !== 'undefined') {\n\t\t\t\t\tonAdded(value);\n\t\t\t\t}\n\n\t\t\t\t_this2.input.value = '';\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'removeTag',\n\t\tvalue: function removeTag(index) {\n\t\t\tvar _this3 = this;\n\n\t\t\tvar _props2 = this.props,\n\t\t\t    onChange = _props2.onChange,\n\t\t\t    onRemoved = _props2.onRemoved;\n\n\t\t\tvar value = this.state.tags[index];\n\n\t\t\tthis.setState({\n\t\t\t\ttags: this.state.tags.filter(function (_, i) {\n\t\t\t\t\treturn i !== index;\n\t\t\t\t})\n\t\t\t}, function () {\n\t\t\t\tif (typeof onChange !== 'undefined') {\n\t\t\t\t\tonChange(_this3.state.tags);\n\t\t\t\t}\n\n\t\t\t\tif (typeof onRemoved !== 'undefined') {\n\t\t\t\t\tonRemoved(value);\n\t\t\t\t}\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'onInputKey',\n\t\tvalue: function onInputKey(e) {\n\t\t\tvar tags = this.state.tags;\n\n\n\t\t\tswitch (e.keyCode) {\n\t\t\t\tcase Tags.KEYS.backspace:\n\t\t\t\t\tif (tags.length === 0 || !this.props.deleteOnKeyPress) return;\n\n\t\t\t\t\tif (this.input.value === '') {\n\t\t\t\t\t\tthis.removeTag(tags.length - 1);\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\n\t\t\t\tdefault:\n\t\t\t\t\tif (this.input.value === '') return;\n\n\t\t\t\t\tif (this.props.addKeys.indexOf(e.keyCode) !== -1) {\n\t\t\t\t\t\tif (Tags.KEYS.enter !== e.keyCode) {\n\t\t\t\t\t\t\te.preventDefault();\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\tthis.addTag();\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}, {\n\t\tkey: 'onInputChange',\n\t\tvalue: function onInputChange(e) {\n\t\t\tvar value = e.target.value.trim();\n\n\t\t\tif (typeof this.props.onInputChange !== 'undefined') {\n\t\t\t\tthis.props.onInputChange(value);\n\t\t\t}\n\n\t\t\tthis.setState({\n\t\t\t\tvalue: value\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\tvar _this4 = this;\n\n\t\t\tvar _props3 = this.props,\n\t\t\t    readOnly = _props3.readOnly,\n\t\t\t    removeTagIcon = _props3.removeTagIcon,\n\t\t\t    placeholder = _props3.placeholder,\n\t\t\t    id = _props3.id;\n\n\n\t\t\tvar tagItems = this.state.tags.map(function (tag, v) {\n\t\t\t\treturn _react2.default.createElement(_Tag2.default, {\n\t\t\t\t\tkey: v,\n\t\t\t\t\tname: tag,\n\t\t\t\t\treadOnly: readOnly,\n\t\t\t\t\tremoveTagIcon: removeTagIcon,\n\t\t\t\t\tonRemoveTag: _this4.removeTag.bind(_this4, v) });\n\t\t\t});\n\n\t\t\tvar tagInput = !this.props.readOnly ? _react2.default.createElement('input', {\n\t\t\t\ttype: 'text',\n\t\t\t\trole: 'textbox',\n\t\t\t\tautoComplete: 'off',\n\t\t\t\t'aria-label': placeholder,\n\t\t\t\tplaceholder: placeholder,\n\t\t\t\tonChange: this.onInputChange.bind(this),\n\t\t\t\tonKeyDown: this.onInputKey.bind(this),\n\t\t\t\tref: function ref(el) {\n\t\t\t\t\treturn _this4.input = el;\n\t\t\t\t} }) : null;\n\n\t\t\tvar classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';\n\n\t\t\treturn _react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'react-tags', id: id },\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'ul',\n\t\t\t\t\t{ className: classNames },\n\t\t\t\t\ttagItems\n\t\t\t\t),\n\t\t\t\ttagInput\n\t\t\t);\n\t\t}\n\t}]);\n\n\treturn Tags;\n}(_react.Component);\n\nTags.KEYS = {\n\tenter: 13,\n\ttab: 9,\n\tspacebar: 32,\n\tbackspace: 8,\n\tleft: 37,\n\tright: 39\n};\nTags.propTypes = {\n\tinitialTags: _react.PropTypes.arrayOf(_react.PropTypes.string),\n\tonChange: _react.PropTypes.func,\n\tonAdded: _react.PropTypes.func,\n\tonRemoved: _react.PropTypes.func,\n\tonInputChange: _react.PropTypes.func,\n\tmaxTags: _react.PropTypes.number,\n\tplaceholder: _react.PropTypes.string,\n\tdeleteOnKeyPress: _react.PropTypes.bool,\n\taddKeys: _react.PropTypes.arrayOf(_react.PropTypes.number),\n\tid: _react.PropTypes.string,\n\treadOnly: _react.PropTypes.bool,\n\tuniqueTags: _react.PropTypes.bool,\n\tremoveTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])\n};\nTags.defaultProps = {\n\tinitialTags: [],\n\tmaxTags: -1,\n\tplaceholder: 'Add a tag',\n\tdeleteOnKeyPress: true,\n\taddKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],\n\tuniqueTags: false,\n\treadOnly: false\n};\nexports.default = Tags;\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/component/js/Tags.js\n// module id = 3\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/component/js/Tags.js?");
+    } ]);
 });
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Tag = function Tag(props) {
-	var onRemoveClick = function onRemoveClick(e) {
-		e.preventDefault();
-
-		props.onRemoveTag(e);
-	};
-
-	var removeIcon = !props.readOnly ? _react2.default.createElement(
-		'a',
-		{ onClick: onRemoveClick },
-		props.removeTagIcon || String.fromCharCode(215)
-	) : null;
-
-	return _react2.default.createElement(
-		'li',
-		null,
-		props.name,
-		removeIcon
-	);
-};
-
-exports.default = Tag;
-
-
-Tag.propTypes = {
-	name: _react.PropTypes.string.isRequired,
-	onRemoveTag: _react.PropTypes.func,
-	readOnly: _react.PropTypes.bool,
-	removeTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Tag = __webpack_require__(1);
-
-var _Tag2 = _interopRequireDefault(_Tag);
-
-__webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Tags = function (_Component) {
-	_inherits(Tags, _Component);
-
-	function Tags(props) {
-		_classCallCheck(this, Tags);
-
-		var _this = _possibleConstructorReturn(this, (Tags.__proto__ || Object.getPrototypeOf(Tags)).call(this, props));
-
-		_this.state = {
-			tags: _this.props.initialTags,
-			value: ''
-		};
-		return _this;
-	}
-
-	_createClass(Tags, [{
-		key: 'addTag',
-		value: function addTag() {
-			var _this2 = this;
-
-			if (this.props.maxTags >= 0) {
-				if (this.state.tags.length >= this.props.maxTags) return;
-			}
-
-			var _props = this.props,
-			    uniqueTags = _props.uniqueTags,
-			    onChange = _props.onChange,
-			    onAdded = _props.onAdded;
-
-
-			var value = this.input.value.trim();
-
-			if (uniqueTags) {
-				if (this.state.tags.indexOf(value) >= 0) return;
-			}
-
-			this.setState({
-				tags: [].concat(_toConsumableArray(this.state.tags), [value])
-			}, function () {
-				if (typeof onChange !== 'undefined') {
-					onChange(_this2.state.tags);
-				}
-
-				if (typeof onAdded !== 'undefined') {
-					onAdded(value);
-				}
-
-				_this2.input.value = '';
-			});
-		}
-	}, {
-		key: 'removeTag',
-		value: function removeTag(index) {
-			var _this3 = this;
-
-			var _props2 = this.props,
-			    onChange = _props2.onChange,
-			    onRemoved = _props2.onRemoved;
-
-			var value = this.state.tags[index];
-
-			this.setState({
-				tags: this.state.tags.filter(function (_, i) {
-					return i !== index;
-				})
-			}, function () {
-				if (typeof onChange !== 'undefined') {
-					onChange(_this3.state.tags);
-				}
-
-				if (typeof onRemoved !== 'undefined') {
-					onRemoved(value);
-				}
-			});
-		}
-	}, {
-		key: 'onInputKey',
-		value: function onInputKey(e) {
-			var tags = this.state.tags;
-
-
-			switch (e.keyCode) {
-				case Tags.KEYS.backspace:
-					if (tags.length === 0 || !this.props.deleteOnKeyPress) return;
-
-					if (this.input.value === '') {
-						this.removeTag(tags.length - 1);
-					}
-
-					break;
-
-				default:
-					if (this.input.value === '') return;
-
-					if (this.props.addKeys.indexOf(e.keyCode) !== -1) {
-						if (Tags.KEYS.enter !== e.keyCode) {
-							e.preventDefault();
-						}
-
-						this.addTag();
-					}
-
-					break;
-			}
-		}
-	}, {
-		key: 'onInputChange',
-		value: function onInputChange(e) {
-			var value = e.target.value.trim();
-
-			if (typeof this.props.onInputChange !== 'undefined') {
-				this.props.onInputChange(value);
-			}
-
-			this.setState({
-				value: value
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this4 = this;
-
-			var _props3 = this.props,
-			    readOnly = _props3.readOnly,
-			    removeTagIcon = _props3.removeTagIcon,
-			    placeholder = _props3.placeholder,
-			    id = _props3.id;
-
-
-			var tagItems = this.state.tags.map(function (tag, v) {
-				return _react2.default.createElement(_Tag2.default, {
-					key: v,
-					name: tag,
-					readOnly: readOnly,
-					removeTagIcon: removeTagIcon,
-					onRemoveTag: _this4.removeTag.bind(_this4, v) });
-			});
-
-			var tagInput = !this.props.readOnly ? _react2.default.createElement('input', {
-				type: 'text',
-				role: 'textbox',
-				autoComplete: 'off',
-				'aria-label': placeholder,
-				placeholder: placeholder,
-				onChange: this.onInputChange.bind(this),
-				onKeyDown: this.onInputKey.bind(this),
-				ref: function ref(el) {
-					return _this4.input = el;
-				} }) : null;
-
-			var classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
-
-			return _react2.default.createElement(
-				'div',
-				{ className: 'react-tags', id: id },
-				_react2.default.createElement(
-					'ul',
-					{ className: classNames },
-					tagItems
-				),
-				tagInput
-			);
-		}
-	}]);
-
-	return Tags;
-}(_react.Component);
-
-Tags.KEYS = {
-	enter: 13,
-	tab: 9,
-	spacebar: 32,
-	backspace: 8,
-	left: 37,
-	right: 39
-};
-Tags.propTypes = {
-	initialTags: _react.PropTypes.arrayOf(_react.PropTypes.string),
-	onChange: _react.PropTypes.func,
-	onAdded: _react.PropTypes.func,
-	onRemoved: _react.PropTypes.func,
-	onInputChange: _react.PropTypes.func,
-	maxTags: _react.PropTypes.number,
-	placeholder: _react.PropTypes.string,
-	deleteOnKeyPress: _react.PropTypes.bool,
-	addKeys: _react.PropTypes.arrayOf(_react.PropTypes.number),
-	id: _react.PropTypes.string,
-	readOnly: _react.PropTypes.bool,
-	uniqueTags: _react.PropTypes.bool,
-	removeTagIcon: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])
-};
-Tags.defaultProps = {
-	initialTags: [],
-	maxTags: -1,
-	placeholder: 'Add a tag',
-	deleteOnKeyPress: true,
-	addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-	uniqueTags: false,
-	readOnly: false
-};
-exports.default = Tags;
-
-/***/ })
-/******/ ]);
-});
-//# sourceMappingURL=react-tags.js.map

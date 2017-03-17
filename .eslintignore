@@ -1,4 +1,4 @@
 /node_modules/
 /dist/
-/dist-components/
+/__mocks__/
 /__tests__/

@@ -2,6 +2,8 @@
 
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import path from 'path';
 import config from '../config.json';
 
 const { NODE_ENV } = process.env;
@@ -18,7 +20,16 @@ const plugins = [
 
 if(NODE_ENV === 'production'){
 	plugins.push(
-		new ExtractTextPlugin('styles.css')
+		new ExtractTextPlugin('styles.css'),
+		new webpack.optimize.UglifyJsPlugin({
+			beautify: true,
+			mangle: false
+		}),
+		new CleanWebpackPlugin(['coverage', 'dist', 'docs'], {
+			root: path.join(__dirname, '../'),
+			verbose: true,
+			dry: false
+		})
 	);
 }
 

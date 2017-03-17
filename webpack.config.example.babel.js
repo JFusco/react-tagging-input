@@ -9,6 +9,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 const { library } = config.scripts;
 
 module.exports =  {
+	devtool: '#eval-source-map',
 	entry: './src/example/index.js',
 	output: {
 		filename: 'bundle.js',

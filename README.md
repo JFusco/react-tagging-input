@@ -204,7 +204,7 @@ $tag-input-border
 $tag-input-placeholder-color
 ```
 
-If you don't care to override variables and just want to override actual styles you may choose to import the minified compiled version of the css instead
+If you don't care to override variables and just want to override actual styles you may choose to import the compiled version of the css instead
 ```scss
 @import "node_modules/react-tagging-input/dist/styles.css";
 ```
