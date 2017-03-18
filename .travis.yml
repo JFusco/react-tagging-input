@@ -1,9 +1,11 @@
 language: node_js
-node_js:
-  - "6"
-before_install:
-  - npm install -g gulp
-  - npm install -g eslint
-  - npm install -g babel-eslint
-script:
-    - "npm run lint && npm test"
+node_js: '7'
+before_install: npm install -g eslint
+script: "npm run lint && npm test"
+deploy:
+  provider: npm
+  email: jfusco311@gmail.com
+  on:
+    tags: true
+  api_key:
+    secure: K1GB8fygxjdrdFp2K3x2TjejKV24rGoOrc+7cwKvjb4LhEBvE77dn/3Jxx+E+em5fR8Bvorg2UsrmSAYteZxQCMeVuwOwDylbqxxJNbHk4SCWXWjh3zZj1poSNUK9bJ4+UBibD7IH1nUr5SrmX9m2WQCVDCt8pf4kG+9Zp2+1K/gUO/SEK4ELmi+t/QVfjh+YNUFCE5cMpYJCL9Z+zn1lLetWNJWT+8tB6yKtaVofXSYRKs0uEs9v9HRUcUxFR2S2y730kdjyTju3LQjTOg87ySzOgcvnVXWTJJeuptY0SvWD8lNquuaW9DHYrw+4qQ1u1UZNPCo6bC6HSH1Cp/2Bn+2UaNRGJcAOilfFhncA7exa71022UEpjoPhqpxei/7IwEs4MJ2IXzZDcPT6DGaWoVaTCz+JXwyjoaAEhZmxQUf7abSasUUU1RKurulHeKiJE/YhEPcDa94KiodUmuoHo1PuNG8Ao/d4/PvArXC5wtmB8YzJc6uipGJAe3ENzxtkStD8wWC7dxtvGpT5viy8WtR0YOdoyyUKGgY1AyAtNAMLfh/MwOkcGQbhsqWKxaD4fDqHH3E57Z6xoHaBRvDadh0q1KuJisS2HkOuyu+PgNWk9W4nbgCylLjEo9oXnXc4lr/sdLHO+chkucIgLVIeCUt5XpCvX92f8jRvlvsojQ=
