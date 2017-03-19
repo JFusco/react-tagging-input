@@ -4,6 +4,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
 import Tags from '../src/component/js/Tags';
+import App from './__fixtures__/App';
 
 const TEST_TAGS = [
 	'foo',
@@ -21,7 +22,7 @@ describe('Tags', () => {
 			<Tags
 				id="test-tags"
 				placeholder="Custom placeholder text"
-				initialTags={TEST_TAGS} />
+				tags={TEST_TAGS} />
 		);
 
 		tags = renderer.getRenderOutput();
@@ -58,7 +59,7 @@ describe('Tags - "initialTags"', () => {
 		const renderList = () => {
 			renderer.render(
 				<Tags
-					initialTags={TEST_TAGS} />
+					tags={TEST_TAGS} />
 			);
 
 			const list = renderer.getRenderOutput();
@@ -72,8 +73,9 @@ describe('Tags - "initialTags"', () => {
 
 	it('should render tags (DOM render)', () => {
 		const tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS} />
+			<div>
+				<Tags tags={TEST_TAGS} />
+			</div>
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -91,7 +93,7 @@ describe('Tags - "readOnly"', () => {
 
 		renderer.render(
 			<Tags
-				initialTags={TEST_TAGS}
+				tags={TEST_TAGS}
 				readOnly={true} />
 		);
 	});
@@ -113,7 +115,6 @@ describe('Tags - "readOnly"', () => {
 	});
 });
 
-
 describe('Tags - "addKeys"', () => {
 	let tags,
 		input,
@@ -121,12 +122,13 @@ describe('Tags - "addKeys"', () => {
 
 	beforeEach(() => {
 		tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS}
+			<App
+				tags={TEST_TAGS}
 				addKeys={[13, 9, 32, 188]} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
+
 		tagContainer = renderedDOM.querySelector('.react-tags__container');
 		input = renderedDOM.getElementsByTagName('input')[0];
 
@@ -181,20 +183,21 @@ describe('Tags - events', () => {
 
 	const onTagAdded = jest.genMockFunction();
 	const onTagRemoved = jest.genMockFunction();
-	const onTagsChanged = jest.genMockFunction();
 	const onTagsInputChange = jest.genMockFunction();
 
 	beforeEach(() => {
 		tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS}
-				onAdded={onTagAdded}
-				onRemoved={onTagRemoved}
-				onChange={onTagsChanged}
-				onInputChange={onTagsInputChange} />
+			<div>
+				<Tags
+					tags={TEST_TAGS}
+					onAdded={onTagAdded}
+					onRemoved={onTagRemoved}
+					onInputChange={onTagsInputChange} />
+			</div>
 		);
 
 		const renderedDOM = findDOMNode(tags);
+
 		tagContainer = renderedDOM.querySelector('.react-tags__container');
 		input = renderedDOM.getElementsByTagName('input')[0];
 	});
@@ -206,38 +209,24 @@ describe('Tags - events', () => {
 	});
 
 	describe('when adding a tag', () => {
-		beforeEach(() => {
+		it('should call the "onAdded" event and return the new tag', () => {
 			input.value = TEST_TAGS[0];
 
 			Simulate.change(input);
 			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
-		});
 
-		it('should call the "onAdded" event and return the new tag', () => {
 			expect(onTagAdded).toBeCalledWith(TEST_TAGS[0]);
-		});
-
-		it('should call the "onChange" event and return the new tags list as an array', () => {
-			const newArray = TEST_TAGS.concat('foo');
-
-			expect(onTagsChanged).toBeCalledWith(newArray);
 		});
 	});
 
 	describe('when removing a tag', () => {
-		beforeEach(() => {
+		it('should call the "onRemoved" event and return the tag that was removed', () => {
 			input.value = '';
 
 			Simulate.change(input);
 			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
-		});
 
-		it('should call the "onRemoved" event and return the tag that was removed', () => {
-			expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1]);
-		});
-
-		it('should call the "onChange" event and return the new tags list as an array', () => {
-			expect(onTagsChanged).toBeCalledWith([TEST_TAGS[0]]);
+			expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1], 1);
 		});
 	});
 
@@ -261,8 +250,8 @@ describe('Tags - removing', () => {
 
 	beforeEach(() => {
 		tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS} />
+			<App
+				tags={TEST_TAGS} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -315,8 +304,8 @@ describe('Tags - removing', () => {
 describe('Tags - "uniqueTags"', () => {
 	it('should allow duplicate tags to be created', () => {
 		const tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS}
+			<App
+				tags={TEST_TAGS}
 				uniqueTags={false} />
 		);
 
@@ -336,8 +325,8 @@ describe('Tags - "uniqueTags"', () => {
 
 	it('should not allow duplicate tags to be created', () => {
 		const tags = renderIntoDocument(
-			<Tags
-				initialTags={TEST_TAGS}
+			<App
+				tags={TEST_TAGS}
 				uniqueTags={true} />
 		);
 
@@ -358,8 +347,8 @@ describe('Tags - "maxTags"', () => {
 	describe('when maxTags is set to 3', () => {
 		it('should allow no more than 3 tags to be added', () => {
 			const tags = renderIntoDocument(
-				<Tags
-					initialTags={TEST_TAGS}
+				<App
+					tags={TEST_TAGS}
 					maxTags={3} />
 			);
 
@@ -385,8 +374,9 @@ describe('Tags - "deleteOnKeyPress"', () => {
 	describe('when deleteOnKeyPress is false', () => {
 		it('should not remove tags on backspace', () => {
 			const tags = renderIntoDocument(
-				<Tags
-					initialTags={TEST_TAGS}
+				<App
+					tags={TEST_TAGS}
+					addKeys={[13, 9, 32, 188]}
 					deleteOnKeyPress={false} />
 			);
 

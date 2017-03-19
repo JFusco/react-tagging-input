@@ -6,20 +6,71 @@ import Tags from '../component/js/Tags';
 
 class App extends Component {
 	state = {
-		tags: []
+		tags: [],
+		initialTags: ['foo', 'bar'],
+		readOnlyTags: ['read', 'only', 'tags'],
+		deleteTagsOne: ['delete one', 'delete two'],
+		deleteTagsTwo: ['delete one', 'delete two'],
+		uniqueTags: ['hello', 'world']
 	};
 
-	static defaultProps = {
-		tags: ['hello', 'world']
-	};
-
-	static propTypes = {
-		tags: PropTypes.arrayOf(PropTypes.string)
-	};
-
-	onTagsChange(tags){
+	onTagAdded(tag) {
 		this.setState({
-			tags
+			tags: [...this.state.tags, tag]
+		});
+	}
+
+	onTagRemoved(tag, index) {
+		this.setState({
+			tags: this.state.tags.filter((tag, i) => i !== index)
+		});
+	}
+
+	onInitTagAdded(tag) {
+		this.setState({
+			initialTags: [...this.state.initialTags, tag]
+		});
+	}
+
+	onInitTagRemoved(tag, index) {
+		this.setState({
+			initialTags: this.state.initialTags.filter((tag, i) => i !== index)
+		});
+	}
+
+	onDeleteOneTagAdded(tag) {
+		this.setState({
+			deleteTagsOne: [...this.state.deleteTagsOne, tag]
+		});
+	}
+
+	onDeleteOneTagRemoved(tag, index) {
+		this.setState({
+			deleteTagsOne: this.state.deleteTagsOne.filter((tag, i) => i !== index)
+		});
+	}
+
+	onDeleteTwoTagAdded(tag) {
+		this.setState({
+			deleteTagsTwo: [...this.state.deleteTagsTwo, tag]
+		});
+	}
+
+	onDeleteTwoTagRemoved(tag, index) {
+		this.setState({
+			deleteTagsTwo: this.state.deleteTagsTwo.filter((tag, i) => i !== index)
+		});
+	}
+
+	onUniqueAdded(tag) {
+		this.setState({
+			uniqueTags: [...this.state.uniqueTags, tag]
+		});
+	}
+
+	onUniqueRemoved(tag, index) {
+		this.setState({
+			uniqueTags: this.state.uniqueTags.filter((tag, i) => i !== index)
 		});
 	}
 
@@ -35,16 +86,37 @@ class App extends Component {
 				<p>View coverage report <a href="https://jfusco.github.io/react-tagging-input/coverage/lcov-report/index.html">here</a></p>
 
 				<div className="example">
-					<h2>Default tags</h2>
-					<p>No properties are required to make this component work.</p>
+					<h2>Default implementation</h2>
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags />
+						<Tags
+							tags={this.state.tags}
+							onAdded={::this.onTagAdded}
+							onRemoved={::this.onTagRemoved} />
 					</div>
 
 					<pre>
-						{`<Tags />`}
+						{`state = {
+  tags: []
+}
+
+onTagAdded(tag) {
+  this.setState({
+    tags: [...this.state.tags, tag]
+  });
+}
+
+onTagRemoved(tag, index) {
+  this.setState({
+    tags: this.state.tags.filter((tag, i) => i !== index)
+  });
+}
+
+<Tags
+  tags={this.state.tags}
+  onAdded={this.onTagAdded.bind(this)}
+  onRemoved={this.onTagRemoved.bind(this)} />`}
 					</pre>
 				</div>
 
@@ -54,15 +126,18 @@ class App extends Component {
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags initialTags={this.props.tags} />
+						<Tags
+							tags={this.state.initialTags}
+							onAdded={::this.onInitTagAdded}
+							onRemoved={::this.onInitTagRemoved} />
 					</div>
 
 					<pre>
-						{`static defaultProps = {
-	tags: ['hello', 'world']
-};
+						{`state = {
+  tags: ['foo', 'bar']
+}
 
-<Tags initialTags={this.props.tags} />`}
+<Tags tags={this.state.tags} />`}
 					</pre>
 				</div>
 
@@ -72,11 +147,15 @@ class App extends Component {
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags readOnly={true} initialTags={this.props.tags} />
+						<Tags
+							readOnly={true}
+							tags={this.state.readOnlyTags}
+							onAdded={::this.onInitTagAdded}
+							onRemoved={::this.onInitTagRemoved} />
 					</div>
 
 					<pre>
-						{`<Tags readOnly={true} initialTags={this.props.tags} />`}
+						{`<Tags readOnly={true} />`}
 					</pre>
 				</div>
 
@@ -86,23 +165,31 @@ class App extends Component {
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags removeTagIcon="delete" initialTags={this.props.tags} />
+						<Tags
+							removeTagIcon="delete"
+							tags={this.state.deleteTagsOne}
+							onAdded={::this.onDeleteOneTagAdded}
+							onRemoved={::this.onDeleteOneTagRemoved} />
 					</div>
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags removeTagIcon={removeIcon} initialTags={this.props.tags} />
+						<Tags
+							removeTagIcon={removeIcon}
+							tags={this.state.deleteTagsTwo}
+							onAdded={::this.onDeleteTwoTagAdded}
+							onRemoved={::this.onDeleteTwoTagRemoved} />
 					</div>
 
 					<pre>
-						{`<Tags removeTagIcon="delete" initialTags={this.props.tags} />`}
+						{`<Tags removeTagIcon="delete" />`}
 					</pre>
 
 					<pre>
 						{`//-- Custom element
 const removeIcon = <span>--</span>;
 
-<Tags removeTagIcon={removeIcon} initialTags={this.props.tags} />`}
+<Tags removeTagIcon={removeIcon} />`}
 					</pre>
 				</div>
 
@@ -112,27 +199,15 @@ const removeIcon = <span>--</span>;
 
 					{/* Component */}
 					<div className="example__component-wrapper">
-						<Tags uniqueTags={true} />
+						<Tags
+							uniqueTags={true}
+							tags={this.state.uniqueTags}
+							onAdded={::this.onUniqueAdded}
+							onRemoved={::this.onUniqueRemoved} />
 					</div>
 
 					<pre>
 						{`<Tags uniqueTags={true} />`}
-					</pre>
-				</div>
-
-				<div className="example">
-					<h2>Change event</h2>
-					<p>Can listen for change event and pass back the new state of tags.</p>
-
-					{/* Component */}
-					<div className="example__component-wrapper">
-						<Tags onChange={::this.onTagsChange} />
-					</div>
-
-					<pre>
-						{`<Tags onChange={this.onTagsChange.bind(this)} />
-
-tags: ${this.state.tags}`}
 					</pre>
 				</div>
 			</div>

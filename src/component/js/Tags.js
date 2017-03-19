@@ -1,179 +1,153 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Tag from './Tag';
 
 import '../scss/styles.scss';
 
-class Tags extends Component {
-	state = {
-		tags: this.props.initialTags,
-		value: ''
-	};
+const Tags = props => {
+	let input = null;
 
-	static KEYS = {
-		enter: 13,
-		tab: 9,
-		spacebar: 32,
-		backspace: 8,
-		left: 37,
-		right: 39
-	};
+	const addTag = () => {
+		const { uniqueTags, onAdded, tags, maxTags } = props;
 
-	static propTypes = {
-		initialTags: PropTypes.arrayOf(PropTypes.string),
-		onChange: PropTypes.func,
-		onAdded: PropTypes.func,
-		onRemoved: PropTypes.func,
-		onInputChange: PropTypes.func,
-		maxTags: PropTypes.number,
-		placeholder: PropTypes.string,
-		deleteOnKeyPress: PropTypes.bool,
-		addKeys: PropTypes.arrayOf(PropTypes.number),
-		id: PropTypes.string,
-		readOnly: PropTypes.bool,
-		uniqueTags: PropTypes.bool,
-		removeTagIcon: PropTypes.oneOfType([
-			PropTypes.string,
-			PropTypes.element
-		])
-	};
-
-	static defaultProps = {
-		initialTags: [],
-		maxTags: -1,
-		placeholder: 'Add a tag',
-		deleteOnKeyPress: true,
-		addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-		uniqueTags: false,
-		readOnly: false
-	};
-
-	constructor(props){
-		super(props);
-	}
-
-	addTag(){
-		if (this.props.maxTags >= 0){
-			if (this.state.tags.length >= this.props.maxTags) return;
+		if (maxTags > 0){
+			if (tags.length >= maxTags) return;
 		}
 
-		const { uniqueTags, onChange, onAdded } = this.props;
-
-		const value = this.input.value.trim();
+		const value = input.value.trim();
 
 		if (uniqueTags){
-			if (this.state.tags.indexOf(value) >= 0) return;
+			if (tags.indexOf(value) >= 0) return;
 		}
 
-		this.setState({
-			tags: [...this.state.tags, value]
-		}, () => {
-			if (typeof onChange !== 'undefined'){
-				onChange(this.state.tags);
-			}
+		if (typeof onAdded !== 'undefined'){
+			onAdded(value);
+		}
 
-			if (typeof onAdded !== 'undefined'){
-				onAdded(value);
-			}
+		input.value = '';
+	};
 
-			this.input.value = '';
-		});
-	}
+	const removeTag = index => {
+		const { onRemoved } = props;
+		const value = props.tags[index];
 
-	removeTag(index){
-		const { onChange, onRemoved } = this.props;
-		const value = this.state.tags[index];
+		if (typeof onRemoved !== 'undefined'){
+			onRemoved(value, index);
+		}
+	};
 
-		this.setState({
-			tags: this.state.tags.filter((_, i) => i !== index)
-		}, () => {
-			if (typeof onChange !== 'undefined'){
-				onChange(this.state.tags);
-			}
-
-			if (typeof onRemoved !== 'undefined'){
-				onRemoved(value);
-			}
-		});
-	}
-
-	onInputKey(e){
-		const { tags } = this.state;
+	const onInputKey = e => {
+		const { tags } = props;
 
 		switch (e.keyCode){
 			case Tags.KEYS.backspace:
-				if (tags.length === 0 || !this.props.deleteOnKeyPress) return;
+				if (tags.length === 0 || !props.deleteOnKeyPress) return;
 
-				if (this.input.value === ''){
-					this.removeTag(tags.length - 1);
+				if (input.value === ''){
+					removeTag(tags.length - 1);
 				}
 
 				break;
 
 			default:
-				if (this.input.value === '') return;
+				if (input.value === '') return;
 
-				if (this.props.addKeys.indexOf(e.keyCode) !== -1){
+				if (props.addKeys.indexOf(e.keyCode) !== -1){
 					if (Tags.KEYS.enter !== e.keyCode){
 						e.preventDefault();
 					}
 
-					this.addTag();
+					addTag();
 				}
 
 				break;
 		}
-	}
+	};
 
-	onInputChange(e){
+	const onInputChange = e => {
 		const value = e.target.value.trim();
 
-		if (typeof this.props.onInputChange !== 'undefined'){
-			this.props.onInputChange(value);
+		if (typeof props.onInputChange !== 'undefined'){
+			props.onInputChange(value);
 		}
+	};
 
-		this.setState({
-			value
-		});
-	}
+	const { readOnly, removeTagIcon, placeholder, id } = props;
 
-	render(){
-		const { readOnly, removeTagIcon, placeholder, id } = this.props;
+	//-- Render tags
+	const tagItems = props.tags.map((tag, v) => {
+		return <Tag
+			key={v}
+			name={tag}
+			readOnly={readOnly}
+			removeTagIcon={removeTagIcon}
+			onRemoveTag={removeTag.bind(this, v)} />;
+	});
 
-		const tagItems = this.state.tags.map((tag, v) => {
-			return <Tag
-				key={v}
-				name={tag}
-				readOnly={readOnly}
-				removeTagIcon={removeTagIcon}
-				onRemoveTag={this.removeTag.bind(this, v)} />;
-		});
+	//-- Render the input field
+	const tagInput = !props.readOnly ? (
+		<input
+			type="text"
+			role="textbox"
+			autoComplete="off"
+			aria-label={placeholder}
+			placeholder={placeholder}
+			onChange={onInputChange}
+			onKeyDown={onInputKey}
+			ref={el => input = el} />
+	) : null;
 
-		const tagInput = !this.props.readOnly ? (
-			<input
-				type="text"
-				role="textbox"
-				autoComplete="off"
-				aria-label={placeholder}
-				placeholder={placeholder}
-				onChange={::this.onInputChange}
-				onKeyDown={::this.onInputKey}
-				ref={el => this.input = el} />
-		) : null;
+	const classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 
-		const classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
+	return (
+		<div className="react-tags" id={id}>
+			<ul className={classNames}>
+				{tagItems}
+			</ul>
 
-		return (
-			<div className="react-tags" id={id}>
-				<ul className={classNames}>
-					{tagItems}
-				</ul>
+			{tagInput}
+		</div>
+	);
+};
 
-				{tagInput}
-			</div>
-		);
-	}
-}
+//-- Keyboard key map
+Tags.KEYS = {
+	enter: 13,
+	tab: 9,
+	spacebar: 32,
+	backspace: 8,
+	left: 37,
+	right: 39
+};
+
+//-- Property types
+Tags.propTypes = {
+	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+	onAdded: PropTypes.func,
+	onRemoved: PropTypes.func,
+	onInputChange: PropTypes.func,
+	maxTags: PropTypes.number,
+	placeholder: PropTypes.string,
+	deleteOnKeyPress: PropTypes.bool,
+	addKeys: PropTypes.arrayOf(PropTypes.number),
+	id: PropTypes.string,
+	readOnly: PropTypes.bool,
+	uniqueTags: PropTypes.bool,
+	removeTagIcon: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element
+	])
+};
+
+//-- Default properties
+Tags.defaultProps = {
+	maxTags: -1,
+	placeholder: 'Add a tag',
+	deleteOnKeyPress: true,
+	addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+	uniqueTags: false,
+	readOnly: false
+};
 
 export default Tags;

@@ -31,25 +31,34 @@ import { render } from 'react-dom';
 import Tags from 'react-tagging-input';
 
 class Application extends Component{
+	state = {
+		tags: ['foo', 'bar']
+	};
+
 	constructor(props){
 		super(props);
-
-		this.state = {
-			tags: ['hello', 'world']
-		}
 	}
 
-	onTagsChange(tags){
-		console.log(`new tags: ${tags}`);
+	onTagAdded(tag) {
+		this.setState({
+			tags: [...this.state.tags, tag]
+		});
+	}
+
+	onTagRemoved(tag, index) {
+		this.setState({
+			tags: this.state.tags.filter((tag, i) => i !== index)
+		});
 	}
 
 	render(){
 		return (
 			<div>
 				<Tags
-				 initialTags={this.state.tags}
-				 placeholder="Add a tag"
-				 onChange={this.onTagsChange.bind(this)} />
+					tags={this.state.tags}
+					placeholder="Add a tag"
+					onAdded={this.onTagAdded.bind(this)}
+					onRemoved={this.onTagRemoved.bind(this)} />
 			</div>
 		);
 	}
@@ -60,10 +69,9 @@ render(<Application />, document.getElementById('application'));
 
 <a name="options"></a>
 #### Options
-* **[`initialTags`](#initialTags)**
+* **[`tags`](#tags)**
 * **[`placeholder`](#placeholder)**
 * **[`addKeys`](#addKeys)**
-* **[`onChange`](#onChange)**
 * **[`onAdded`](#onAdded)**
 * **[`onRemoved`](#onRemoved)**
 * **[`maxTags`](#maxTags)**
@@ -72,13 +80,15 @@ render(<Application />, document.getElementById('application'));
 * **[`uniqueTags`](#uniqueTags)**
 * **[`id`](#id)**
 
-<a name="initialTags"></a>
-##### initialTags ~ optional ~ default `[]`
+<a name="tags"></a>
+##### tags ~ required
 An `array` of tags to be passed in and rendered right away in the component
 ```js
-const tags = ['hello', 'world'];
+state = {
+  tags: ['foo', 'bar']
+};
 
-<Tags initialTags={tags} />
+<Tags tags={this.state.tags} />
 ```
 
 <a name="placeholder"></a>
@@ -97,17 +107,6 @@ An `array` of keyCodes used to tell the tags component which delimiter to use to
 <Tags addKeys={[13, 9, 32, 188]} />
 ```
 
-<a name="onChange"></a>
-##### onChange ~ optional
-A `function` fired anytime there is a change - returns the new `array` of tags
-```js
-onTagsChange(tags){
-	console.log(`new tags: ${tags}`);
-}
-
-<Tags onChange={this.onTagsChange} />
-```
-
 <a name="onAdded"></a>
 ##### onAdded ~ optional
 A `function` fired when a new tag is added - returns a `string` of the new tag
@@ -123,11 +122,11 @@ onTagAdded(tag){
 ##### onRemoved ~ optional
 A `function` fired when a new tag is deleted - returns a `string` of the tag that was deleted
 ```js
-onTagRemoved(tag){
-	console.log(`deleted tag: ${tag}`);
+onTagRemoved(tag, index){
+	console.log(`deleted tag: ${tag} at index ${index}`);
 }
 
-<Tags onRemoved={this.onTagRemoved} />
+<Tags onRemoved={this.onTagRemoved.bind(this)} />
 ```
 
 <a name="maxTags"></a>

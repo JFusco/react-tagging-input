@@ -15,12 +15,14 @@ const plugins = [
 		'process.env': {
 			'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 		}
+	}),
+	new ExtractTextPlugin({
+		filename: 'styles.css'
 	})
 ];
 
 if(NODE_ENV === 'production'){
 	plugins.push(
-		new ExtractTextPlugin('styles.css'),
 		new webpack.optimize.UglifyJsPlugin({
 			beautify: true,
 			mangle: false

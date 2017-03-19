@@ -1,13 +1,17 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Tags from './js/Tags';
+import Tags from '../../src/component/js/Tags';
 
 class App extends Component {
 	state = {
-		tags: []
+		tags: this.props.tags
 	};
+
+	constructor(props){
+		super(props);
+	}
 
 	onTagAdded(tag) {
 		this.setState({
@@ -24,10 +28,9 @@ class App extends Component {
 	render () {
 		return (
 			<div>
-				{/* Component */}
 				<Tags
-					tags={this.state.tags}
-					placeholder="Add a tag"
+					{...this.props}
+					{...this.state}
 					onAdded={::this.onTagAdded}
 					onRemoved={::this.onTagRemoved} />
 			</div>
@@ -35,4 +38,4 @@ class App extends Component {
 	}
 }
 
-render(<App />, document.getElementById('application'));
+export default App;
