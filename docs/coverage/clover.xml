@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489870091060" clover="3.2.0">
-  <project timestamp="1489870091060" name="All files">
-    <metrics statements="51" coveredstatements="51" conditionals="40" coveredconditionals="37" methods="13" coveredmethods="13" elements="104" coveredelements="101" complexity="0" loc="51" ncloc="51" packages="1" files="2" classes="2">
+<coverage generated="1489944984350" clover="3.2.0">
+  <project timestamp="1489944984351" name="All files">
+    <metrics statements="51" coveredstatements="51" conditionals="36" coveredconditionals="31" methods="9" coveredmethods="9" elements="96" coveredelements="91" complexity="0" loc="51" ncloc="51" packages="1" files="2" classes="2">
       <file name="Tag.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tag.js">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="98" type="stmt"/>
+        <line num="6" count="56" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="12" count="98" type="stmt"/>
-        <line num="18" count="98" type="stmt"/>
+        <line num="12" count="56" type="stmt"/>
+        <line num="18" count="56" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
       </file>
       <file name="Tags.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tags.js">
-        <metrics statements="44" coveredstatements="44" conditionals="36" coveredconditionals="33" methods="11" coveredmethods="11"/>
-        <line num="53" count="24" type="stmt"/>
-        <line num="57" count="10" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
+        <metrics statements="44" coveredstatements="44" conditionals="32" coveredconditionals="27" methods="7" coveredmethods="7"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="30" type="stmt"/>
+        <line num="11" count="30" type="stmt"/>
+        <line num="12" count="9" type="stmt"/>
+        <line num="14" count="9" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="31" count="30" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="40" count="30" type="stmt"/>
+        <line num="41" count="13" type="stmt"/>
+        <line num="43" count="13" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="54" count="9" type="stmt"/>
+        <line num="56" count="9" type="stmt"/>
+        <line num="57" count="9" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
         <line num="61" count="9" type="stmt"/>
-        <line num="63" count="9" type="stmt"/>
-        <line num="65" count="9" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="69" count="8" type="stmt"/>
-        <line num="72" count="8" type="stmt"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="76" count="8" type="stmt"/>
-        <line num="77" count="2" type="stmt"/>
-        <line num="80" count="8" type="stmt"/>
-        <line num="85" count="4" type="stmt"/>
-        <line num="86" count="4" type="stmt"/>
-        <line num="88" count="4" type="stmt"/>
-        <line num="89" count="8" type="stmt"/>
-        <line num="91" count="4" type="stmt"/>
-        <line num="92" count="2" type="stmt"/>
-        <line num="95" count="4" type="stmt"/>
-        <line num="96" count="2" type="stmt"/>
-        <line num="102" count="15" type="stmt"/>
-        <line num="104" count="15" type="stmt"/>
-        <line num="106" count="5" type="stmt"/>
-        <line num="108" count="4" type="stmt"/>
-        <line num="109" count="3" type="stmt"/>
-        <line num="112" count="4" type="stmt"/>
-        <line num="115" count="10" type="stmt"/>
-        <line num="117" count="10" type="stmt"/>
-        <line num="118" count="10" type="stmt"/>
-        <line num="119" count="3" type="stmt"/>
-        <line num="122" count="10" type="stmt"/>
-        <line num="125" count="10" type="stmt"/>
-        <line num="130" count="15" type="stmt"/>
-        <line num="132" count="15" type="stmt"/>
-        <line num="133" count="5" type="stmt"/>
-        <line num="136" count="15" type="stmt"/>
-        <line num="142" count="51" type="stmt"/>
-        <line num="144" count="51" type="stmt"/>
-        <line num="145" count="106" type="stmt"/>
-        <line num="153" count="51" type="stmt"/>
-        <line num="162" count="71" type="stmt"/>
-        <line num="165" count="51" type="stmt"/>
-        <line num="167" count="51" type="stmt"/>
+        <line num="64" count="9" type="stmt"/>
+        <line num="68" count="30" type="stmt"/>
+        <line num="69" count="13" type="stmt"/>
+        <line num="71" count="13" type="stmt"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="76" count="30" type="stmt"/>
+        <line num="79" count="30" type="stmt"/>
+        <line num="80" count="64" type="stmt"/>
+        <line num="89" count="30" type="stmt"/>
+        <line num="98" count="31" type="stmt"/>
+        <line num="101" count="30" type="stmt"/>
+        <line num="103" count="30" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
       </file>
     </metrics>
   </project>
