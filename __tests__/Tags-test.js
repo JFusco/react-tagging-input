@@ -1,8 +1,7 @@
-'use strict';
-
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import { createRenderer, Simulate, renderIntoDocument } from 'react-addons-test-utils';
+import { Simulate, renderIntoDocument } from 'react-dom/test-utils';
+import { createRenderer } from 'react-test-renderer/shallow';
 import Tags from '../src/component/js/Tags';
 import App from './__fixtures__/App';
 
@@ -251,7 +250,8 @@ describe('Tags - removing', () => {
 	beforeEach(() => {
 		tags = renderIntoDocument(
 			<App
-				tags={TEST_TAGS} />
+				tags={TEST_TAGS}
+        deleteOnKeyPress={true} />
 		);
 
 		const renderedDOM = findDOMNode(tags);
@@ -281,7 +281,7 @@ describe('Tags - removing', () => {
 			input.value = '';
 
 			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+      Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 
 			expect(tagContainer.children.length).toBe(1);
 			expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[0]);

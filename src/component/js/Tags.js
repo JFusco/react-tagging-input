@@ -1,59 +1,83 @@
-'use strict';
+// @flow
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Tag from './Tag';
 
 import '../scss/styles.scss';
 
-const Tags = props => {
-	let input = null;
+type Props = {
+  tags: Array<string>,
+  maxTags?: number,
+  placeholder?: string,
+  deleteOnKeyPress?: boolean,
+  addKeys?: Array<number>,
+  uniqueTags?: boolean,
+  readOnly?: boolean,
+  onAdded?: Function,
+  onRemoved?: Function,
+  onInputChange?: Function,
+  id?: string,
+  removeTagIcon?: string | Object
+};
 
-	const addTag = () => {
-		const { uniqueTags, onAdded, tags, maxTags } = props;
+const Tags = ({
+  tags,
+  maxTags = -1,
+  placeholder = 'Add a tag',
+  deleteOnKeyPress = true,
+  addKeys = [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+  uniqueTags = false,
+  readOnly = false,
+  ...props }: Props) => {
+
+	let input: HTMLInputElement;
+
+	const addTag = (): void => {
+		const { onAdded } = props;
 
 		if (maxTags > 0){
 			if (tags.length >= maxTags) return;
 		}
 
-		const value = input.value.trim();
+    if(input){
+      const value = input.value.trim();
 
-		if (uniqueTags){
-			if (tags.indexOf(value) >= 0) return;
-		}
+      if (uniqueTags){
+        if (tags.indexOf(value) >= 0) return;
+      }
 
-		if (typeof onAdded !== 'undefined'){
-			onAdded(value);
-		}
+      if (typeof onAdded !== 'undefined'){
+        onAdded(value);
+      }
 
-		input.value = '';
+      input.value = '';
+    }
 	};
 
-	const removeTag = index => {
+	const removeTag = (index: number): void => {
 		const { onRemoved } = props;
-		const value = props.tags[index];
+		const value: string = tags[index];
 
 		if (typeof onRemoved !== 'undefined'){
 			onRemoved(value, index);
 		}
 	};
 
-	const onInputKey = e => {
-		const { tags } = props;
-
+	const onInputKey = (e: KeyboardEvent): void => {
 		switch (e.keyCode){
 			case Tags.KEYS.backspace:
-				if (tags.length === 0 || !props.deleteOnKeyPress) return;
+				if (tags.length === 0 || !deleteOnKeyPress) return;
 
-				if (input.value === ''){
-					removeTag(tags.length - 1);
-				}
+        if (input.value === ''){
+          removeTag(tags.length - 1);
+        }
 
 				break;
 
 			default:
-				if (input.value === '') return;
+        if (input.value === '') return;
 
-				if (props.addKeys.indexOf(e.keyCode) !== -1){
+				if (addKeys.indexOf(e.keyCode) !== -1){
 					if (Tags.KEYS.enter !== e.keyCode){
 						e.preventDefault();
 					}
@@ -65,18 +89,18 @@ const Tags = props => {
 		}
 	};
 
-	const onInputChange = e => {
-		const value = e.target.value.trim();
+	const onInputChange = (e: SyntheticInputEvent): void => {
+		const value: string = e.target.value.trim();
 
 		if (typeof props.onInputChange !== 'undefined'){
 			props.onInputChange(value);
 		}
 	};
 
-	const { readOnly, removeTagIcon, placeholder, id } = props;
+	const { removeTagIcon, id } = props;
 
 	//-- Render tags
-	const tagItems = props.tags.map((tag, v) => {
+	const tagItems: Array<Tag> = tags.map((tag, v) => {
 		return <Tag
 			key={v}
 			name={tag}
@@ -86,7 +110,7 @@ const Tags = props => {
 	});
 
 	//-- Render the input field
-	const tagInput = !props.readOnly ? (
+	const tagInput: ?React$Element<any> = !readOnly ? (
 		<input
 			type="text"
 			role="textbox"
@@ -98,7 +122,7 @@ const Tags = props => {
 			ref={el => input = el} />
 	) : null;
 
-	const classNames = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
+	const classNames: string = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 
 	return (
 		<div className="react-tags" id={id}>
@@ -119,35 +143,6 @@ Tags.KEYS = {
 	backspace: 8,
 	left: 37,
 	right: 39
-};
-
-//-- Property types
-Tags.propTypes = {
-	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-	onAdded: PropTypes.func,
-	onRemoved: PropTypes.func,
-	onInputChange: PropTypes.func,
-	maxTags: PropTypes.number,
-	placeholder: PropTypes.string,
-	deleteOnKeyPress: PropTypes.bool,
-	addKeys: PropTypes.arrayOf(PropTypes.number),
-	id: PropTypes.string,
-	readOnly: PropTypes.bool,
-	uniqueTags: PropTypes.bool,
-	removeTagIcon: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.element
-	])
-};
-
-//-- Default properties
-Tags.defaultProps = {
-	maxTags: -1,
-	placeholder: 'Add a tag',
-	deleteOnKeyPress: true,
-	addKeys: [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-	uniqueTags: false,
-	readOnly: false
 };
 
 export default Tags;

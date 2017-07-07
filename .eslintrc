@@ -1,5 +1,6 @@
 {
 	"parser": "babel-eslint",
+  "plugins": ["flowtype"],
 	"rules": {
 		"eqeqeq": [2, "allow-null"],
 		"no-extra-semi": 2,

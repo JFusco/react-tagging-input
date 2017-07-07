@@ -1,0 +1,15 @@
+[ignore]
+<PROJECT_ROOT>/__tests__/.*
+<PROJECT_ROOT>/__mocks__/.*
+<PROJECT_ROOT>/dist
+<PROJECT_ROOT>/coverage
+<PROJECT_ROOT>/docs
+<PROJECT_ROOT>/node_modules
+
+[include]
+<PROJECT_ROOT>/src/component/js/*.js
+
+[options]
+module.file_ext=.js
+module.file_ext=.css
+module.file_ext=.scss

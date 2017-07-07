@@ -1,15 +1,15 @@
-'use strict';
+// @flow
 
-import React, { PropTypes } from 'react';
+import React  from 'react';
 
-const Tag = props => {
-	const onRemoveClick = e => {
+const Tag = (props: Object) => {
+	const onRemoveClick = (e: MouseEvent) => {
 		e.preventDefault();
 
 		props.onRemoveTag(e);
 	};
 
-	const removeIcon = !props.readOnly ? (
+	const removeIcon: ?React$Element<any> = !props.readOnly ? (
 		<a onClick={onRemoveClick}>
 			{props.removeTagIcon|| String.fromCharCode(215)}
 		</a>
@@ -24,13 +24,3 @@ const Tag = props => {
 };
 
 export default Tag;
-
-Tag.propTypes = {
-	name: PropTypes.string.isRequired,
-	onRemoveTag: PropTypes.func,
-	readOnly: PropTypes.bool,
-	removeTagIcon: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.element
-	])
-};

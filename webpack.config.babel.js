@@ -1,5 +1,3 @@
-'use strict';
-
 import path from 'path';
 import plugins from './webpack/plugins';
 import rules from './webpack/rules';
