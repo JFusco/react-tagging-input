@@ -39,7 +39,7 @@ const Tags = ({
 			if (tags.length >= maxTags) return;
 		}
 
-    if(input){
+    if (input){
       const value = input.value.trim();
 
       if (uniqueTags){

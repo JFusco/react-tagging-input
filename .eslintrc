@@ -81,6 +81,11 @@
 	"globals": {
 		"console": true,
 		"process": true,
-		"__DEV__": true
+		"__DEV__": true,
+    "MouseEvent": true,
+    "React$Element": true,
+    "HTMLInputElement": true,
+    "KeyboardEvent": true,
+    "SyntheticInputEvent": true
 	}
 }
