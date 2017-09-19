@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1499433569731" clover="3.2.0">
-  <project timestamp="1499433569731" name="All files">
+<coverage generated="1505832214264" clover="3.2.0">
+  <project timestamp="1505832214265" name="All files">
     <metrics statements="47" coveredstatements="47" conditionals="44" coveredconditionals="38" methods="9" coveredmethods="9" elements="100" coveredelements="94" complexity="0" loc="47" ncloc="47" packages="1" files="2" classes="2">
-      <file name="Tag.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tag.js">
+      <file name="Tag.js" path="/Users/joe.fusco/Projects/Personal/react-tagging-input/src/component/js/Tag.js">
         <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="56" type="stmt"/>
@@ -11,7 +11,7 @@
         <line num="12" count="56" type="cond" truecount="2" falsecount="0"/>
         <line num="18" count="56" type="stmt"/>
       </file>
-      <file name="Tags.js" path="/Users/Rinzler/Projects/Personal/react-tagging-input/src/component/js/Tags.js">
+      <file name="Tags.js" path="/Users/joe.fusco/Projects/Personal/react-tagging-input/src/component/js/Tags.js">
         <metrics statements="41" coveredstatements="41" conditionals="40" coveredconditionals="34" methods="7" coveredmethods="7"/>
         <line num="23" count="1" type="stmt"/>
         <line num="35" count="30" type="stmt"/>

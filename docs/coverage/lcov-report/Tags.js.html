@@ -362,23 +362,23 @@ type Props = {
 };
 &nbsp;
 const Tags = ({
-  tags,
-  maxTags = -1,
-  placeholder = 'Add a tag',
-  deleteOnKeyPress = true,
-  addKeys = [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-  uniqueTags = false,
-  readOnly = false,
-  ...props }: Props) =&gt; {
+                tags,
+                maxTags = -1,
+                placeholder = 'Add a tag',
+                deleteOnKeyPress = true,
+                addKeys = [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+                uniqueTags = false,
+                readOnly = false,
+                ...props }: Props) =&gt; {
 &nbsp;
-	let input: HTMLInputElement;
+  let input: HTMLInputElement;
 &nbsp;
-	const addTag = (): void =&gt; {
-		const { onAdded } = props;
+  const addTag = (): void =&gt; {
+    const { onAdded } = props;
 &nbsp;
-		if (maxTags &gt; 0){
-			if (tags.length &gt;= maxTags) return;
-		}
+    if (maxTags &gt; 0){
+      if (tags.length &gt;= maxTags) return;
+    }
 &nbsp;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (input){
       const value = input.value.trim();
@@ -393,97 +393,97 @@ const Tags = ({
 &nbsp;
       input.value = '';
     }
-	};
+  };
 &nbsp;
-	const removeTag = (index: number): void =&gt; {
-		const { onRemoved } = props;
-		const value: string = tags[index];
+  const removeTag = (index: number): void =&gt; {
+    const { onRemoved } = props;
+    const value: string = tags[index];
 &nbsp;
-		<span class="missing-if-branch" title="else path not taken" >E</span>if (typeof onRemoved !== 'undefined'){
-			onRemoved(value, index);
-		}
-	};
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof onRemoved !== 'undefined'){
+      onRemoved(value, index);
+    }
+  };
 &nbsp;
-	const onInputKey = (e: KeyboardEvent): void =&gt; {
-		switch (e.keyCode){
-			case Tags.KEYS.backspace:
-				if (tags.length === 0 || !deleteOnKeyPress) return;
+  const onInputKey = (e: KeyboardEvent): void =&gt; {
+    switch (e.keyCode){
+      case Tags.KEYS.backspace:
+        if (tags.length === 0 || !deleteOnKeyPress) return;
 &nbsp;
         if (input.value === ''){
           removeTag(tags.length - 1);
         }
 &nbsp;
-				break;
+        break;
 &nbsp;
-			default:
+      default:
         <span class="missing-if-branch" title="if path not taken" >I</span>if (input.value === '') <span class="cstat-no" title="statement not covered" >return;</span>
 &nbsp;
-				<span class="missing-if-branch" title="else path not taken" >E</span>if (addKeys.indexOf(e.keyCode) !== -1){
-					if (Tags.KEYS.enter !== e.keyCode){
-						e.preventDefault();
-					}
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (addKeys.indexOf(e.keyCode) !== -1){
+          if (Tags.KEYS.enter !== e.keyCode){
+            e.preventDefault();
+          }
 &nbsp;
-					addTag();
-				}
+          addTag();
+        }
 &nbsp;
-				break;
-		}
-	};
+        break;
+    }
+  };
 &nbsp;
-	const onInputChange = (e: SyntheticInputEvent): void =&gt; {
-		const value: string = e.target.value.trim();
+  const onInputChange = (e: SyntheticInputEvent): void =&gt; {
+    const value: string = e.target.value.trim();
 &nbsp;
-		if (typeof props.onInputChange !== 'undefined'){
-			props.onInputChange(value);
-		}
-	};
+    if (typeof props.onInputChange !== 'undefined'){
+      props.onInputChange(value);
+    }
+  };
 &nbsp;
-	const { removeTagIcon, id } = props;
+  const { removeTagIcon, id } = props;
 &nbsp;
-	//-- Render tags
-	const tagItems: Array&lt;Tag&gt; = tags.map((tag, v) =&gt; {
-		return &lt;Tag
-			key={v}
-			name={tag}
-			readOnly={readOnly}
-			removeTagIcon={removeTagIcon}
-			onRemoveTag={removeTag.bind(this, v)} /&gt;;
-	});
+  //-- Render tags
+  const tagItems: Array&lt;Tag&gt; = tags.map((tag, v) =&gt; {
+    return &lt;Tag
+      key={v}
+      name={tag}
+      readOnly={readOnly}
+      removeTagIcon={removeTagIcon}
+      onRemoveTag={removeTag.bind(this, v)} /&gt;;
+  });
 &nbsp;
-	//-- Render the input field
-	const tagInput: ?React$Element&lt;any&gt; = !readOnly ? (
-		&lt;input
-			type="text"
-			role="textbox"
-			autoComplete="off"
-			aria-label={placeholder}
-			placeholder={placeholder}
-			onChange={onInputChange}
-			onKeyDown={onInputKey}
-			ref={el =&gt; input = el} /&gt;
-	) : null;
+  //-- Render the input field
+  const tagInput: ?React$Element&lt;any&gt; = !readOnly ? (
+    &lt;input
+      type="text"
+      role="textbox"
+      autoComplete="off"
+      aria-label={placeholder}
+      placeholder={placeholder}
+      onChange={onInputChange}
+      onKeyDown={onInputKey}
+      ref={el =&gt; input = el} /&gt;
+  ) : null;
 &nbsp;
-	const classNames: string = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
+  const classNames: string = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 &nbsp;
-	return (
-		&lt;div className="react-tags" id={id}&gt;
-			&lt;ul className={classNames}&gt;
-				{tagItems}
-			&lt;/ul&gt;
+  return (
+    &lt;div className="react-tags" id={id}&gt;
+      &lt;ul className={classNames}&gt;
+        {tagItems}
+      &lt;/ul&gt;
 &nbsp;
-			{tagInput}
-		&lt;/div&gt;
-	);
+      {tagInput}
+    &lt;/div&gt;
+  );
 };
 &nbsp;
 //-- Keyboard key map
 Tags.KEYS = {
-	enter: 13,
-	tab: 9,
-	spacebar: 32,
-	backspace: 8,
-	left: 37,
-	right: 39
+  enter: 13,
+  tab: 9,
+  spacebar: 32,
+  backspace: 8,
+  left: 37,
+  right: 39
 };
 &nbsp;
 export default Tags;
@@ -493,7 +493,7 @@ export default Tags;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 07 2017 09:19:29 GMT-0400 (EDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 19 2017 10:43:33 GMT-0400 (EDT)
 </div>
 </div>
 <script src="prettify.js"></script>

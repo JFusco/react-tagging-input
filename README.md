@@ -31,37 +31,37 @@ import { render } from 'react-dom';
 import Tags from 'react-tagging-input';
 
 class Application extends Component{
-	state = {
-		tags: ['foo', 'bar']
-	};
+  state = {
+    tags: ['foo', 'bar']
+  };
 
-	constructor(props){
-		super(props);
-	}
+  constructor(props){
+    super(props);
+  }
 
-	onTagAdded(tag) {
-		this.setState({
-			tags: [...this.state.tags, tag]
-		});
-	}
+  onTagAdded(tag) {
+    this.setState({
+      tags: [...this.state.tags, tag]
+    });
+  }
 
-	onTagRemoved(tag, index) {
-		this.setState({
-			tags: this.state.tags.filter((tag, i) => i !== index)
-		});
-	}
+  onTagRemoved(tag, index) {
+    this.setState({
+      tags: this.state.tags.filter((tag, i) => i !== index)
+    });
+  }
 
-	render(){
-		return (
-			<div>
-				<Tags
-					tags={this.state.tags}
-					placeholder="Add a tag"
-					onAdded={this.onTagAdded.bind(this)}
-					onRemoved={this.onTagRemoved.bind(this)} />
-			</div>
-		);
-	}
+  render(){
+    return (
+      <div>
+        <Tags
+          tags={this.state.tags}
+          placeholder="Add a tag"
+          onAdded={this.onTagAdded.bind(this)}
+          onRemoved={this.onTagRemoved.bind(this)} />
+      </div>
+    );
+  }
 }
 
 render(<Application />, document.getElementById('application'));
@@ -112,7 +112,7 @@ An `array` of keyCodes used to tell the tags component which delimiter to use to
 A `function` fired when a new tag is added - returns a `string` of the new tag
 ```js
 onTagAdded(tag){
-	console.log(`new tag: ${tags}`);
+  console.log(`new tag: ${tags}`);
 }
 
 <Tags onAdded={this.onTagAdded} />
@@ -123,7 +123,7 @@ onTagAdded(tag){
 A `function` fired when a new tag is deleted - returns a `string` of the tag that was deleted
 ```js
 onTagRemoved(tag, index){
-	console.log(`deleted tag: ${tag} at index ${index}`);
+  console.log(`deleted tag: ${tag} at index ${index}`);
 }
 
 <Tags onRemoved={this.onTagRemoved.bind(this)} />
@@ -148,9 +148,9 @@ A `boolean` that sets the tag component to read only mode. No adding or removing
 The `element` to be used for the delete icon
 ```js
 const removeIcon = () => {
-	return (
-		<i class="my-custom-icon"></i>
-	);
+  return (
+    <i class="my-custom-icon"></i>
+  );
 }
 
 <Tags removeTagsIcon={removeIcon()} />

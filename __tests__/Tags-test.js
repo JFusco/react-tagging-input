@@ -6,392 +6,392 @@ import Tags from '../src/component/js/Tags';
 import App from './__fixtures__/App';
 
 const TEST_TAGS = [
-	'foo',
-	'bar'
+  'foo',
+  'bar'
 ];
 
 describe('Tags', () => {
-	let renderer,
-		tags;
+  let renderer,
+    tags;
 
-	beforeEach(() => {
-		renderer = createRenderer();
+  beforeEach(() => {
+    renderer = createRenderer();
 
-		renderer.render(
-			<Tags
-				id="test-tags"
-				placeholder="Custom placeholder text"
-				tags={TEST_TAGS} />
-		);
+    renderer.render(
+      <Tags
+        id="test-tags"
+        placeholder="Custom placeholder text"
+        tags={TEST_TAGS} />
+    );
 
-		tags = renderer.getRenderOutput();
-	});
+    tags = renderer.getRenderOutput();
+  });
 
-	it('should render', () => {
-		expect(tags).not.toBeUndefined();
-		expect(tags.type).toBe('div');
-	});
+  it('should render', () => {
+    expect(tags).not.toBeUndefined();
+    expect(tags.type).toBe('div');
+  });
 
-	it('should check ID of tags component', () => {
-		expect(tags.type).toEqual('div');
-		expect(tags.props.id).toEqual('test-tags');
-	});
+  it('should check ID of tags component', () => {
+    expect(tags.type).toEqual('div');
+    expect(tags.props.id).toEqual('test-tags');
+  });
 
-	it('should render custom placeholder if provided', () => {
-		const input = tags.props.children[1];
+  it('should render custom placeholder if provided', () => {
+    const input = tags.props.children[1];
 
-		expect(input.type).toBe('input');
-		expect(input.props.placeholder).toBe('Custom placeholder text');
-	});
+    expect(input.type).toBe('input');
+    expect(input.props.placeholder).toBe('Custom placeholder text');
+  });
 
-	it('should set aria-label', () => {
-		const input = tags.props.children[1];
+  it('should set aria-label', () => {
+    const input = tags.props.children[1];
 
-		expect(input.props['aria-label']).toBe('Custom placeholder text');
-	});
+    expect(input.props['aria-label']).toBe('Custom placeholder text');
+  });
 });
 
 describe('Tags - "initialTags"', () => {
-	it('should render tags (shallow render)', () => {
-		const renderer = createRenderer();
+  it('should render tags (shallow render)', () => {
+    const renderer = createRenderer();
 
-		const renderList = () => {
-			renderer.render(
-				<Tags
-					tags={TEST_TAGS} />
-			);
+    const renderList = () => {
+      renderer.render(
+        <Tags
+          tags={TEST_TAGS} />
+      );
 
-			const list = renderer.getRenderOutput();
-			return list.props.children.filter(component => component.type == 'ul');
-		};
+      const list = renderer.getRenderOutput();
+      return list.props.children.filter(component => component.type == 'ul');
+    };
 
-		const items = renderList();
+    const items = renderList();
 
-		expect(items[0].props.children.length).toBe(TEST_TAGS.length);
-	});
+    expect(items[0].props.children.length).toBe(TEST_TAGS.length);
+  });
 
-	it('should render tags (DOM render)', () => {
-		const tags = renderIntoDocument(
-			<div>
-				<Tags tags={TEST_TAGS} />
-			</div>
-		);
+  it('should render tags (DOM render)', () => {
+    const tags = renderIntoDocument(
+      <div>
+        <Tags tags={TEST_TAGS} />
+      </div>
+    );
 
-		const renderedDOM = findDOMNode(tags);
-		const tagContainer = renderedDOM.querySelector('.react-tags__container');
+    const renderedDOM = findDOMNode(tags);
+    const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
-		expect(tagContainer.children.length).toBe(TEST_TAGS.length);
-	});
+    expect(tagContainer.children.length).toBe(TEST_TAGS.length);
+  });
 });
 
 describe('Tags - "readOnly"', () => {
-	let renderer;
+  let renderer;
 
-	beforeEach(() => {
-		renderer = createRenderer();
+  beforeEach(() => {
+    renderer = createRenderer();
 
-		renderer.render(
-			<Tags
-				tags={TEST_TAGS}
-				readOnly={true} />
-		);
-	});
+    renderer.render(
+      <Tags
+        tags={TEST_TAGS}
+        readOnly={true} />
+    );
+  });
 
-	it('should only render the tags container, not the input', () => {
-		const list = renderer.getRenderOutput();
-		const items = list.props.children;
+  it('should only render the tags container, not the input', () => {
+    const list = renderer.getRenderOutput();
+    const items = list.props.children;
 
-		expect(items.length).toBe(2);
-		expect(items[0].type).toBe('ul');
-		expect(items[1]).toBeNull();
-	});
+    expect(items.length).toBe(2);
+    expect(items[0].type).toBe('ul');
+    expect(items[1]).toBeNull();
+  });
 
-	it('should add the className "readonly" to tags container', () => {
-		const list = renderer.getRenderOutput();
-		const items = list.props.children;
+  it('should add the className "readonly" to tags container', () => {
+    const list = renderer.getRenderOutput();
+    const items = list.props.children;
 
-		expect(items[0].props.className).toContain('readonly');
-	});
+    expect(items[0].props.className).toContain('readonly');
+  });
 });
 
 describe('Tags - "addKeys"', () => {
-	let tags,
-		input,
-		tagContainer;
+  let tags,
+    input,
+    tagContainer;
 
-	beforeEach(() => {
-		tags = renderIntoDocument(
-			<App
-				tags={TEST_TAGS}
-				addKeys={[13, 9, 32, 188]} />
-		);
+  beforeEach(() => {
+    tags = renderIntoDocument(
+      <App
+        tags={TEST_TAGS}
+        addKeys={[13, 9, 32, 188]} />
+    );
 
-		const renderedDOM = findDOMNode(tags);
+    const renderedDOM = findDOMNode(tags);
 
-		tagContainer = renderedDOM.querySelector('.react-tags__container');
-		input = renderedDOM.getElementsByTagName('input')[0];
+    tagContainer = renderedDOM.querySelector('.react-tags__container');
+    input = renderedDOM.getElementsByTagName('input')[0];
 
-		input.value = TEST_TAGS[0];
+    input.value = TEST_TAGS[0];
 
-		Simulate.change(input);
-	});
+    Simulate.change(input);
+  });
 
-	afterEach(() => {
-		tags = null;
-		input = null;
-		tagContainer = null;
-	});
+  afterEach(() => {
+    tags = null;
+    input = null;
+    tagContainer = null;
+  });
 
-	describe('when pressing "enter"', () => {
-		it('should add a tag', () => {
-			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+  describe('when pressing "enter"', () => {
+    it('should add a tag', () => {
+      Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-			expect(tagContainer.children.length).toBe(3);
-		});
-	});
+      expect(tagContainer.children.length).toBe(3);
+    });
+  });
 
-	describe('when pressing "tab"', () => {
-		it('should add a tag', () => {
-			Simulate.keyDown(input, {key: 'Tab', keyCode: 9, which: 9});
+  describe('when pressing "tab"', () => {
+    it('should add a tag', () => {
+      Simulate.keyDown(input, {key: 'Tab', keyCode: 9, which: 9});
 
-			expect(tagContainer.children.length).toBe(3);
-		});
-	});
+      expect(tagContainer.children.length).toBe(3);
+    });
+  });
 
-	describe('when pressing "spacebar"', () => {
-		it('should add a tag', () => {
-			Simulate.keyDown(input, {key: 'Spacebar', keyCode: 32, which: 32});
+  describe('when pressing "spacebar"', () => {
+    it('should add a tag', () => {
+      Simulate.keyDown(input, {key: 'Spacebar', keyCode: 32, which: 32});
 
-			expect(tagContainer.children.length).toBe(3);
-		});
-	});
+      expect(tagContainer.children.length).toBe(3);
+    });
+  });
 
-	describe('when pressing ","', () => {
-		it('should add a tag', () => {
-			Simulate.keyDown(input, {key: 'Comma', keyCode: 188, which: 188});
+  describe('when pressing ","', () => {
+    it('should add a tag', () => {
+      Simulate.keyDown(input, {key: 'Comma', keyCode: 188, which: 188});
 
-			expect(tagContainer.children.length).toBe(3);
-		});
-	});
+      expect(tagContainer.children.length).toBe(3);
+    });
+  });
 });
 
 describe('Tags - events', () => {
-	let tags,
-		input,
-		tagContainer;
+  let tags,
+    input,
+    tagContainer;
 
-	const onTagAdded = jest.genMockFunction();
-	const onTagRemoved = jest.genMockFunction();
-	const onTagsInputChange = jest.genMockFunction();
+  const onTagAdded = jest.genMockFunction();
+  const onTagRemoved = jest.genMockFunction();
+  const onTagsInputChange = jest.genMockFunction();
 
-	beforeEach(() => {
-		tags = renderIntoDocument(
-			<div>
-				<Tags
-					tags={TEST_TAGS}
-					onAdded={onTagAdded}
-					onRemoved={onTagRemoved}
-					onInputChange={onTagsInputChange} />
-			</div>
-		);
+  beforeEach(() => {
+    tags = renderIntoDocument(
+      <div>
+        <Tags
+          tags={TEST_TAGS}
+          onAdded={onTagAdded}
+          onRemoved={onTagRemoved}
+          onInputChange={onTagsInputChange} />
+      </div>
+    );
 
-		const renderedDOM = findDOMNode(tags);
+    const renderedDOM = findDOMNode(tags);
 
-		tagContainer = renderedDOM.querySelector('.react-tags__container');
-		input = renderedDOM.getElementsByTagName('input')[0];
-	});
+    tagContainer = renderedDOM.querySelector('.react-tags__container');
+    input = renderedDOM.getElementsByTagName('input')[0];
+  });
 
-	afterEach(() => {
-		tags = null;
-		input = null;
-		tagContainer = null;
-	});
+  afterEach(() => {
+    tags = null;
+    input = null;
+    tagContainer = null;
+  });
 
-	describe('when adding a tag', () => {
-		it('should call the "onAdded" event and return the new tag', () => {
-			input.value = TEST_TAGS[0];
+  describe('when adding a tag', () => {
+    it('should call the "onAdded" event and return the new tag', () => {
+      input.value = TEST_TAGS[0];
 
-			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+      Simulate.change(input);
+      Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-			expect(onTagAdded).toBeCalledWith(TEST_TAGS[0]);
-		});
-	});
+      expect(onTagAdded).toBeCalledWith(TEST_TAGS[0]);
+    });
+  });
 
-	describe('when removing a tag', () => {
-		it('should call the "onRemoved" event and return the tag that was removed', () => {
-			input.value = '';
+  describe('when removing a tag', () => {
+    it('should call the "onRemoved" event and return the tag that was removed', () => {
+      input.value = '';
 
-			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+      Simulate.change(input);
+      Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 
-			expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1], 1);
-		});
-	});
+      expect(onTagRemoved).toBeCalledWith(TEST_TAGS[1], 1);
+    });
+  });
 
-	describe('when typing in the input field', () => {
-		it('should call the "inputChange" and return the word as you\'re typing', () => {
-			Simulate.change(input, {
-				target: {
-					value: 'a'
-				}
-			});
+  describe('when typing in the input field', () => {
+    it('should call the "inputChange" and return the word as you\'re typing', () => {
+      Simulate.change(input, {
+        target: {
+          value: 'a'
+        }
+      });
 
-			expect(onTagsInputChange).toBeCalledWith('a');
-		});
-	});
+      expect(onTagsInputChange).toBeCalledWith('a');
+    });
+  });
 });
 
 describe('Tags - removing', () => {
-	let tags,
-		input,
-		tagContainer;
+  let tags,
+    input,
+    tagContainer;
 
-	beforeEach(() => {
-		tags = renderIntoDocument(
-			<App
-				tags={TEST_TAGS}
+  beforeEach(() => {
+    tags = renderIntoDocument(
+      <App
+        tags={TEST_TAGS}
         deleteOnKeyPress={true} />
-		);
+    );
 
-		const renderedDOM = findDOMNode(tags);
-		tagContainer = renderedDOM.querySelector('.react-tags__container');
-		input = renderedDOM.getElementsByTagName('input')[0];
-	});
+    const renderedDOM = findDOMNode(tags);
+    tagContainer = renderedDOM.querySelector('.react-tags__container');
+    input = renderedDOM.getElementsByTagName('input')[0];
+  });
 
-	afterEach(() => {
-		tags = null;
-		input = null;
-		tagContainer = null;
-	});
+  afterEach(() => {
+    tags = null;
+    input = null;
+    tagContainer = null;
+  });
 
-	describe('when the remove icon is clicked on a tag', () => {
-		it('should remove a single tag', () => {
-			const removeIcon = tagContainer.children[0].getElementsByTagName('a')[0];
+  describe('when the remove icon is clicked on a tag', () => {
+    it('should remove a single tag', () => {
+      const removeIcon = tagContainer.children[0].getElementsByTagName('a')[0];
 
-			Simulate.click(removeIcon);
+      Simulate.click(removeIcon);
 
-			expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[1]);
-			expect(tagContainer.children.length).toBe(1);
-		});
-	});
+      expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[1]);
+      expect(tagContainer.children.length).toBe(1);
+    });
+  });
 
-	describe('when the input field is empty and backspace is pressed', () => {
-		it('should remove a single tag', () => {
-			input.value = '';
+  describe('when the input field is empty and backspace is pressed', () => {
+    it('should remove a single tag', () => {
+      input.value = '';
 
-			Simulate.change(input);
+      Simulate.change(input);
       Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 
-			expect(tagContainer.children.length).toBe(1);
-			expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[0]);
-		});
-	});
+      expect(tagContainer.children.length).toBe(1);
+      expect(tagContainer.children[0].textContent).toContain(TEST_TAGS[0]);
+    });
+  });
 
-	describe('when the input field is not empty and backspace is pressed', () => {
-		it('should not remove a tag', () => {
-			input.value = 'a';
+  describe('when the input field is not empty and backspace is pressed', () => {
+    it('should not remove a tag', () => {
+      input.value = 'a';
 
-			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+      Simulate.change(input);
+      Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 
-			expect(tagContainer.children.length).toBe(2);
-			expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
-		});
-	});
+      expect(tagContainer.children.length).toBe(2);
+      expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
+    });
+  });
 });
 
 describe('Tags - "uniqueTags"', () => {
-	it('should allow duplicate tags to be created', () => {
-		const tags = renderIntoDocument(
-			<App
-				tags={TEST_TAGS}
-				uniqueTags={false} />
-		);
+  it('should allow duplicate tags to be created', () => {
+    const tags = renderIntoDocument(
+      <App
+        tags={TEST_TAGS}
+        uniqueTags={false} />
+    );
 
-		const renderedDOM = findDOMNode(tags);
-		const input = renderedDOM.getElementsByTagName('input')[0];
-		const tagContainer = renderedDOM.querySelector('.react-tags__container');
+    const renderedDOM = findDOMNode(tags);
+    const input = renderedDOM.getElementsByTagName('input')[0];
+    const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
-		input.value = TEST_TAGS[0];
+    input.value = TEST_TAGS[0];
 
-		Simulate.change(input);
-		Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+    Simulate.change(input);
+    Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-		expect(tagContainer.children.length).toBe(3);
-		expect(tagContainer.children[2].textContent).toContain(TEST_TAGS[0]);
-		expect(tagContainer.children[2].textContent).toBe(tagContainer.children[0].textContent);
-	});
+    expect(tagContainer.children.length).toBe(3);
+    expect(tagContainer.children[2].textContent).toContain(TEST_TAGS[0]);
+    expect(tagContainer.children[2].textContent).toBe(tagContainer.children[0].textContent);
+  });
 
-	it('should not allow duplicate tags to be created', () => {
-		const tags = renderIntoDocument(
-			<App
-				tags={TEST_TAGS}
-				uniqueTags={true} />
-		);
+  it('should not allow duplicate tags to be created', () => {
+    const tags = renderIntoDocument(
+      <App
+        tags={TEST_TAGS}
+        uniqueTags={true} />
+    );
 
-		const renderedDOM = findDOMNode(tags);
-		const input = renderedDOM.getElementsByTagName('input')[0];
-		const tagContainer = renderedDOM.querySelector('.react-tags__container');
+    const renderedDOM = findDOMNode(tags);
+    const input = renderedDOM.getElementsByTagName('input')[0];
+    const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
-		input.value = TEST_TAGS[0];
+    input.value = TEST_TAGS[0];
 
-		Simulate.change(input);
-		Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+    Simulate.change(input);
+    Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-		expect(tagContainer.children.length).toBe(2);
-	});
+    expect(tagContainer.children.length).toBe(2);
+  });
 });
 
 describe('Tags - "maxTags"', () => {
-	describe('when maxTags is set to 3', () => {
-		it('should allow no more than 3 tags to be added', () => {
-			const tags = renderIntoDocument(
-				<App
-					tags={TEST_TAGS}
-					maxTags={3} />
-			);
+  describe('when maxTags is set to 3', () => {
+    it('should allow no more than 3 tags to be added', () => {
+      const tags = renderIntoDocument(
+        <App
+          tags={TEST_TAGS}
+          maxTags={3} />
+      );
 
-			const renderedDOM = findDOMNode(tags);
-			const input = renderedDOM.getElementsByTagName('input')[0];
-			const tagContainer = renderedDOM.querySelector('.react-tags__container');
+      const renderedDOM = findDOMNode(tags);
+      const input = renderedDOM.getElementsByTagName('input')[0];
+      const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
-			input.value = TEST_TAGS[0];
+      input.value = TEST_TAGS[0];
 
-			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+      Simulate.change(input);
+      Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-			input.value = TEST_TAGS[0];
+      input.value = TEST_TAGS[0];
 
-			Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
+      Simulate.keyDown(input, {key: 'Enter', keyCode: 13, which: 13});
 
-			expect(tagContainer.children.length).toBe(3);
-		});
-	});
+      expect(tagContainer.children.length).toBe(3);
+    });
+  });
 });
 
 describe('Tags - "deleteOnKeyPress"', () => {
-	describe('when deleteOnKeyPress is false', () => {
-		it('should not remove tags on backspace', () => {
-			const tags = renderIntoDocument(
-				<App
-					tags={TEST_TAGS}
-					addKeys={[13, 9, 32, 188]}
-					deleteOnKeyPress={false} />
-			);
+  describe('when deleteOnKeyPress is false', () => {
+    it('should not remove tags on backspace', () => {
+      const tags = renderIntoDocument(
+        <App
+          tags={TEST_TAGS}
+          addKeys={[13, 9, 32, 188]}
+          deleteOnKeyPress={false} />
+      );
 
-			const renderedDOM = findDOMNode(tags);
-			const input = renderedDOM.getElementsByTagName('input')[0];
-			const tagContainer = renderedDOM.querySelector('.react-tags__container');
+      const renderedDOM = findDOMNode(tags);
+      const input = renderedDOM.getElementsByTagName('input')[0];
+      const tagContainer = renderedDOM.querySelector('.react-tags__container');
 
-			input.value = '';
+      input.value = '';
 
-			Simulate.change(input);
-			Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
+      Simulate.change(input);
+      Simulate.keyDown(input, {key: 'Delete', keyCode: 8, which: 8});
 
-			expect(tagContainer.children.length).toBe(2);
-			expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
-			expect(tagContainer.children.length).toBe(2);
-		});
-	});
+      expect(tagContainer.children.length).toBe(2);
+      expect(tagContainer.children[1].textContent).toContain(TEST_TAGS[1]);
+      expect(tagContainer.children.length).toBe(2);
+    });
+  });
 });

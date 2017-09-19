@@ -7,93 +7,93 @@ import Tag from '../src/component/js/Tag';
 const TAG_NAME = 'foo';
 
 describe('Tag', () => {
-	it('should render', () => {
-		const component = renderer.create(
-			<Tag
-				name={TAG_NAME} />
-		).toJSON();
+  it('should render', () => {
+    const component = renderer.create(
+      <Tag
+        name={TAG_NAME} />
+    ).toJSON();
 
-		expect(component).toMatchSnapshot();
-	});
+    expect(component).toMatchSnapshot();
+  });
 });
 
 describe('Tag - "readOnly"', () => {
-	describe('when false', () => {
-		it('should render the removeTagIcon', () => {
-			const component = shallow(
-				<Tag
-					name={TAG_NAME}
-					readOnly={false} />
-			);
+  describe('when false', () => {
+    it('should render the removeTagIcon', () => {
+      const component = shallow(
+        <Tag
+          name={TAG_NAME}
+          readOnly={false} />
+      );
 
-			expect(component.find('a')).toHaveLength(1);
-			expect(component.find('a').text()).toEqual(String.fromCharCode(215));
+      expect(component.find('a')).toHaveLength(1);
+      expect(component.find('a').text()).toEqual(String.fromCharCode(215));
 
-			expect(toJson(component)).toMatchSnapshot();
-		});
-	});
+      expect(toJson(component)).toMatchSnapshot();
+    });
+  });
 
-	describe('when true', () => {
-		it('should not render the removeTagIcon', () => {
-			const component = shallow(
-				<Tag
-					name={TAG_NAME}
-					readOnly={true} />
-			);
+  describe('when true', () => {
+    it('should not render the removeTagIcon', () => {
+      const component = shallow(
+        <Tag
+          name={TAG_NAME}
+          readOnly={true} />
+      );
 
-			expect(component.find('a')).toHaveLength(0);
+      expect(component.find('a')).toHaveLength(0);
 
-			expect(toJson(component)).toMatchSnapshot();
-		});
-	});
+      expect(toJson(component)).toMatchSnapshot();
+    });
+  });
 });
 
 describe('Tag - "removeTagIcon"', () => {
-	describe('when a custom element is passed in', () => {
-		it('should render the element', () => {
-			const customRemoveIcon = (
-				<i className="icon-remove"></i>
-			);
+  describe('when a custom element is passed in', () => {
+    it('should render the element', () => {
+      const customRemoveIcon = (
+        <i className="icon-remove"></i>
+      );
 
-			const component = renderer.create(
-				<Tag
-					name={TAG_NAME}
-					removeTagIcon={customRemoveIcon} />
-			).toJSON();
+      const component = renderer.create(
+        <Tag
+          name={TAG_NAME}
+          removeTagIcon={customRemoveIcon} />
+      ).toJSON();
 
-			expect(component).toMatchSnapshot();
-		});
-	});
+      expect(component).toMatchSnapshot();
+    });
+  });
 
-	describe('when a custom string is passed in', () => {
-		it('should render the string', () => {
-			const customRemoveString = 'remove';
+  describe('when a custom string is passed in', () => {
+    it('should render the string', () => {
+      const customRemoveString = 'remove';
 
-			const component = renderer.create(
-				<Tag
-					name={TAG_NAME}
-					removeTagIcon={customRemoveString} />
-			).toJSON();
+      const component = renderer.create(
+        <Tag
+          name={TAG_NAME}
+          removeTagIcon={customRemoveString} />
+      ).toJSON();
 
-			expect(component).toMatchSnapshot();
-		});
-	});
+      expect(component).toMatchSnapshot();
+    });
+  });
 });
 
 describe('Tag - "onRemoveTag"', () => {
-	it('should be called when clicking the remove icon', () => {
-		const onRemoveClick = jest.fn();
+  it('should be called when clicking the remove icon', () => {
+    const onRemoveClick = jest.fn();
 
-		const component = shallow(
-			<Tag
-				name={TAG_NAME}
-				onRemoveTag={onRemoveClick} />
-		);
+    const component = shallow(
+      <Tag
+        name={TAG_NAME}
+        onRemoveTag={onRemoveClick} />
+    );
 
-		component.find('a').simulate('click', {
-			preventDefault() {}
-		});
+    component.find('a').simulate('click', {
+      preventDefault() {}
+    });
 
-		expect(onRemoveClick).toBeCalled();
-	});
+    expect(onRemoveClick).toBeCalled();
+  });
 });

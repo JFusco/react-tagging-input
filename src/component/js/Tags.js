@@ -21,23 +21,23 @@ type Props = {
 };
 
 const Tags = ({
-  tags,
-  maxTags = -1,
-  placeholder = 'Add a tag',
-  deleteOnKeyPress = true,
-  addKeys = [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
-  uniqueTags = false,
-  readOnly = false,
-  ...props }: Props) => {
+                tags,
+                maxTags = -1,
+                placeholder = 'Add a tag',
+                deleteOnKeyPress = true,
+                addKeys = [Tags.KEYS.enter, Tags.KEYS.tab, Tags.KEYS.spacebar],
+                uniqueTags = false,
+                readOnly = false,
+                ...props }: Props) => {
 
-	let input: HTMLInputElement;
+  let input: HTMLInputElement;
 
-	const addTag = (): void => {
-		const { onAdded } = props;
+  const addTag = (): void => {
+    const { onAdded } = props;
 
-		if (maxTags > 0){
-			if (tags.length >= maxTags) return;
-		}
+    if (maxTags > 0){
+      if (tags.length >= maxTags) return;
+    }
 
     if (input){
       const value = input.value.trim();
@@ -52,97 +52,97 @@ const Tags = ({
 
       input.value = '';
     }
-	};
+  };
 
-	const removeTag = (index: number): void => {
-		const { onRemoved } = props;
-		const value: string = tags[index];
+  const removeTag = (index: number): void => {
+    const { onRemoved } = props;
+    const value: string = tags[index];
 
-		if (typeof onRemoved !== 'undefined'){
-			onRemoved(value, index);
-		}
-	};
+    if (typeof onRemoved !== 'undefined'){
+      onRemoved(value, index);
+    }
+  };
 
-	const onInputKey = (e: KeyboardEvent): void => {
-		switch (e.keyCode){
-			case Tags.KEYS.backspace:
-				if (tags.length === 0 || !deleteOnKeyPress) return;
+  const onInputKey = (e: KeyboardEvent): void => {
+    switch (e.keyCode){
+      case Tags.KEYS.backspace:
+        if (tags.length === 0 || !deleteOnKeyPress) return;
 
         if (input.value === ''){
           removeTag(tags.length - 1);
         }
 
-				break;
+        break;
 
-			default:
+      default:
         if (input.value === '') return;
 
-				if (addKeys.indexOf(e.keyCode) !== -1){
-					if (Tags.KEYS.enter !== e.keyCode){
-						e.preventDefault();
-					}
+        if (addKeys.indexOf(e.keyCode) !== -1){
+          if (Tags.KEYS.enter !== e.keyCode){
+            e.preventDefault();
+          }
 
-					addTag();
-				}
+          addTag();
+        }
 
-				break;
-		}
-	};
+        break;
+    }
+  };
 
-	const onInputChange = (e: SyntheticInputEvent): void => {
-		const value: string = e.target.value.trim();
+  const onInputChange = (e: SyntheticInputEvent): void => {
+    const value: string = e.target.value.trim();
 
-		if (typeof props.onInputChange !== 'undefined'){
-			props.onInputChange(value);
-		}
-	};
+    if (typeof props.onInputChange !== 'undefined'){
+      props.onInputChange(value);
+    }
+  };
 
-	const { removeTagIcon, id } = props;
+  const { removeTagIcon, id } = props;
 
-	//-- Render tags
-	const tagItems: Array<Tag> = tags.map((tag, v) => {
-		return <Tag
-			key={v}
-			name={tag}
-			readOnly={readOnly}
-			removeTagIcon={removeTagIcon}
-			onRemoveTag={removeTag.bind(this, v)} />;
-	});
+  //-- Render tags
+  const tagItems: Array<Tag> = tags.map((tag, v) => {
+    return <Tag
+      key={v}
+      name={tag}
+      readOnly={readOnly}
+      removeTagIcon={removeTagIcon}
+      onRemoveTag={removeTag.bind(this, v)} />;
+  });
 
-	//-- Render the input field
-	const tagInput: ?React$Element<any> = !readOnly ? (
-		<input
-			type="text"
-			role="textbox"
-			autoComplete="off"
-			aria-label={placeholder}
-			placeholder={placeholder}
-			onChange={onInputChange}
-			onKeyDown={onInputKey}
-			ref={el => input = el} />
-	) : null;
+  //-- Render the input field
+  const tagInput: ?React$Element<any> = !readOnly ? (
+    <input
+      type="text"
+      role="textbox"
+      autoComplete="off"
+      aria-label={placeholder}
+      placeholder={placeholder}
+      onChange={onInputChange}
+      onKeyDown={onInputKey}
+      ref={el => input = el} />
+  ) : null;
 
-	const classNames: string = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
+  const classNames: string = readOnly ? 'react-tags__container react-tags__container_readonly' : 'react-tags__container';
 
-	return (
-		<div className="react-tags" id={id}>
-			<ul className={classNames}>
-				{tagItems}
-			</ul>
+  return (
+    <div className="react-tags" id={id}>
+      <ul className={classNames}>
+        {tagItems}
+      </ul>
 
-			{tagInput}
-		</div>
-	);
+      {tagInput}
+    </div>
+  );
 };
 
 //-- Keyboard key map
 Tags.KEYS = {
-	enter: 13,
-	tab: 9,
-	spacebar: 32,
-	backspace: 8,
-	left: 37,
-	right: 39
+  enter: 13,
+  tab: 9,
+  spacebar: 32,
+  backspace: 8,
+  left: 37,
+  right: 39
 };
 
 export default Tags;
