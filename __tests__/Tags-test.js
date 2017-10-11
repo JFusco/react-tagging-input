@@ -4,6 +4,10 @@ import { Simulate, renderIntoDocument } from 'react-dom/test-utils';
 import { createRenderer } from 'react-test-renderer/shallow';
 import Tags from '../src/component/js/Tags';
 import App from './__fixtures__/App';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 const TEST_TAGS = [
   'foo',

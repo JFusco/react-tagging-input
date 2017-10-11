@@ -66,10 +66,12 @@ const Tags = ({
   const onInputKey = (e: KeyboardEvent): void => {
     switch (e.keyCode){
       case Tags.KEYS.backspace:
-        if (tags.length === 0 || !deleteOnKeyPress) return;
+        const { length } = tags;
+
+        if (length === 0 || !deleteOnKeyPress) return;
 
         if (input.value === ''){
-          removeTag(tags.length - 1);
+          removeTag(length - 1);
         }
 
         break;
